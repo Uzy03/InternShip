@@ -1,0 +1,29 @@
+{
+  "town": "九品寺5丁目",
+  "base_year": 2025,
+  "horizons": [1, 2, 3],
+  "events": [
+    {
+      "year_offset": 0,
+      "event_type": "housing",
+      "effect_direction": "increase",
+      "confidence": 1.0,
+      "intensity": 1.0,
+      "lag_t": 1,
+      "lag_t1": 1,
+      "note": "分譲マンション竣工・入居開始"
+    }
+  ],
+  "macros": {
+    "foreign_population_growth_pct": {
+      "h1": 0.03,
+      "h2": 0.02,
+      "h3": 0.02
+    }
+  },
+  "manual_delta": {
+    "h1": 0,
+    "h2": 0,
+    "h3": 0
+  }
+}

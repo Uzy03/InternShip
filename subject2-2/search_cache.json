@@ -1,0 +1,561 @@
+{
+  "c480f5717579f86d6cbc129d20301721": {
+    "query": "\"魚屋町１丁目\" \"熊本市\" (2019 OR 2020 OR 2021) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [
+      {
+        "title": "魚屋町１丁目商業施設完成",
+        "url": "https://example.com/uoya-commercial",
+        "snippet": "2019年に魚屋町１丁目で商業施設が完成し、開業しました。",
+        "date": "2019-03-20"
+      }
+    ],
+    "timestamp": "2025-08-28T16:41:30.925822"
+  },
+  "3998a197d6faa614e607457d385527ba": {
+    "query": "\"総数\" \"熊本市\" (2005 OR 2006 OR 2007) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.661627"
+  },
+  "d0c7ca08e7dd80f2eb79406b6c34e1ba": {
+    "query": "\"楠３丁目\" \"熊本市\" (1999 OR 2000 OR 2001) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.661867"
+  },
+  "86def839c562e47870a5a8a982beffe7": {
+    "query": "\"紺屋町１丁目\" \"熊本市\" (2001 OR 2002 OR 2003) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.661913"
+  },
+  "5f0c38dc5308a59e2d12d7df9012902d": {
+    "query": "\"紺屋町２丁目\" \"熊本市\" (2021 OR 2022 OR 2023) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662076"
+  },
+  "dd33046e6d22a7ce885ea5d27599b7d9": {
+    "query": "\"八島町\" \"熊本市\" (2007 OR 2008 OR 2009) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662149"
+  },
+  "76a7436c7216809ddfbad5268073a796": {
+    "query": "\"西阿弥陀寺町\" \"熊本市\" (2024 OR 2025 OR 2026) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662178"
+  },
+  "d35879bd5eb072a495b7c8ee8779b27d": {
+    "query": "\"横紺屋町\" \"熊本市\" (2005 OR 2006 OR 2007) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662206"
+  },
+  "86cf0ed9c904172922b249825e61fab4": {
+    "query": "\"春日２丁目\" \"熊本市\" (2013 OR 2014 OR 2015) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662237"
+  },
+  "8231b4b62f0226b45da96a1ca85e4b7c": {
+    "query": "\"桜木６丁目\" \"熊本市\" (2014 OR 2015 OR 2016) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662266"
+  },
+  "130aca0f4338249fc51fe7aced225f46": {
+    "query": "\"薄場町\" \"熊本市\" (2000 OR 2001 OR 2002) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662293"
+  },
+  "98e8b57dbe4b5ea7f26fd59310a01a6e": {
+    "query": "\"戸島町\" \"熊本市\" (2002 OR 2003 OR 2004) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662320"
+  },
+  "4016fbb40e5bffbec418b04b0c015afe": {
+    "query": "\"徳王町\" \"熊本市\" (2008 OR 2009 OR 2010) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662347"
+  },
+  "3bd09a6c65031f04b9e0561db8e06def": {
+    "query": "\"江津２丁目\" \"熊本市\" (2012 OR 2013 OR 2014) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662373"
+  },
+  "962b960130247d481788360e82ddb1aa": {
+    "query": "\"神水本町\" \"熊本市\" (2012 OR 2013 OR 2014) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662400"
+  },
+  "e5c128cdc36e122919d47bf2d6d97e88": {
+    "query": "\"田迎町大字田井島\" \"熊本市\" (1999 OR 2000 OR 2001) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662427"
+  },
+  "d852dcaecfc0246902b6d2d6ef459ca8": {
+    "query": "\"呉服町３丁目\" \"熊本市\" (2010 OR 2011 OR 2012) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662454"
+  },
+  "2ae31f0ff53368ba3e9a1deb79a160d7": {
+    "query": "\"小山町\" \"熊本市\" (2003 OR 2004 OR 2005) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662480"
+  },
+  "4f47a8c0291d33ae9a2b769eb029c949": {
+    "query": "\"東京塚町\" \"熊本市\" (2012 OR 2013 OR 2014) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662506"
+  },
+  "617d383f64f00523f677d0bf45d95001": {
+    "query": "\"近見町\" \"熊本市\" (2000 OR 2001 OR 2002) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662531"
+  },
+  "2dfd5dd89e136a5fcb154fbe9fffc79a": {
+    "query": "\"辛島町\" \"熊本市\" (2005 OR 2006 OR 2007) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662557"
+  },
+  "1db32c7830fbdddf89704236d05c8987": {
+    "query": "\"黒髪７丁目\" \"熊本市\" (2012 OR 2013 OR 2014) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662583"
+  },
+  "aad07529b26588d6a18be42d7597e561": {
+    "query": "\"東子飼町\" \"熊本市\" (1999 OR 2000 OR 2001) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662609"
+  },
+  "5718933b9edbf74f07ba80460ef61166": {
+    "query": "\"鶴羽田町\" \"熊本市\" (2009 OR 2010 OR 2011) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662634"
+  },
+  "0cc9837ad6bbf4bf96b2398f23c5e9e8": {
+    "query": "\"小島上町\" \"熊本市\" (2007 OR 2008 OR 2009) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662660"
+  },
+  "6ae8fea5300a08bbf483e17625d07d00": {
+    "query": "\"春日３丁目\" \"熊本市\" (2013 OR 2014 OR 2015) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662685"
+  },
+  "60da624a09c9f8227e1ec0f4df57bb33": {
+    "query": "\"総数\" \"熊本市\" (2009 OR 2010 OR 2011) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662711"
+  },
+  "1c07317f41a148ed11b02958edf348ed": {
+    "query": "\"湖東１丁目\" \"熊本市\" (2012 OR 2013 OR 2014) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662736"
+  },
+  "833933254225ab9fd75d9ee469f89307": {
+    "query": "\"松原町\" \"熊本市\" (2022 OR 2023 OR 2024) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662762"
+  },
+  "3fb144d8e1e094528fb29f71d98ba489": {
+    "query": "\"平成１丁目\" \"熊本市\" (2012 OR 2013 OR 2014) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662788"
+  },
+  "d35be0a07a8b9edd980667348febdc7a": {
+    "query": "\"山ノ内１丁目\" \"熊本市\" (2006 OR 2007 OR 2008) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662814"
+  },
+  "0ba5a7e7edd11d6c00d78a381c7e0004": {
+    "query": "\"上京塚町\" \"熊本市\" (2000 OR 2001 OR 2002) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662840"
+  },
+  "371935277fe4eae8d5889edfce4c22b4": {
+    "query": "\"小島下町\" \"熊本市\" (2007 OR 2008 OR 2009) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662865"
+  },
+  "115dd82d8b52c473c612ac610a5a0dbf": {
+    "query": "\"米屋町１丁目\" \"熊本市\" (2007 OR 2008 OR 2009) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662891"
+  },
+  "684f46f9eff42ab082638c19e1c05504": {
+    "query": "\"南熊本２丁目\" \"熊本市\" (2017 OR 2018 OR 2019) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662917"
+  },
+  "6ebf85baabd112fc75d6ec6f89408ca6": {
+    "query": "\"世安町\" \"熊本市\" (2021 OR 2022 OR 2023) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662942"
+  },
+  "5550a435a480675a7c637784726e7e68": {
+    "query": "\"魚屋町２丁目\" \"熊本市\" (2019 OR 2020 OR 2021) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662968"
+  },
+  "9ab44c05dad9ce3db04aea040ce0207a": {
+    "query": "\"横手３丁目\" \"熊本市\" (2012 OR 2013 OR 2014) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.662993"
+  },
+  "9e9fc7a19d098d34a06dd3f1c87f6597": {
+    "query": "\"紺屋町１丁目\" \"熊本市\" (2019 OR 2020 OR 2021) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663018"
+  },
+  "b82127fa83fcfec25e548c3caa6bd10c": {
+    "query": "\"九品寺２丁目\" \"熊本市\" (2007 OR 2008 OR 2009) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663044"
+  },
+  "8e003ac8607b634b49b38a920aeef8ff": {
+    "query": "\"辛島町\" \"熊本市\" (2006 OR 2007 OR 2008) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663070"
+  },
+  "193052534ec25037ff092dbeb87c3826": {
+    "query": "\"近見２丁目\" \"熊本市\" (2000 OR 2001 OR 2002) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663095"
+  },
+  "187ba15f238f1f7e1dbed7a977e4dbc4": {
+    "query": "\"中江町\" \"熊本市\" (2015 OR 2016 OR 2017) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663120"
+  },
+  "194c2af828b0e60b4527e53e91a7a156": {
+    "query": "\"水道町\" \"熊本市\" (2003 OR 2004 OR 2005) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663145"
+  },
+  "2ea9cb3dfa2d645c6261b8d043704473": {
+    "query": "\"春日３丁目\" \"熊本市\" (2011 OR 2012 OR 2013) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663171"
+  },
+  "a08821491066491e0afee470e8b9946c": {
+    "query": "\"川端町\" \"熊本市\" (2009 OR 2010 OR 2011) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663197"
+  },
+  "daa8a09612019611314e348070b86041": {
+    "query": "\"古大工町\" \"熊本市\" (2023 OR 2024 OR 2025) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663223"
+  },
+  "07be18cabbf556997bc8c43becd5b051": {
+    "query": "\"田迎１丁目\" \"熊本市\" (2004 OR 2005 OR 2006) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663248"
+  },
+  "50ab78fa8efc9b5062f3ed61f9ab2b32": {
+    "query": "\"下硯川町\" \"熊本市\" (2010 OR 2011 OR 2012) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663273"
+  },
+  "f3c1c47143546ab7d7a97444a78a7e29": {
+    "query": "\"段山本町\" \"熊本市\" (2022 OR 2023 OR 2024) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663298"
+  },
+  "f5830c0924db955073aed396494e12c1": {
+    "query": "\"九品寺６丁目\" \"熊本市\" (2005 OR 2006 OR 2007) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663325"
+  },
+  "2af631f60ce5995bfdb11baab179a3ff": {
+    "query": "\"桜町\" \"熊本市\" (2019 OR 2020 OR 2021) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663350"
+  },
+  "cf7392309a92a817df98c0135193fc9b": {
+    "query": "\"辛島町\" \"熊本市\" (2007 OR 2008 OR 2009) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663376"
+  },
+  "cf813c118eccdfc536801783d6f9d6e7": {
+    "query": "\"春日３丁目\" \"熊本市\" (2009 OR 2010 OR 2011) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663401"
+  },
+  "0d250b0bed326ed7aaaf097f475ab9b9": {
+    "query": "\"馬渡１丁目\" \"熊本市\" (2001 OR 2002 OR 2003) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663426"
+  },
+  "cf86652b9b082bfce17401476e5aa8a4": {
+    "query": "\"船場町下１丁目\" \"熊本市\" (2000 OR 2001 OR 2002) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663451"
+  },
+  "2b22a4d0093c9efc1f1adb2873b806fb": {
+    "query": "\"出仲間９丁目\" \"熊本市\" (2013 OR 2014 OR 2015) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663476"
+  },
+  "d4794f7022ff1fcbc023ecf3430bab8d": {
+    "query": "\"大江３丁目\" \"熊本市\" (2015 OR 2016 OR 2017) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663501"
+  },
+  "d48340f4c802bb89999153601e3c2bb5": {
+    "query": "\"八幡８丁目\" \"熊本市\" (2005 OR 2006 OR 2007) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663526"
+  },
+  "ce1c7da807b9fa5571de0377943ea513": {
+    "query": "\"八島町\" \"熊本市\" (2005 OR 2006 OR 2007) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663551"
+  },
+  "3de7ec22a557a930a2bf74fdd6a67a15": {
+    "query": "\"横紺屋町\" \"熊本市\" (1999 OR 2000 OR 2001) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663576"
+  },
+  "4d7f63ee85826666cf05ae9b2b07c271": {
+    "query": "\"紺屋町１丁目\" \"熊本市\" (2000 OR 2001 OR 2002) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663601"
+  },
+  "19a666207cc32953c93a6bbd122b18af": {
+    "query": "\"出仲間５丁目\" \"熊本市\" (2006 OR 2007 OR 2008) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663627"
+  },
+  "0bf1bbdf8ac0a80aa2060f4273a71a22": {
+    "query": "\"呉服町２丁目\" \"熊本市\" (2000 OR 2001 OR 2002) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663652"
+  },
+  "49972f594931b170436864348b683814": {
+    "query": "\"千葉城町\" \"熊本市\" (2013 OR 2014 OR 2015) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663677"
+  },
+  "a4f0d823f6e37c5785ee3233ce4be5fc": {
+    "query": "\"九品寺６丁目\" \"熊本市\" (2000 OR 2001 OR 2002) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663703"
+  },
+  "b8def7f8d311a0c67017b6f128e760fe": {
+    "query": "\"出仲間８丁目\" \"熊本市\" (2002 OR 2003 OR 2004) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663728"
+  },
+  "344f6c4c8c6ada5eae85905b6f12823f": {
+    "query": "\"佐土原３丁目\" \"熊本市\" (2012 OR 2013 OR 2014) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663753"
+  },
+  "74b0fc583949273c842fd2249c7728c1": {
+    "query": "\"中江町\" \"熊本市\" (2002 OR 2003 OR 2004) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663778"
+  },
+  "f09f0d7ef1ae9201ecc9f2b149276ab8": {
+    "query": "\"三郎１丁目\" \"熊本市\" (2012 OR 2013 OR 2014) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663803"
+  },
+  "1980c8914bb020e561403fbb4cce1489": {
+    "query": "\"近見９丁目\" \"熊本市\" (1999 OR 2000 OR 2001) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663828"
+  },
+  "9a2d13e154494b4dbaef21309e37df8c": {
+    "query": "\"春日２丁目\" \"熊本市\" (2024 OR 2025 OR 2026) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663854"
+  },
+  "843ebd883a27b866d9673d1b77aa4d3e": {
+    "query": "\"魚屋町３丁目\" \"熊本市\" (2020 OR 2021 OR 2022) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663879"
+  },
+  "020af9820dccb9bf0f2b5139acb6357a": {
+    "query": "\"米屋町１丁目\" \"熊本市\" (2008 OR 2009 OR 2010) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663904"
+  },
+  "11dd11a1bc6bb9dc066aa205ba27136c": {
+    "query": "\"草葉町\" \"熊本市\" (2002 OR 2003 OR 2004) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663929"
+  },
+  "e31f8f9ffca57ad249510f0773e3737c": {
+    "query": "\"武蔵ケ丘９丁目\" \"熊本市\" (2006 OR 2007 OR 2008) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663954"
+  },
+  "e6378b70f49951ea0a10a0d8c65197ff": {
+    "query": "\"船場町３丁目\" \"熊本市\" (2004 OR 2005 OR 2006) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.663979"
+  },
+  "daa6f5ae3ef47d4097319bfe7f385f16": {
+    "query": "\"飛田町\" \"熊本市\" (1998 OR 1999 OR 2000) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664004"
+  },
+  "d8064339513427ee691af2085955fe96": {
+    "query": "\"出仲間９丁目\" \"熊本市\" (2005 OR 2006 OR 2007) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664315"
+  },
+  "cfb26340904d3bab8fcb3186b4bef12b": {
+    "query": "\"佐土原２丁目\" \"熊本市\" (2016 OR 2017 OR 2018) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664381"
+  },
+  "511697e8822c2cea9dd5892021e0116c": {
+    "query": "\"城東町\" \"熊本市\" (2004 OR 2005 OR 2006) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664419"
+  },
+  "879c47d2af74f09e12a8393308902f1b": {
+    "query": "\"魚屋町２丁目\" \"熊本市\" (2005 OR 2006 OR 2007) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664450"
+  },
+  "1b5e3df43f51488b1ee3e15fa4f0dd25": {
+    "query": "\"田迎町大字田井島\" \"熊本市\" (2000 OR 2001 OR 2002) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664479"
+  },
+  "5f5074cd0137d31ee78b93e5dbeaaa10": {
+    "query": "\"紺屋町２丁目\" \"熊本市\" (2003 OR 2004 OR 2005) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664507"
+  },
+  "911a515550791c54bd09fe1c3d9cb2ea": {
+    "query": "\"平田２丁目\" \"熊本市\" (2011 OR 2012 OR 2013) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664534"
+  },
+  "374ffc2ea61f0405445493ec69cd2fcf": {
+    "query": "\"横紺屋町\" \"熊本市\" (1998 OR 1999 OR 2000) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664561"
+  },
+  "d2e0f9629dfa221d728d4731b4f9f000": {
+    "query": "\"近見８丁目\" \"熊本市\" (2001 OR 2002 OR 2003) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664587"
+  },
+  "ce1a2804688e33bd18029e26fbeb1e3f": {
+    "query": "\"春日１丁目\" \"熊本市\" (2011 OR 2012 OR 2013) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664613"
+  },
+  "59cccd3afae204b6a782a039f0676d3f": {
+    "query": "\"板屋町\" \"熊本市\" (2021 OR 2022 OR 2023) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664639"
+  },
+  "9e8458b2022020065041796c1a656452": {
+    "query": "\"上熊本１丁目\" \"熊本市\" (2020 OR 2021 OR 2022) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664666"
+  },
+  "1ef751ae1fa674d1b5637661bc7bb13e": {
+    "query": "\"田崎町\" \"熊本市\" (2016 OR 2017 OR 2018) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664692"
+  },
+  "82437d4a79a0da957dbdc9d398b9a71b": {
+    "query": "\"南高江３丁目\" \"熊本市\" (1998 OR 1999 OR 2000) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664717"
+  },
+  "70a3ea013784cf7e6d024ce95940b3f3": {
+    "query": "\"保田窪２丁目\" \"熊本市\" (2012 OR 2013 OR 2014) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664747"
+  },
+  "01663fd588bacd65ff81401bbd6c827d": {
+    "query": "\"坪井６丁目\" \"熊本市\" (1999 OR 2000 OR 2001) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664772"
+  },
+  "4b1d851de80c3cbc8811d54ed35a93d6": {
+    "query": "\"飛田町\" \"熊本市\" (1999 OR 2000 OR 2001) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664798"
+  },
+  "e586206050bb1d941980107b2be601fb": {
+    "query": "\"佐土原３丁目\" \"熊本市\" (2014 OR 2015 OR 2016) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664824"
+  },
+  "661002b85d1caf218d9c617bf48c27f9": {
+    "query": "\"紺屋阿弥陀寺町\" \"熊本市\" (2017 OR 2018 OR 2019) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664849"
+  },
+  "7581ff3ec9f1c911cc02d4ec9d24fcee": {
+    "query": "\"出仲間３丁目\" \"熊本市\" (2002 OR 2003 OR 2004) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664875"
+  },
+  "423fbc2bec77944ffe7aae3ba33994b8": {
+    "query": "\"南熊本２丁目\" \"熊本市\" (2019 OR 2020 OR 2021) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664901"
+  },
+  "9945092f8c26f69426d73b9d4298313e": {
+    "query": "\"春日３丁目\" \"熊本市\" (2008 OR 2009 OR 2010) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664927"
+  },
+  "99af29b35ccc716736e11718cc2aa804": {
+    "query": "\"東町１丁目\" \"熊本市\" (2023 OR 2024 OR 2025) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664952"
+  },
+  "5d338541afd95acc9f5d73a747bed110": {
+    "query": "\"月出１丁目\" \"熊本市\" (2007 OR 2008 OR 2009) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.664977"
+  },
+  "d820ef76fde7125081038ce63ceeee56": {
+    "query": "\"楠２丁目\" \"熊本市\" (2013 OR 2014 OR 2015) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.665002"
+  },
+  "6d6c4bc1d29d795bf74cb0eb1bb000af": {
+    "query": "\"西阿弥陀寺町\" \"熊本市\" (2019 OR 2020 OR 2021) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.665568"
+  },
+  "1b27c801680f9c9eeab8880c972e4bfd": {
+    "query": "\"春日３丁目\" \"熊本市\" (2010 OR 2011 OR 2012) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.665602"
+  },
+  "1b258af4029a9869f43f2abfae372462": {
+    "query": "\"魚屋町１丁目\" \"熊本市\" (2002 OR 2003 OR 2004) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [
+      {
+        "title": "魚屋町１丁目商業施設完成",
+        "url": "https://example.com/uoya-commercial",
+        "snippet": "2002年に魚屋町１丁目で商業施設が完成し、開業しました。",
+        "date": "2002-03-20"
+      }
+    ],
+    "timestamp": "2025-08-28T17:06:39.665629"
+  },
+  "931d4706e2d977fe8cbafee57ee62d6b": {
+    "query": "\"川端町\" \"熊本市\" (2015 OR 2016 OR 2017) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.665844"
+  },
+  "e981f67b73ecfb0e2cd0617288127101": {
+    "query": "\"魚屋町２丁目\" \"熊本市\" (2020 OR 2021 OR 2022) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.665875"
+  },
+  "a3ffa54e983733f3132c3b07a374c6a0": {
+    "query": "\"板屋町\" \"熊本市\" (2022 OR 2023 OR 2024) (竣工 OR 完成 OR 開業 OR 建設 OR 再開発 OR 分譲 OR マンション OR 工場 OR 物流 OR キャンパス OR 病院 OR インター OR BRT OR 地震 OR 災害)",
+    "results": [],
+    "timestamp": "2025-08-28T17:06:39.665904"
+  }
+}

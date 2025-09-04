@@ -1,0 +1,24 @@
+2025-09-02 15:44:22,204 - INFO - === TWFE分析開始 ===
+2025-09-02 15:44:22,204 - INFO - データ読み込み開始
+2025-09-02 15:44:22,204 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-02 15:44:22,332 - INFO - events_matrix.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 15:44:22,344 - INFO - データマージ中
+2025-09-02 15:44:22,359 - INFO - 欠損値処理中
+2025-09-02 15:44:22,363 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-02 15:44:22,363 - INFO - マージ完了: 17381 行
+2025-09-02 15:44:22,363 - INFO - コントロール変数を追加中
+2025-09-02 15:44:22,363 - INFO - TWFE推定開始
+2025-09-02 15:44:22,364 - INFO - 符号なしイベント変数を使用: 12 個
+2025-09-02 15:44:22,364 - INFO - 選択された変数: ['event_housing_t', 'event_housing_t1', 'event_commercial_t', 'event_commercial_t1', 'event_transit_t']...
+2025-09-02 15:44:22,364 - INFO - 薄い列を除外: 6 個 (非ゼロ件数 < 20)
+2025-09-02 15:44:22,364 - INFO - 除外された列: ['event_transit_t', 'event_public_edu_medical_t', 'event_employment_t', 'event_employment_t1', 'event_disaster_t', 'event_disaster_t1']
+2025-09-02 15:44:22,364 - INFO - フィルタ後: 6 個のイベント変数
+2025-09-02 15:44:22,364 - INFO - 回帰式: delta ~ 0 + C(town) + C(year) + event_housing_t + event_housing_t1 + event_commercial_t + event_commercial_t1 + event_transit_t1 + event_public_edu_medical_t1 + growth_adj_log + policy_boundary_dummy + disaster_2016_dummy
+2025-09-02 15:44:22,364 - INFO - split時は自動的にRidge正則化を有効化 (alpha=1.0)
+2025-09-02 15:44:22,364 - INFO - Ridge正則化付き推定を実行 (alpha=1.0)
+2025-09-02 15:44:34,589 - INFO - 推定完了: R² = 0.4659
+2025-09-02 15:44:34,590 - INFO - 推定結果を抽出中
+2025-09-02 15:44:34,592 - INFO - 結果を保存中
+2025-09-02 15:44:34,595 - INFO - 係数結果を保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/output/effects_coefficients.csv
+2025-09-02 15:44:34,597 - INFO - サマリを保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/logs/20250902_154422_87e6c4c7/twfe_summary.txt
+2025-09-02 15:44:34,597 - INFO - === TWFE分析完了 ===

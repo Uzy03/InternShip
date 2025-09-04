@@ -1,0 +1,44 @@
+2025-09-02 13:39:36,863 - INFO - データ読み込み開始
+2025-09-02 13:39:36,863 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-02 13:39:36,976 - INFO - events_matrix.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 13:39:36,986 - INFO - データマージ中
+2025-09-02 13:39:36,994 - INFO - 欠損値処理中
+2025-09-02 13:39:36,996 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-02 13:39:36,996 - INFO - マージ完了: 17381 行
+2025-09-02 13:39:36,996 - INFO - コントロール変数を追加中
+2025-09-02 13:39:36,997 - INFO - === TWFE分析開始 ===
+2025-09-02 13:39:36,997 - INFO - データ読み込み開始
+2025-09-02 13:39:36,997 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-02 13:39:37,108 - INFO - events_matrix.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 13:39:37,119 - INFO - データマージ中
+2025-09-02 13:39:37,127 - INFO - 欠損値処理中
+2025-09-02 13:39:37,130 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-02 13:39:37,130 - INFO - マージ完了: 17381 行
+2025-09-02 13:39:37,130 - INFO - コントロール変数を追加中
+2025-09-02 13:39:37,130 - INFO - TWFE推定開始
+2025-09-02 13:39:37,131 - INFO - 回帰式: delta ~ 0 + C(town) + C(year) + event_disaster_t + event_disaster_t1 + event_policy_boundary_t + event_policy_boundary_t1 + event_transit_t + event_transit_t1 + event_employment_t + event_employment_t1 + event_public_edu_medical_t + event_public_edu_medical_t1 + event_commercial_t + event_commercial_t1 + event_housing_t + event_housing_t1 + growth_adj_log + policy_boundary_dummy + disaster_2016_dummy
+2025-09-02 13:39:41,407 - INFO - 推定完了: R² = 0.9887
+2025-09-02 13:39:41,407 - INFO - 推定結果を抽出中
+2025-09-02 13:39:41,409 - INFO - 結果を保存中
+2025-09-02 13:39:41,411 - INFO - 係数結果を保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/output/effects_coefficients.csv
+2025-09-02 13:39:41,413 - INFO - サマリを保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/logs/20250902_133936_64c6441f/twfe_summary.txt
+2025-09-02 13:39:41,413 - INFO - === TWFE分析完了 ===
+2025-09-02 13:39:41,420 - INFO - === TWFE分析開始 ===
+2025-09-02 13:39:41,420 - INFO - データ読み込み開始
+2025-09-02 13:39:41,420 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-02 13:39:41,602 - INFO - events_matrix.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 13:39:41,615 - INFO - events_labeled.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-02 13:39:41,622 - INFO - データマージ中
+2025-09-02 13:39:41,639 - INFO - 有向イベントを作成中
+2025-09-02 13:39:41,963 - INFO - 欠損値処理中
+2025-09-02 13:39:41,968 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-02 13:39:41,968 - INFO - マージ完了: 17381 行
+2025-09-02 13:39:41,968 - INFO - コントロール変数を追加中
+2025-09-02 13:39:41,969 - INFO - TWFE推定開始
+2025-09-02 13:39:41,969 - INFO - 回帰式: delta ~ 0 + C(town) + C(year) + event_disaster_t + event_disaster_t1 + event_policy_boundary_t + event_policy_boundary_t1 + event_transit_t + event_transit_t1 + event_employment_t + event_employment_t1 + event_public_edu_medical_t + event_public_edu_medical_t1 + event_commercial_t + event_commercial_t1 + event_housing_t + event_housing_t1 + event_housing_inc_t + event_housing_inc_t1 + event_housing_dec_t + event_housing_dec_t1 + event_transit_inc_t + event_transit_inc_t1 + event_transit_dec_t + event_transit_dec_t1 + event_public_edu_medical_inc_t + event_public_edu_medical_inc_t1 + event_public_edu_medical_dec_t + event_public_edu_medical_dec_t1 + event_employment_inc_t + event_employment_inc_t1 + event_employment_dec_t + event_employment_dec_t1 + event_disaster_inc_t + event_disaster_inc_t1 + event_disaster_dec_t + event_disaster_dec_t1 + event_policy_boundary_inc_t + event_policy_boundary_inc_t1 + event_policy_boundary_dec_t + event_policy_boundary_dec_t1 + event_unknown_inc_t + event_unknown_inc_t1 + event_unknown_dec_t + event_unknown_dec_t1 + event_commercial_inc_t + event_commercial_inc_t1 + event_commercial_dec_t + event_commercial_dec_t1 + growth_adj_log + policy_boundary_dummy + disaster_2016_dummy
+2025-09-02 13:39:45,821 - INFO - 推定完了: R² = 0.9890
+2025-09-02 13:39:45,822 - INFO - 推定結果を抽出中
+2025-09-02 13:39:45,829 - INFO - 結果を保存中
+2025-09-02 13:39:45,830 - INFO - 係数結果を保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/output/effects_coefficients.csv
+2025-09-02 13:39:45,833 - INFO - サマリを保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/logs/20250902_133941_6434366b/twfe_summary.txt
+2025-09-02 13:39:45,833 - INFO - === TWFE分析完了 ===

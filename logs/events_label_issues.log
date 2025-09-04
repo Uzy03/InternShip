@@ -1,0 +1,627 @@
+2025-09-02 11:06:28,678 - INFO - Starting event normalization process
+2025-09-02 11:06:28,719 - WARNING - Panel mismatch: (魚屋町１丁目, 2020) not found in panel data
+2025-09-02 11:06:28,720 - WARNING - Panel mismatch: (楠３丁目, 2000) not found in panel data
+2025-09-02 11:06:28,720 - WARNING - Panel mismatch: (紺屋町１丁目, 2002) not found in panel data
+2025-09-02 11:06:28,721 - WARNING - Panel mismatch: (近見１丁目, 2001) not found in panel data
+2025-09-02 11:06:28,721 - WARNING - Panel mismatch: (紺屋町２丁目, 2022) not found in panel data
+2025-09-02 11:06:28,721 - WARNING - Panel mismatch: (春日３丁目, 2013) not found in panel data
+2025-09-02 11:06:28,721 - WARNING - Panel mismatch: (本山３丁目, 2009) not found in panel data
+2025-09-02 11:06:28,721 - WARNING - Panel mismatch: (春日２丁目, 2014) not found in panel data
+2025-09-02 11:06:28,721 - WARNING - Panel mismatch: (桜木６丁目, 2015) not found in panel data
+2025-09-02 11:06:28,721 - WARNING - Panel mismatch: (呉服町３丁目, 2011) not found in panel data
+2025-09-02 11:06:28,721 - WARNING - Panel mismatch: (春日３丁目, 2014) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (山ノ内１丁目, 2007) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (米屋町１丁目, 2008) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (南熊本２丁目, 2018) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (魚屋町２丁目, 2020) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (紺屋町１丁目, 2020) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (九品寺２丁目, 2008) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (近見２丁目, 2001) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (春日３丁目, 2012) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (田迎１丁目, 2005) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (九品寺６丁目, 2006) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (馬渡１丁目, 2002) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (船場町下１丁目, 2001) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (出仲間９丁目, 2014) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (大江３丁目, 2016) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (八幡８丁目, 2006) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (紺屋町１丁目, 2001) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (出仲間５丁目, 2007) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (呉服町２丁目, 2001) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (九品寺６丁目, 2001) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (出仲間８丁目, 2003) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (佐土原３丁目, 2013) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (近見９丁目, 2000) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (春日２丁目, 2025) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (魚屋町３丁目, 2021) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (米屋町１丁目, 2009) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (武蔵ケ丘９丁目, 2007) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (船場町３丁目, 2005) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (出仲間９丁目, 2006) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (佐土原２丁目, 2017) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (紺屋町２丁目, 2004) not found in panel data
+2025-09-02 11:06:28,722 - WARNING - Panel mismatch: (平田２丁目, 2012) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (近見８丁目, 2002) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (春日１丁目, 2012) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (上熊本１丁目, 2021) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (南高江３丁目, 1999) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (坪井６丁目, 2000) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (佐土原３丁目, 2015) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (出仲間３丁目, 2003) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (南熊本２丁目, 2020) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (月出１丁目, 2008) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (魚屋町２丁目, 2021) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (魚屋町１丁目, 2003) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (春日３丁目, 2011) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (楠２丁目, 2014) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (東町１丁目, 2024) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (春日３丁目, 2009) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (保田窪２丁目, 2013) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (魚屋町２丁目, 2006) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (三郎１丁目, 2013) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (春日３丁目, 2010) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (横手３丁目, 2013) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (平成１丁目, 2013) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (湖東１丁目, 2013) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (黒髪７丁目, 2013) not found in panel data
+2025-09-02 11:06:28,723 - WARNING - Panel mismatch: (江津２丁目, 2013) not found in panel data
+2025-09-02 11:06:28,729 - INFO - Long format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-02 11:06:28,790 - INFO - Wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 11:06:28,790 - INFO - === Event Normalization Statistics ===
+2025-09-02 11:06:28,790 - INFO - Total processed: 115
+2025-09-02 11:06:28,790 - INFO - Unknown categories: 1
+2025-09-02 11:06:28,790 - INFO - Panel mismatches: 66
+2025-09-02 11:06:28,790 - INFO - Intensity extraction failures: 0
+2025-09-02 11:06:28,790 - INFO - Category counts:
+2025-09-02 11:06:28,790 - INFO -   housing: t=7, t1=7
+2025-09-02 11:06:28,790 - INFO -   employment: t=0, t1=1
+2025-09-02 11:06:28,790 - INFO -   unknown: t=0, t1=0
+2025-09-02 11:06:28,790 - INFO -   transit: t=0, t1=2
+2025-09-02 11:06:42,265 - INFO - Starting event normalization process
+2025-09-02 11:06:42,299 - WARNING - Panel mismatch: (魚屋町１丁目, 2020) not found in panel data
+2025-09-02 11:06:42,300 - WARNING - Panel mismatch: (楠３丁目, 2000) not found in panel data
+2025-09-02 11:06:42,300 - WARNING - Panel mismatch: (紺屋町１丁目, 2002) not found in panel data
+2025-09-02 11:06:42,300 - WARNING - Panel mismatch: (近見１丁目, 2001) not found in panel data
+2025-09-02 11:06:42,300 - WARNING - Panel mismatch: (紺屋町２丁目, 2022) not found in panel data
+2025-09-02 11:06:42,300 - WARNING - Panel mismatch: (春日３丁目, 2013) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (本山３丁目, 2009) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (春日２丁目, 2014) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (桜木６丁目, 2015) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (呉服町３丁目, 2011) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (春日３丁目, 2014) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (山ノ内１丁目, 2007) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (米屋町１丁目, 2008) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (南熊本２丁目, 2018) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (魚屋町２丁目, 2020) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (紺屋町１丁目, 2020) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (九品寺２丁目, 2008) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (近見２丁目, 2001) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (春日３丁目, 2012) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (田迎１丁目, 2005) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (九品寺６丁目, 2006) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (馬渡１丁目, 2002) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (船場町下１丁目, 2001) not found in panel data
+2025-09-02 11:06:42,301 - WARNING - Panel mismatch: (出仲間９丁目, 2014) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (大江３丁目, 2016) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (八幡８丁目, 2006) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (紺屋町１丁目, 2001) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (出仲間５丁目, 2007) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (呉服町２丁目, 2001) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (九品寺６丁目, 2001) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (出仲間８丁目, 2003) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (佐土原３丁目, 2013) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (近見９丁目, 2000) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (春日２丁目, 2025) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (魚屋町３丁目, 2021) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (米屋町１丁目, 2009) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (武蔵ケ丘９丁目, 2007) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (船場町３丁目, 2005) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (出仲間９丁目, 2006) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (佐土原２丁目, 2017) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (紺屋町２丁目, 2004) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (平田２丁目, 2012) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (近見８丁目, 2002) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (春日１丁目, 2012) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (上熊本１丁目, 2021) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (南高江３丁目, 1999) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (坪井６丁目, 2000) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (佐土原３丁目, 2015) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (出仲間３丁目, 2003) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (南熊本２丁目, 2020) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (月出１丁目, 2008) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (魚屋町２丁目, 2021) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (魚屋町１丁目, 2003) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (春日３丁目, 2011) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (楠２丁目, 2014) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (東町１丁目, 2024) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (春日３丁目, 2009) not found in panel data
+2025-09-02 11:06:42,302 - WARNING - Panel mismatch: (保田窪２丁目, 2013) not found in panel data
+2025-09-02 11:06:42,303 - WARNING - Panel mismatch: (魚屋町２丁目, 2006) not found in panel data
+2025-09-02 11:06:42,303 - WARNING - Panel mismatch: (三郎１丁目, 2013) not found in panel data
+2025-09-02 11:06:42,303 - WARNING - Panel mismatch: (春日３丁目, 2010) not found in panel data
+2025-09-02 11:06:42,303 - WARNING - Panel mismatch: (横手３丁目, 2013) not found in panel data
+2025-09-02 11:06:42,303 - WARNING - Panel mismatch: (平成１丁目, 2013) not found in panel data
+2025-09-02 11:06:42,303 - WARNING - Panel mismatch: (湖東１丁目, 2013) not found in panel data
+2025-09-02 11:06:42,303 - WARNING - Panel mismatch: (黒髪７丁目, 2013) not found in panel data
+2025-09-02 11:06:42,303 - WARNING - Panel mismatch: (江津２丁目, 2013) not found in panel data
+2025-09-02 11:06:42,306 - INFO - Long format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-02 11:06:42,363 - INFO - Wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 11:06:42,363 - INFO - === Event Normalization Statistics ===
+2025-09-02 11:06:42,363 - INFO - Total processed: 115
+2025-09-02 11:06:42,363 - INFO - Unknown categories: 1
+2025-09-02 11:06:42,363 - INFO - Panel mismatches: 66
+2025-09-02 11:06:42,363 - INFO - Intensity extraction failures: 0
+2025-09-02 11:06:42,363 - INFO - Category counts:
+2025-09-02 11:06:42,363 - INFO -   housing: t=7, t1=7
+2025-09-02 11:06:42,363 - INFO -   employment: t=0, t1=1
+2025-09-02 11:06:42,363 - INFO -   unknown: t=0, t1=0
+2025-09-02 11:06:42,363 - INFO -   transit: t=0, t1=2
+2025-09-02 11:25:27,328 - INFO - Starting event normalization process
+2025-09-02 11:25:27,366 - WARNING - Panel mismatch: (八幡１１丁目, 2012) not found in panel data
+2025-09-02 11:25:27,369 - WARNING - Panel mismatch: (長嶺東８丁目, 2012) not found in panel data
+2025-09-02 11:25:27,370 - WARNING - Panel mismatch: (島崎７丁目, 2006) not found in panel data
+2025-09-02 11:25:27,371 - WARNING - Panel mismatch: (魚屋町１丁目, 2020) not found in panel data
+2025-09-02 11:25:27,371 - WARNING - Panel mismatch: (山室６丁目, 2006) not found in panel data
+2025-09-02 11:25:27,371 - WARNING - Panel mismatch: (楠３丁目, 2000) not found in panel data
+2025-09-02 11:25:27,371 - WARNING - Panel mismatch: (紺屋町１丁目, 2002) not found in panel data
+2025-09-02 11:25:27,372 - WARNING - Panel mismatch: (元三町１丁目, 2016) not found in panel data
+2025-09-02 11:25:27,372 - WARNING - Panel mismatch: (近見１丁目, 2001) not found in panel data
+2025-09-02 11:25:27,372 - WARNING - Panel mismatch: (清水万石５丁目, 2011) not found in panel data
+2025-09-02 11:25:27,372 - WARNING - Panel mismatch: (紺屋町２丁目, 2022) not found in panel data
+2025-09-02 11:25:27,372 - WARNING - Panel mismatch: (春日３丁目, 2013) not found in panel data
+2025-09-02 11:25:27,372 - WARNING - Panel mismatch: (江津２丁目, 2008) not found in panel data
+2025-09-02 11:25:27,373 - WARNING - Panel mismatch: (本山３丁目, 2009) not found in panel data
+2025-09-02 11:25:27,373 - WARNING - Panel mismatch: (春日２丁目, 2014) not found in panel data
+2025-09-02 11:25:27,373 - WARNING - Panel mismatch: (桜木６丁目, 2015) not found in panel data
+2025-09-02 11:25:27,373 - WARNING - Panel mismatch: (呉服町３丁目, 2011) not found in panel data
+2025-09-02 11:25:27,374 - WARNING - Panel mismatch: (春日３丁目, 2014) not found in panel data
+2025-09-02 11:25:27,374 - WARNING - Panel mismatch: (山ノ内１丁目, 2007) not found in panel data
+2025-09-02 11:25:27,374 - WARNING - Panel mismatch: (米屋町１丁目, 2008) not found in panel data
+2025-09-02 11:25:27,374 - WARNING - Panel mismatch: (南熊本２丁目, 2018) not found in panel data
+2025-09-02 11:25:27,374 - WARNING - Panel mismatch: (九品寺２丁目, 2008) not found in panel data
+2025-09-02 11:25:27,374 - WARNING - Panel mismatch: (近見２丁目, 2001) not found in panel data
+2025-09-02 11:25:27,374 - WARNING - Panel mismatch: (田迎１丁目, 2005) not found in panel data
+2025-09-02 11:25:27,374 - WARNING - Panel mismatch: (清水万石５丁目, 2009) not found in panel data
+2025-09-02 11:25:27,375 - WARNING - Panel mismatch: (清水万石５丁目, 2007) not found in panel data
+2025-09-02 11:25:27,375 - WARNING - Panel mismatch: (九品寺６丁目, 2006) not found in panel data
+2025-09-02 11:25:27,375 - WARNING - Panel mismatch: (馬渡１丁目, 2002) not found in panel data
+2025-09-02 11:25:27,375 - WARNING - Panel mismatch: (出仲間９丁目, 2014) not found in panel data
+2025-09-02 11:25:27,375 - WARNING - Panel mismatch: (大江３丁目, 2016) not found in panel data
+2025-09-02 11:25:27,375 - WARNING - Panel mismatch: (小峯４丁目, 2020) not found in panel data
+2025-09-02 11:25:27,375 - WARNING - Panel mismatch: (出仲間５丁目, 2007) not found in panel data
+2025-09-02 11:25:27,376 - WARNING - Panel mismatch: (呉服町２丁目, 2001) not found in panel data
+2025-09-02 11:25:27,376 - WARNING - Panel mismatch: (九品寺６丁目, 2001) not found in panel data
+2025-09-02 11:25:27,376 - WARNING - Panel mismatch: (出仲間８丁目, 2003) not found in panel data
+2025-09-02 11:25:27,376 - WARNING - Panel mismatch: (佐土原３丁目, 2013) not found in panel data
+2025-09-02 11:25:27,376 - WARNING - Panel mismatch: (春日２丁目, 2025) not found in panel data
+2025-09-02 11:25:27,376 - WARNING - Panel mismatch: (米屋町１丁目, 2009) not found in panel data
+2025-09-02 11:25:27,377 - WARNING - Panel mismatch: (武蔵ケ丘９丁目, 2007) not found in panel data
+2025-09-02 11:25:27,377 - WARNING - Panel mismatch: (船場町３丁目, 2005) not found in panel data
+2025-09-02 11:25:27,377 - WARNING - Panel mismatch: (出仲間９丁目, 2006) not found in panel data
+2025-09-02 11:25:27,377 - WARNING - Panel mismatch: (佐土原２丁目, 2017) not found in panel data
+2025-09-02 11:25:27,378 - WARNING - Panel mismatch: (平田２丁目, 2012) not found in panel data
+2025-09-02 11:25:27,378 - WARNING - Panel mismatch: (近見８丁目, 2002) not found in panel data
+2025-09-02 11:25:27,378 - WARNING - Panel mismatch: (春日１丁目, 2012) not found in panel data
+2025-09-02 11:25:27,378 - WARNING - Panel mismatch: (小峯４丁目, 2019) not found in panel data
+2025-09-02 11:25:27,378 - WARNING - Panel mismatch: (上熊本１丁目, 2021) not found in panel data
+2025-09-02 11:25:27,379 - WARNING - Panel mismatch: (江津２丁目, 2013) not found in panel data
+2025-09-02 11:25:27,379 - WARNING - Panel mismatch: (坪井６丁目, 2000) not found in panel data
+2025-09-02 11:25:27,379 - WARNING - Panel mismatch: (佐土原３丁目, 2015) not found in panel data
+2025-09-02 11:25:27,379 - WARNING - Panel mismatch: (出仲間３丁目, 2003) not found in panel data
+2025-09-02 11:25:27,380 - WARNING - Panel mismatch: (南熊本２丁目, 2020) not found in panel data
+2025-09-02 11:25:27,381 - WARNING - Panel mismatch: (清水万石５丁目, 2008) not found in panel data
+2025-09-02 11:25:27,381 - WARNING - Panel mismatch: (月出１丁目, 2008) not found in panel data
+2025-09-02 11:25:27,381 - WARNING - Panel mismatch: (小峯４丁目, 2022) not found in panel data
+2025-09-02 11:25:27,381 - WARNING - Panel mismatch: (元三町１丁目, 2021) not found in panel data
+2025-09-02 11:25:27,381 - WARNING - Panel mismatch: (大江６丁目, 2010) not found in panel data
+2025-09-02 11:25:27,381 - WARNING - Panel mismatch: (二本木５丁目, 2006) not found in panel data
+2025-09-02 11:25:27,381 - WARNING - Panel mismatch: (新屋敷１丁目, 2001) not found in panel data
+2025-09-02 11:25:27,381 - WARNING - Panel mismatch: (大江６丁目, 2013) not found in panel data
+2025-09-02 11:25:27,381 - WARNING - Panel mismatch: (上熊本３丁目, 2020) not found in panel data
+2025-09-02 11:25:27,381 - WARNING - Panel mismatch: (新屋敷１丁目, 2006) not found in panel data
+2025-09-02 11:25:27,382 - WARNING - Panel mismatch: (長嶺南４丁目, 2014) not found in panel data
+2025-09-02 11:25:27,382 - WARNING - Panel mismatch: (大江２丁目, 2018) not found in panel data
+2025-09-02 11:25:27,382 - WARNING - Panel mismatch: (渡鹿６丁目, 2006) not found in panel data
+2025-09-02 11:25:27,382 - WARNING - Panel mismatch: (大江２丁目, 2019) not found in panel data
+2025-09-02 11:25:27,382 - WARNING - Panel mismatch: (近見８丁目, 2004) not found in panel data
+2025-09-02 11:25:27,382 - WARNING - Panel mismatch: (九品寺５丁目, 2019) not found in panel data
+2025-09-02 11:25:27,382 - WARNING - Panel mismatch: (坪井６丁目, 2004) not found in panel data
+2025-09-02 11:25:27,383 - WARNING - Panel mismatch: (東町３丁目, 2018) not found in panel data
+2025-09-02 11:25:27,383 - WARNING - Panel mismatch: (長嶺南３丁目, 2008) not found in panel data
+2025-09-02 11:25:27,383 - WARNING - Panel mismatch: (月出２丁目, 2001) not found in panel data
+2025-09-02 11:25:27,383 - WARNING - Panel mismatch: (大江３丁目, 2017) not found in panel data
+2025-09-02 11:25:27,383 - WARNING - Panel mismatch: (長嶺南３丁目, 2006) not found in panel data
+2025-09-02 11:25:27,383 - WARNING - Panel mismatch: (長嶺東５丁目, 2002) not found in panel data
+2025-09-02 11:25:27,383 - WARNING - Panel mismatch: (帯山１丁目, 2007) not found in panel data
+2025-09-02 11:25:27,383 - WARNING - Panel mismatch: (東町４丁目, 2007) not found in panel data
+2025-09-02 11:25:27,383 - WARNING - Panel mismatch: (東町４丁目, 2009) not found in panel data
+2025-09-02 11:25:27,383 - WARNING - Panel mismatch: (東町４丁目, 2006) not found in panel data
+2025-09-02 11:25:27,384 - WARNING - Panel mismatch: (東町４丁目, 2014) not found in panel data
+2025-09-02 11:25:27,384 - WARNING - Panel mismatch: (東町４丁目, 2020) not found in panel data
+2025-09-02 11:25:27,384 - WARNING - Panel mismatch: (東町３丁目, 2024) not found in panel data
+2025-09-02 11:25:27,384 - WARNING - Panel mismatch: (東町３丁目, 2015) not found in panel data
+2025-09-02 11:25:27,384 - WARNING - Panel mismatch: (江津１丁目, 2005) not found in panel data
+2025-09-02 11:25:27,384 - WARNING - Panel mismatch: (大江２丁目, 2004) not found in panel data
+2025-09-02 11:25:27,384 - WARNING - Panel mismatch: (楠１丁目, 2000) not found in panel data
+2025-09-02 11:25:27,384 - WARNING - Panel mismatch: (西原３丁目, 2015) not found in panel data
+2025-09-02 11:25:27,385 - WARNING - Panel mismatch: (楠２丁目, 2014) not found in panel data
+2025-09-02 11:25:27,385 - WARNING - Panel mismatch: (東町１丁目, 2024) not found in panel data
+2025-09-02 11:25:27,385 - WARNING - Panel mismatch: (春日３丁目, 2009) not found in panel data
+2025-09-02 11:25:27,385 - WARNING - Panel mismatch: (八幡１丁目, 2000) not found in panel data
+2025-09-02 11:25:27,386 - WARNING - Panel mismatch: (春日３丁目, 2010) not found in panel data
+2025-09-02 11:25:27,387 - WARNING - Panel mismatch: (沼山津４丁目, 2006) not found in panel data
+2025-09-02 11:25:27,387 - WARNING - Panel mismatch: (小峯４丁目, 2006) not found in panel data
+2025-09-02 11:25:27,388 - WARNING - Panel mismatch: (清水万石５丁目, 2006) not found in panel data
+2025-09-02 11:25:27,388 - WARNING - Panel mismatch: (御領７丁目, 1999) not found in panel data
+2025-09-02 11:25:27,389 - WARNING - Panel mismatch: (江津２丁目, 2006) not found in panel data
+2025-09-02 11:25:27,389 - WARNING - Panel mismatch: (坪井６丁目, 2010) not found in panel data
+2025-09-02 11:25:27,390 - WARNING - Panel mismatch: (島崎７丁目, 2001) not found in panel data
+2025-09-02 11:25:27,390 - WARNING - Panel mismatch: (長嶺東８丁目, 2004) not found in panel data
+2025-09-02 11:25:27,396 - INFO - Long format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-02 11:25:27,622 - INFO - Wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 11:25:27,622 - INFO - === Event Normalization Statistics ===
+2025-09-02 11:25:27,622 - INFO - Total processed: 167
+2025-09-02 11:25:27,622 - INFO - Unknown categories: 7
+2025-09-02 11:25:27,622 - INFO - Panel mismatches: 100
+2025-09-02 11:25:27,622 - INFO - Intensity extraction failures: 0
+2025-09-02 11:25:27,622 - INFO - Category counts:
+2025-09-02 11:25:27,622 - INFO -   housing: t=118, t1=118
+2025-09-02 11:25:27,622 - INFO -   transit: t=3, t1=74
+2025-09-02 11:25:27,622 - INFO -   public_edu_medical: t=0, t1=55
+2025-09-02 11:25:27,622 - INFO -   commercial: t=26, t1=26
+2025-09-02 11:25:27,622 - INFO -   employment: t=0, t1=15
+2025-09-02 11:25:27,622 - INFO -   disaster: t=6, t1=0
+2025-09-02 11:25:27,622 - INFO -   unknown: t=0, t1=0
+2025-09-02 11:25:27,622 - INFO -   policy_boundary: t=42, t1=0
+2025-09-02 11:25:42,841 - INFO - Starting event normalization process
+2025-09-02 11:25:42,869 - WARNING - Panel mismatch: (八幡１１丁目, 2012) not found in panel data
+2025-09-02 11:25:42,872 - WARNING - Panel mismatch: (長嶺東８丁目, 2012) not found in panel data
+2025-09-02 11:25:42,873 - WARNING - Panel mismatch: (島崎７丁目, 2006) not found in panel data
+2025-09-02 11:25:42,873 - WARNING - Panel mismatch: (魚屋町１丁目, 2020) not found in panel data
+2025-09-02 11:25:42,873 - WARNING - Panel mismatch: (山室６丁目, 2006) not found in panel data
+2025-09-02 11:25:42,873 - WARNING - Panel mismatch: (楠３丁目, 2000) not found in panel data
+2025-09-02 11:25:42,873 - WARNING - Panel mismatch: (紺屋町１丁目, 2002) not found in panel data
+2025-09-02 11:25:42,874 - WARNING - Panel mismatch: (元三町１丁目, 2016) not found in panel data
+2025-09-02 11:25:42,874 - WARNING - Panel mismatch: (近見１丁目, 2001) not found in panel data
+2025-09-02 11:25:42,874 - WARNING - Panel mismatch: (清水万石５丁目, 2011) not found in panel data
+2025-09-02 11:25:42,874 - WARNING - Panel mismatch: (紺屋町２丁目, 2022) not found in panel data
+2025-09-02 11:25:42,874 - WARNING - Panel mismatch: (春日３丁目, 2013) not found in panel data
+2025-09-02 11:25:42,874 - WARNING - Panel mismatch: (江津２丁目, 2008) not found in panel data
+2025-09-02 11:25:42,874 - WARNING - Panel mismatch: (本山３丁目, 2009) not found in panel data
+2025-09-02 11:25:42,875 - WARNING - Panel mismatch: (春日２丁目, 2014) not found in panel data
+2025-09-02 11:25:42,875 - WARNING - Panel mismatch: (桜木６丁目, 2015) not found in panel data
+2025-09-02 11:25:42,875 - WARNING - Panel mismatch: (呉服町３丁目, 2011) not found in panel data
+2025-09-02 11:25:42,875 - WARNING - Panel mismatch: (春日３丁目, 2014) not found in panel data
+2025-09-02 11:25:42,875 - WARNING - Panel mismatch: (山ノ内１丁目, 2007) not found in panel data
+2025-09-02 11:25:42,875 - WARNING - Panel mismatch: (米屋町１丁目, 2008) not found in panel data
+2025-09-02 11:25:42,876 - WARNING - Panel mismatch: (南熊本２丁目, 2018) not found in panel data
+2025-09-02 11:25:42,876 - WARNING - Panel mismatch: (九品寺２丁目, 2008) not found in panel data
+2025-09-02 11:25:42,876 - WARNING - Panel mismatch: (近見２丁目, 2001) not found in panel data
+2025-09-02 11:25:42,876 - WARNING - Panel mismatch: (田迎１丁目, 2005) not found in panel data
+2025-09-02 11:25:42,876 - WARNING - Panel mismatch: (清水万石５丁目, 2009) not found in panel data
+2025-09-02 11:25:42,876 - WARNING - Panel mismatch: (清水万石５丁目, 2007) not found in panel data
+2025-09-02 11:25:42,876 - WARNING - Panel mismatch: (九品寺６丁目, 2006) not found in panel data
+2025-09-02 11:25:42,877 - WARNING - Panel mismatch: (馬渡１丁目, 2002) not found in panel data
+2025-09-02 11:25:42,877 - WARNING - Panel mismatch: (出仲間９丁目, 2014) not found in panel data
+2025-09-02 11:25:42,877 - WARNING - Panel mismatch: (大江３丁目, 2016) not found in panel data
+2025-09-02 11:25:42,877 - WARNING - Panel mismatch: (小峯４丁目, 2020) not found in panel data
+2025-09-02 11:25:42,877 - WARNING - Panel mismatch: (出仲間５丁目, 2007) not found in panel data
+2025-09-02 11:25:42,877 - WARNING - Panel mismatch: (呉服町２丁目, 2001) not found in panel data
+2025-09-02 11:25:42,877 - WARNING - Panel mismatch: (九品寺６丁目, 2001) not found in panel data
+2025-09-02 11:25:42,877 - WARNING - Panel mismatch: (出仲間８丁目, 2003) not found in panel data
+2025-09-02 11:25:42,878 - WARNING - Panel mismatch: (佐土原３丁目, 2013) not found in panel data
+2025-09-02 11:25:42,878 - WARNING - Panel mismatch: (春日２丁目, 2025) not found in panel data
+2025-09-02 11:25:42,878 - WARNING - Panel mismatch: (米屋町１丁目, 2009) not found in panel data
+2025-09-02 11:25:42,878 - WARNING - Panel mismatch: (武蔵ケ丘９丁目, 2007) not found in panel data
+2025-09-02 11:25:42,878 - WARNING - Panel mismatch: (船場町３丁目, 2005) not found in panel data
+2025-09-02 11:25:42,878 - WARNING - Panel mismatch: (出仲間９丁目, 2006) not found in panel data
+2025-09-02 11:25:42,879 - WARNING - Panel mismatch: (佐土原２丁目, 2017) not found in panel data
+2025-09-02 11:25:42,879 - WARNING - Panel mismatch: (平田２丁目, 2012) not found in panel data
+2025-09-02 11:25:42,879 - WARNING - Panel mismatch: (近見８丁目, 2002) not found in panel data
+2025-09-02 11:25:42,879 - WARNING - Panel mismatch: (春日１丁目, 2012) not found in panel data
+2025-09-02 11:25:42,879 - WARNING - Panel mismatch: (小峯４丁目, 2019) not found in panel data
+2025-09-02 11:25:42,880 - WARNING - Panel mismatch: (上熊本１丁目, 2021) not found in panel data
+2025-09-02 11:25:42,880 - WARNING - Panel mismatch: (江津２丁目, 2013) not found in panel data
+2025-09-02 11:25:42,880 - WARNING - Panel mismatch: (坪井６丁目, 2000) not found in panel data
+2025-09-02 11:25:42,881 - WARNING - Panel mismatch: (佐土原３丁目, 2015) not found in panel data
+2025-09-02 11:25:42,881 - WARNING - Panel mismatch: (出仲間３丁目, 2003) not found in panel data
+2025-09-02 11:25:42,881 - WARNING - Panel mismatch: (南熊本２丁目, 2020) not found in panel data
+2025-09-02 11:25:42,881 - WARNING - Panel mismatch: (清水万石５丁目, 2008) not found in panel data
+2025-09-02 11:25:42,881 - WARNING - Panel mismatch: (月出１丁目, 2008) not found in panel data
+2025-09-02 11:25:42,882 - WARNING - Panel mismatch: (小峯４丁目, 2022) not found in panel data
+2025-09-02 11:25:42,882 - WARNING - Panel mismatch: (元三町１丁目, 2021) not found in panel data
+2025-09-02 11:25:42,882 - WARNING - Panel mismatch: (大江６丁目, 2010) not found in panel data
+2025-09-02 11:25:42,882 - WARNING - Panel mismatch: (二本木５丁目, 2006) not found in panel data
+2025-09-02 11:25:42,882 - WARNING - Panel mismatch: (新屋敷１丁目, 2001) not found in panel data
+2025-09-02 11:25:42,882 - WARNING - Panel mismatch: (大江６丁目, 2013) not found in panel data
+2025-09-02 11:25:42,882 - WARNING - Panel mismatch: (上熊本３丁目, 2020) not found in panel data
+2025-09-02 11:25:42,883 - WARNING - Panel mismatch: (新屋敷１丁目, 2006) not found in panel data
+2025-09-02 11:25:42,883 - WARNING - Panel mismatch: (長嶺南４丁目, 2014) not found in panel data
+2025-09-02 11:25:42,883 - WARNING - Panel mismatch: (大江２丁目, 2018) not found in panel data
+2025-09-02 11:25:42,883 - WARNING - Panel mismatch: (渡鹿６丁目, 2006) not found in panel data
+2025-09-02 11:25:42,883 - WARNING - Panel mismatch: (大江２丁目, 2019) not found in panel data
+2025-09-02 11:25:42,883 - WARNING - Panel mismatch: (近見８丁目, 2004) not found in panel data
+2025-09-02 11:25:42,884 - WARNING - Panel mismatch: (九品寺５丁目, 2019) not found in panel data
+2025-09-02 11:25:42,884 - WARNING - Panel mismatch: (坪井６丁目, 2004) not found in panel data
+2025-09-02 11:25:42,884 - WARNING - Panel mismatch: (東町３丁目, 2018) not found in panel data
+2025-09-02 11:25:42,884 - WARNING - Panel mismatch: (長嶺南３丁目, 2008) not found in panel data
+2025-09-02 11:25:42,884 - WARNING - Panel mismatch: (月出２丁目, 2001) not found in panel data
+2025-09-02 11:25:42,884 - WARNING - Panel mismatch: (大江３丁目, 2017) not found in panel data
+2025-09-02 11:25:42,884 - WARNING - Panel mismatch: (長嶺南３丁目, 2006) not found in panel data
+2025-09-02 11:25:42,885 - WARNING - Panel mismatch: (長嶺東５丁目, 2002) not found in panel data
+2025-09-02 11:25:42,885 - WARNING - Panel mismatch: (帯山１丁目, 2007) not found in panel data
+2025-09-02 11:25:42,885 - WARNING - Panel mismatch: (東町４丁目, 2007) not found in panel data
+2025-09-02 11:25:42,885 - WARNING - Panel mismatch: (東町４丁目, 2009) not found in panel data
+2025-09-02 11:25:42,885 - WARNING - Panel mismatch: (東町４丁目, 2006) not found in panel data
+2025-09-02 11:25:42,885 - WARNING - Panel mismatch: (東町４丁目, 2014) not found in panel data
+2025-09-02 11:25:42,885 - WARNING - Panel mismatch: (東町４丁目, 2020) not found in panel data
+2025-09-02 11:25:42,885 - WARNING - Panel mismatch: (東町３丁目, 2024) not found in panel data
+2025-09-02 11:25:42,886 - WARNING - Panel mismatch: (東町３丁目, 2015) not found in panel data
+2025-09-02 11:25:42,886 - WARNING - Panel mismatch: (江津１丁目, 2005) not found in panel data
+2025-09-02 11:25:42,886 - WARNING - Panel mismatch: (大江２丁目, 2004) not found in panel data
+2025-09-02 11:25:42,886 - WARNING - Panel mismatch: (楠１丁目, 2000) not found in panel data
+2025-09-02 11:25:42,886 - WARNING - Panel mismatch: (西原３丁目, 2015) not found in panel data
+2025-09-02 11:25:42,886 - WARNING - Panel mismatch: (楠２丁目, 2014) not found in panel data
+2025-09-02 11:25:42,887 - WARNING - Panel mismatch: (東町１丁目, 2024) not found in panel data
+2025-09-02 11:25:42,887 - WARNING - Panel mismatch: (春日３丁目, 2009) not found in panel data
+2025-09-02 11:25:42,887 - WARNING - Panel mismatch: (八幡１丁目, 2000) not found in panel data
+2025-09-02 11:25:42,887 - WARNING - Panel mismatch: (春日３丁目, 2010) not found in panel data
+2025-09-02 11:25:42,888 - WARNING - Panel mismatch: (沼山津４丁目, 2006) not found in panel data
+2025-09-02 11:25:42,888 - WARNING - Panel mismatch: (小峯４丁目, 2006) not found in panel data
+2025-09-02 11:25:42,888 - WARNING - Panel mismatch: (清水万石５丁目, 2006) not found in panel data
+2025-09-02 11:25:42,889 - WARNING - Panel mismatch: (御領７丁目, 1999) not found in panel data
+2025-09-02 11:25:42,890 - WARNING - Panel mismatch: (江津２丁目, 2006) not found in panel data
+2025-09-02 11:25:42,890 - WARNING - Panel mismatch: (坪井６丁目, 2010) not found in panel data
+2025-09-02 11:25:42,890 - WARNING - Panel mismatch: (島崎７丁目, 2001) not found in panel data
+2025-09-02 11:25:42,890 - WARNING - Panel mismatch: (長嶺東８丁目, 2004) not found in panel data
+2025-09-02 11:25:42,897 - INFO - Long format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-02 11:25:43,129 - INFO - Wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 11:25:43,129 - INFO - === Event Normalization Statistics ===
+2025-09-02 11:25:43,129 - INFO - Total processed: 167
+2025-09-02 11:25:43,129 - INFO - Unknown categories: 7
+2025-09-02 11:25:43,129 - INFO - Panel mismatches: 100
+2025-09-02 11:25:43,129 - INFO - Intensity extraction failures: 0
+2025-09-02 11:25:43,129 - INFO - Category counts:
+2025-09-02 11:25:43,129 - INFO -   housing: t=118, t1=118
+2025-09-02 11:25:43,129 - INFO -   transit: t=3, t1=74
+2025-09-02 11:25:43,129 - INFO -   public_edu_medical: t=0, t1=55
+2025-09-02 11:25:43,129 - INFO -   commercial: t=26, t1=26
+2025-09-02 11:25:43,129 - INFO -   employment: t=0, t1=15
+2025-09-02 11:25:43,129 - INFO -   disaster: t=6, t1=0
+2025-09-02 11:25:43,129 - INFO -   unknown: t=0, t1=0
+2025-09-02 11:25:43,129 - INFO -   policy_boundary: t=42, t1=0
+2025-09-02 11:29:56,508 - INFO - Starting event normalization process
+2025-09-02 11:29:56,542 - WARNING - Panel mismatch: (八幡１１丁目, 2012) not found in panel data
+2025-09-02 11:29:56,545 - WARNING - Panel mismatch: (長嶺東８丁目, 2012) not found in panel data
+2025-09-02 11:29:56,545 - WARNING - Panel mismatch: (島崎７丁目, 2006) not found in panel data
+2025-09-02 11:29:56,546 - WARNING - Panel mismatch: (魚屋町１丁目, 2020) not found in panel data
+2025-09-02 11:29:56,546 - WARNING - Panel mismatch: (山室６丁目, 2006) not found in panel data
+2025-09-02 11:29:56,546 - WARNING - Panel mismatch: (楠３丁目, 2000) not found in panel data
+2025-09-02 11:29:56,546 - WARNING - Panel mismatch: (紺屋町１丁目, 2002) not found in panel data
+2025-09-02 11:29:56,546 - WARNING - Panel mismatch: (元三町１丁目, 2016) not found in panel data
+2025-09-02 11:29:56,547 - WARNING - Panel mismatch: (近見１丁目, 2001) not found in panel data
+2025-09-02 11:29:56,547 - WARNING - Panel mismatch: (清水万石５丁目, 2011) not found in panel data
+2025-09-02 11:29:56,547 - WARNING - Panel mismatch: (紺屋町２丁目, 2022) not found in panel data
+2025-09-02 11:29:56,547 - WARNING - Panel mismatch: (春日３丁目, 2013) not found in panel data
+2025-09-02 11:29:56,548 - WARNING - Panel mismatch: (江津２丁目, 2008) not found in panel data
+2025-09-02 11:29:56,548 - WARNING - Panel mismatch: (本山３丁目, 2009) not found in panel data
+2025-09-02 11:29:56,548 - WARNING - Panel mismatch: (春日２丁目, 2014) not found in panel data
+2025-09-02 11:29:56,548 - WARNING - Panel mismatch: (桜木６丁目, 2015) not found in panel data
+2025-09-02 11:29:56,548 - WARNING - Panel mismatch: (呉服町３丁目, 2011) not found in panel data
+2025-09-02 11:29:56,549 - WARNING - Panel mismatch: (春日３丁目, 2014) not found in panel data
+2025-09-02 11:29:56,549 - WARNING - Panel mismatch: (山ノ内１丁目, 2007) not found in panel data
+2025-09-02 11:29:56,549 - WARNING - Panel mismatch: (米屋町１丁目, 2008) not found in panel data
+2025-09-02 11:29:56,549 - WARNING - Panel mismatch: (南熊本２丁目, 2018) not found in panel data
+2025-09-02 11:29:56,549 - WARNING - Panel mismatch: (九品寺２丁目, 2008) not found in panel data
+2025-09-02 11:29:56,550 - WARNING - Panel mismatch: (近見２丁目, 2001) not found in panel data
+2025-09-02 11:29:56,550 - WARNING - Panel mismatch: (田迎１丁目, 2005) not found in panel data
+2025-09-02 11:29:56,550 - WARNING - Panel mismatch: (清水万石５丁目, 2009) not found in panel data
+2025-09-02 11:29:56,550 - WARNING - Panel mismatch: (清水万石５丁目, 2007) not found in panel data
+2025-09-02 11:29:56,550 - WARNING - Panel mismatch: (九品寺６丁目, 2006) not found in panel data
+2025-09-02 11:29:56,550 - WARNING - Panel mismatch: (馬渡１丁目, 2002) not found in panel data
+2025-09-02 11:29:56,550 - WARNING - Panel mismatch: (出仲間９丁目, 2014) not found in panel data
+2025-09-02 11:29:56,550 - WARNING - Panel mismatch: (大江３丁目, 2016) not found in panel data
+2025-09-02 11:29:56,551 - WARNING - Panel mismatch: (小峯４丁目, 2020) not found in panel data
+2025-09-02 11:29:56,551 - WARNING - Panel mismatch: (出仲間５丁目, 2007) not found in panel data
+2025-09-02 11:29:56,551 - WARNING - Panel mismatch: (呉服町２丁目, 2001) not found in panel data
+2025-09-02 11:29:56,551 - WARNING - Panel mismatch: (九品寺６丁目, 2001) not found in panel data
+2025-09-02 11:29:56,551 - WARNING - Panel mismatch: (出仲間８丁目, 2003) not found in panel data
+2025-09-02 11:29:56,551 - WARNING - Panel mismatch: (佐土原３丁目, 2013) not found in panel data
+2025-09-02 11:29:56,552 - WARNING - Panel mismatch: (春日２丁目, 2025) not found in panel data
+2025-09-02 11:29:56,552 - WARNING - Panel mismatch: (米屋町１丁目, 2009) not found in panel data
+2025-09-02 11:29:56,552 - WARNING - Panel mismatch: (武蔵ケ丘９丁目, 2007) not found in panel data
+2025-09-02 11:29:56,553 - WARNING - Panel mismatch: (船場町３丁目, 2005) not found in panel data
+2025-09-02 11:29:56,553 - WARNING - Panel mismatch: (出仲間９丁目, 2006) not found in panel data
+2025-09-02 11:29:56,553 - WARNING - Panel mismatch: (佐土原２丁目, 2017) not found in panel data
+2025-09-02 11:29:56,553 - WARNING - Panel mismatch: (平田２丁目, 2012) not found in panel data
+2025-09-02 11:29:56,553 - WARNING - Panel mismatch: (近見８丁目, 2002) not found in panel data
+2025-09-02 11:29:56,553 - WARNING - Panel mismatch: (春日１丁目, 2012) not found in panel data
+2025-09-02 11:29:56,554 - WARNING - Panel mismatch: (小峯４丁目, 2019) not found in panel data
+2025-09-02 11:29:56,554 - WARNING - Panel mismatch: (上熊本１丁目, 2021) not found in panel data
+2025-09-02 11:29:56,555 - WARNING - Panel mismatch: (江津２丁目, 2013) not found in panel data
+2025-09-02 11:29:56,555 - WARNING - Panel mismatch: (坪井６丁目, 2000) not found in panel data
+2025-09-02 11:29:56,555 - WARNING - Panel mismatch: (佐土原３丁目, 2015) not found in panel data
+2025-09-02 11:29:56,555 - WARNING - Panel mismatch: (出仲間３丁目, 2003) not found in panel data
+2025-09-02 11:29:56,556 - WARNING - Panel mismatch: (南熊本２丁目, 2020) not found in panel data
+2025-09-02 11:29:56,556 - WARNING - Panel mismatch: (清水万石５丁目, 2008) not found in panel data
+2025-09-02 11:29:56,556 - WARNING - Panel mismatch: (月出１丁目, 2008) not found in panel data
+2025-09-02 11:29:56,556 - WARNING - Panel mismatch: (小峯４丁目, 2022) not found in panel data
+2025-09-02 11:29:56,556 - WARNING - Panel mismatch: (元三町１丁目, 2021) not found in panel data
+2025-09-02 11:29:56,556 - WARNING - Panel mismatch: (大江６丁目, 2010) not found in panel data
+2025-09-02 11:29:56,556 - WARNING - Panel mismatch: (二本木５丁目, 2006) not found in panel data
+2025-09-02 11:29:56,556 - WARNING - Panel mismatch: (新屋敷１丁目, 2001) not found in panel data
+2025-09-02 11:29:56,557 - WARNING - Panel mismatch: (大江６丁目, 2013) not found in panel data
+2025-09-02 11:29:56,557 - WARNING - Panel mismatch: (上熊本３丁目, 2020) not found in panel data
+2025-09-02 11:29:56,557 - WARNING - Panel mismatch: (新屋敷１丁目, 2006) not found in panel data
+2025-09-02 11:29:56,557 - WARNING - Panel mismatch: (長嶺南４丁目, 2014) not found in panel data
+2025-09-02 11:29:56,557 - WARNING - Panel mismatch: (大江２丁目, 2018) not found in panel data
+2025-09-02 11:29:56,557 - WARNING - Panel mismatch: (渡鹿６丁目, 2006) not found in panel data
+2025-09-02 11:29:56,557 - WARNING - Panel mismatch: (大江２丁目, 2019) not found in panel data
+2025-09-02 11:29:56,557 - WARNING - Panel mismatch: (近見８丁目, 2004) not found in panel data
+2025-09-02 11:29:56,557 - WARNING - Panel mismatch: (九品寺５丁目, 2019) not found in panel data
+2025-09-02 11:29:56,558 - WARNING - Panel mismatch: (坪井６丁目, 2004) not found in panel data
+2025-09-02 11:29:56,558 - WARNING - Panel mismatch: (東町３丁目, 2018) not found in panel data
+2025-09-02 11:29:56,558 - WARNING - Panel mismatch: (長嶺南３丁目, 2008) not found in panel data
+2025-09-02 11:29:56,558 - WARNING - Panel mismatch: (月出２丁目, 2001) not found in panel data
+2025-09-02 11:29:56,558 - WARNING - Panel mismatch: (大江３丁目, 2017) not found in panel data
+2025-09-02 11:29:56,558 - WARNING - Panel mismatch: (長嶺南３丁目, 2006) not found in panel data
+2025-09-02 11:29:56,558 - WARNING - Panel mismatch: (長嶺東５丁目, 2002) not found in panel data
+2025-09-02 11:29:56,558 - WARNING - Panel mismatch: (帯山１丁目, 2007) not found in panel data
+2025-09-02 11:29:56,558 - WARNING - Panel mismatch: (東町４丁目, 2007) not found in panel data
+2025-09-02 11:29:56,559 - WARNING - Panel mismatch: (東町４丁目, 2009) not found in panel data
+2025-09-02 11:29:56,559 - WARNING - Panel mismatch: (東町４丁目, 2006) not found in panel data
+2025-09-02 11:29:56,559 - WARNING - Panel mismatch: (東町４丁目, 2014) not found in panel data
+2025-09-02 11:29:56,559 - WARNING - Panel mismatch: (東町４丁目, 2020) not found in panel data
+2025-09-02 11:29:56,559 - WARNING - Panel mismatch: (東町３丁目, 2024) not found in panel data
+2025-09-02 11:29:56,559 - WARNING - Panel mismatch: (東町３丁目, 2015) not found in panel data
+2025-09-02 11:29:56,559 - WARNING - Panel mismatch: (江津１丁目, 2005) not found in panel data
+2025-09-02 11:29:56,559 - WARNING - Panel mismatch: (大江２丁目, 2004) not found in panel data
+2025-09-02 11:29:56,559 - WARNING - Panel mismatch: (楠１丁目, 2000) not found in panel data
+2025-09-02 11:29:56,559 - WARNING - Panel mismatch: (西原３丁目, 2015) not found in panel data
+2025-09-02 11:29:56,560 - WARNING - Panel mismatch: (楠２丁目, 2014) not found in panel data
+2025-09-02 11:29:56,560 - WARNING - Panel mismatch: (東町１丁目, 2024) not found in panel data
+2025-09-02 11:29:56,560 - WARNING - Panel mismatch: (春日３丁目, 2009) not found in panel data
+2025-09-02 11:29:56,560 - WARNING - Panel mismatch: (八幡１丁目, 2000) not found in panel data
+2025-09-02 11:29:56,560 - WARNING - Panel mismatch: (春日３丁目, 2010) not found in panel data
+2025-09-02 11:29:56,561 - WARNING - Panel mismatch: (沼山津４丁目, 2006) not found in panel data
+2025-09-02 11:29:56,561 - WARNING - Panel mismatch: (小峯４丁目, 2006) not found in panel data
+2025-09-02 11:29:56,562 - WARNING - Panel mismatch: (清水万石５丁目, 2006) not found in panel data
+2025-09-02 11:29:56,562 - WARNING - Panel mismatch: (御領７丁目, 1999) not found in panel data
+2025-09-02 11:29:56,563 - WARNING - Panel mismatch: (江津２丁目, 2006) not found in panel data
+2025-09-02 11:29:56,563 - WARNING - Panel mismatch: (坪井６丁目, 2010) not found in panel data
+2025-09-02 11:29:56,563 - WARNING - Panel mismatch: (島崎７丁目, 2001) not found in panel data
+2025-09-02 11:29:56,564 - WARNING - Panel mismatch: (長嶺東８丁目, 2004) not found in panel data
+2025-09-02 11:29:56,570 - INFO - Long format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-02 11:29:56,798 - INFO - Wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 11:29:56,798 - INFO - === Event Normalization Statistics ===
+2025-09-02 11:29:56,798 - INFO - Total processed: 167
+2025-09-02 11:29:56,798 - INFO - Unknown categories: 7
+2025-09-02 11:29:56,798 - INFO - Panel mismatches: 100
+2025-09-02 11:29:56,798 - INFO - Intensity extraction failures: 0
+2025-09-02 11:29:56,798 - INFO - Category counts:
+2025-09-02 11:29:56,798 - INFO -   housing: t=118, t1=118
+2025-09-02 11:29:56,798 - INFO -   transit: t=3, t1=74
+2025-09-02 11:29:56,798 - INFO -   public_edu_medical: t=0, t1=55
+2025-09-02 11:29:56,798 - INFO -   commercial: t=26, t1=26
+2025-09-02 11:29:56,798 - INFO -   employment: t=0, t1=15
+2025-09-02 11:29:56,798 - INFO -   disaster: t=6, t1=0
+2025-09-02 11:29:56,798 - INFO -   unknown: t=0, t1=0
+2025-09-02 11:29:56,798 - INFO -   policy_boundary: t=42, t1=0
+2025-09-02 12:39:29,694 - INFO - Starting event normalization process
+2025-09-02 12:39:29,852 - INFO - Long format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-02 12:39:30,138 - INFO - Wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 12:39:30,138 - INFO - === Event Normalization Statistics ===
+2025-09-02 12:39:30,138 - INFO - Total processed: 167
+2025-09-02 12:39:30,138 - INFO - Unknown categories: 7
+2025-09-02 12:39:30,138 - INFO - Panel mismatches: 0
+2025-09-02 12:39:30,138 - INFO - Intensity extraction failures: 0
+2025-09-02 12:39:30,138 - INFO - Category counts:
+2025-09-02 12:39:30,138 - INFO -   housing: t=118, t1=118
+2025-09-02 12:39:30,138 - INFO -   transit: t=3, t1=74
+2025-09-02 12:39:30,138 - INFO -   public_edu_medical: t=0, t1=55
+2025-09-02 12:39:30,138 - INFO -   commercial: t=26, t1=26
+2025-09-02 12:39:30,138 - INFO -   employment: t=0, t1=15
+2025-09-02 12:39:30,138 - INFO -   disaster: t=6, t1=0
+2025-09-02 12:39:30,138 - INFO -   unknown: t=0, t1=0
+2025-09-02 12:39:30,138 - INFO -   policy_boundary: t=42, t1=0
+2025-09-02 12:41:59,428 - INFO - Starting event normalization process
+2025-09-02 12:41:59,582 - INFO - Long format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-02 12:41:59,843 - INFO - Wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 12:41:59,843 - INFO - === Event Normalization Statistics ===
+2025-09-02 12:41:59,843 - INFO - Total processed: 167
+2025-09-02 12:41:59,843 - INFO - Unknown categories: 7
+2025-09-02 12:41:59,843 - INFO - Panel mismatches: 0
+2025-09-02 12:41:59,843 - INFO - Intensity extraction failures: 0
+2025-09-02 12:41:59,843 - INFO - Category counts:
+2025-09-02 12:41:59,843 - INFO -   housing: t=118, t1=118
+2025-09-02 12:41:59,843 - INFO -   transit: t=3, t1=74
+2025-09-02 12:41:59,843 - INFO -   public_edu_medical: t=0, t1=55
+2025-09-02 12:41:59,843 - INFO -   commercial: t=26, t1=26
+2025-09-02 12:41:59,843 - INFO -   employment: t=0, t1=15
+2025-09-02 12:41:59,843 - INFO -   disaster: t=6, t1=0
+2025-09-02 12:41:59,843 - INFO -   unknown: t=0, t1=0
+2025-09-02 12:41:59,843 - INFO -   policy_boundary: t=42, t1=0
+2025-09-02 17:11:18,211 - INFO - Starting event normalization process
+2025-09-02 17:11:18,369 - INFO - Long format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-02 17:11:18,594 - INFO - Wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 17:11:18,594 - INFO - === Event Normalization Statistics ===
+2025-09-02 17:11:18,594 - INFO - Total processed: 167
+2025-09-02 17:11:18,594 - INFO - Unknown categories: 1
+2025-09-02 17:11:18,594 - INFO - Panel mismatches: 0
+2025-09-02 17:11:18,594 - INFO - Intensity extraction failures: 0
+2025-09-02 17:11:18,594 - INFO - Category counts:
+2025-09-02 17:11:18,594 - INFO -   housing: t=111, t1=111
+2025-09-02 17:11:18,594 - INFO -   transit: t=3, t1=40
+2025-09-02 17:11:18,594 - INFO -   commercial: t=25, t1=25
+2025-09-02 17:11:18,594 - INFO -   public_edu_medical: t=0, t1=9
+2025-09-02 17:11:18,594 - INFO -   employment: t=0, t1=9
+2025-09-02 17:11:18,594 - INFO -   disaster: t=6, t1=0
+2025-09-02 17:11:18,594 - INFO -   unknown: t=0, t1=0
+2025-09-02 17:11:18,594 - INFO -   policy_boundary: t=46, t1=0
+2025-09-02 17:41:41,856 - INFO - Starting event normalization process
+2025-09-02 17:41:42,016 - INFO - Found 1 events with unknown direction, dropping them
+2025-09-02 17:41:42,020 - INFO - Long format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-02 17:41:42,256 - INFO - Wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 17:41:42,539 - INFO - Signed wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix_signed.csv
+2025-09-02 17:41:42,539 - INFO - === Event Normalization Statistics ===
+2025-09-02 17:41:42,539 - INFO - Total processed: 167
+2025-09-02 17:41:42,539 - INFO - Unknown categories: 1
+2025-09-02 17:41:42,539 - INFO - Panel mismatches: 0
+2025-09-02 17:41:42,539 - INFO - Intensity extraction failures: 0
+2025-09-02 17:41:42,539 - INFO - Category counts:
+2025-09-02 17:41:42,539 - INFO -   housing: t=111, t1=111
+2025-09-02 17:41:42,539 - INFO -   transit: t=3, t1=40
+2025-09-02 17:41:42,539 - INFO -   commercial: t=25, t1=25
+2025-09-02 17:41:42,539 - INFO -   public_edu_medical: t=0, t1=9
+2025-09-02 17:41:42,539 - INFO -   employment: t=0, t1=9
+2025-09-02 17:41:42,539 - INFO -   disaster: t=6, t1=0
+2025-09-02 17:41:42,539 - INFO -   unknown: t=0, t1=0
+2025-09-02 17:41:42,539 - INFO -   policy_boundary: t=46, t1=0
+2025-09-03 10:48:01,956 - INFO - Starting event normalization process
+2025-09-03 10:49:01,097 - INFO - Starting event normalization process
+2025-09-03 10:49:01,270 - INFO - Found 1 events with unknown direction, dropping them
+2025-09-03 10:49:01,274 - INFO - Long format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-03 10:49:01,495 - INFO - Wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-03 10:49:01,746 - INFO - Signed wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix_signed.csv
+2025-09-03 10:49:01,746 - INFO - === Event Normalization Statistics ===
+2025-09-03 10:49:01,747 - INFO - Total processed: 167
+2025-09-03 10:49:01,747 - INFO - Unknown categories: 1
+2025-09-03 10:49:01,747 - INFO - Panel mismatches: 0
+2025-09-03 10:49:01,747 - INFO - Intensity extraction failures: 0
+2025-09-03 10:49:01,747 - INFO - Category counts:
+2025-09-03 10:49:01,747 - INFO -   housing: t=111, t1=111
+2025-09-03 10:49:01,747 - INFO -   transit: t=3, t1=40
+2025-09-03 10:49:01,747 - INFO -   commercial: t=25, t1=25
+2025-09-03 10:49:01,747 - INFO -   public_edu_medical: t=0, t1=9
+2025-09-03 10:49:01,747 - INFO -   employment: t=0, t1=9
+2025-09-03 10:49:01,747 - INFO -   disaster: t=6, t1=0
+2025-09-03 10:49:01,747 - INFO -   unknown: t=0, t1=0
+2025-09-03 10:49:01,747 - INFO -   policy_boundary: t=46, t1=0
+2025-09-03 11:29:22,141 - INFO - Starting event normalization process
+2025-09-03 11:29:22,304 - INFO - Found 1 events with unknown direction, dropping them
+2025-09-03 11:29:22,308 - INFO - Long format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-03 11:29:22,517 - INFO - Wide format output saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-03 11:29:22,680 - INFO - Applying post-processing filters...
+2025-09-03 11:29:22,801 - INFO - [SmallN Filter] Zeroed 4210 rows, 28 event columns
+2025-09-03 11:29:22,801 - INFO - [Inc/Dec Rectification] Applied to categories: ['transit', 'public_edu_medical']
+2025-09-03 11:29:22,887 - INFO - Signed wide format output (post-processed) saved to: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix_signed.csv
+2025-09-03 11:29:22,887 - INFO - === Event Normalization Statistics ===
+2025-09-03 11:29:22,887 - INFO - Total processed: 167
+2025-09-03 11:29:22,888 - INFO - Unknown categories: 1
+2025-09-03 11:29:22,888 - INFO - Panel mismatches: 0
+2025-09-03 11:29:22,888 - INFO - Intensity extraction failures: 0
+2025-09-03 11:29:22,888 - INFO - Category counts:
+2025-09-03 11:29:22,888 - INFO -   housing: t=111, t1=111
+2025-09-03 11:29:22,888 - INFO -   transit: t=3, t1=40
+2025-09-03 11:29:22,888 - INFO -   commercial: t=25, t1=25
+2025-09-03 11:29:22,888 - INFO -   public_edu_medical: t=0, t1=9
+2025-09-03 11:29:22,888 - INFO -   employment: t=0, t1=9
+2025-09-03 11:29:22,888 - INFO -   disaster: t=6, t1=0
+2025-09-03 11:29:22,888 - INFO -   unknown: t=0, t1=0
+2025-09-03 11:29:22,888 - INFO -   policy_boundary: t=46, t1=0
+2025-09-04 13:21:32,585 - INFO - [normalize] loaded=259, dropped_foreigner=1, kept_clean=258 → /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled_clean.csv
+2025-09-04 13:21:32,595 - INFO - [normalize] events_matrix_signed saved → /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix_signed.csv
+2025-09-04 13:36:41,016 - INFO - [normalize] loaded=259, dropped_foreigner=1, kept_clean=258 → /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled_clean.csv
+2025-09-04 13:36:41,024 - INFO - [normalize] events_matrix_signed saved → /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix_signed.csv
+2025-09-04 13:37:05,813 - INFO - [normalize] loaded=259, dropped_foreigner=1, kept_clean=258 → /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled_clean.csv
+2025-09-04 13:37:05,823 - INFO - [normalize] events_matrix_signed saved → /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix_signed.csv

@@ -1,0 +1,22 @@
+2025-09-02 14:28:32,348 - INFO - === TWFE分析開始 ===
+2025-09-02 14:28:32,348 - INFO - データ読み込み開始
+2025-09-02 14:28:32,348 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-02 14:28:32,471 - INFO - events_matrix.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 14:28:32,483 - INFO - events_labeled.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-02 14:28:32,484 - INFO - データマージ中
+2025-09-02 14:28:32,498 - INFO - 有向イベントを作成中
+2025-09-02 14:28:32,801 - INFO - 欠損値処理中
+2025-09-02 14:28:32,807 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-02 14:28:32,807 - INFO - マージ完了: 17381 行
+2025-09-02 14:28:32,807 - INFO - コントロール変数を追加中
+2025-09-02 14:28:32,808 - INFO - TWFE推定開始
+2025-09-02 14:28:32,809 - INFO - 符号ありイベント変数を使用: 32 個
+2025-09-02 14:28:32,809 - INFO - 選択された変数: ['event_housing_inc_t', 'event_housing_inc_t1', 'event_housing_dec_t', 'event_housing_dec_t1', 'event_transit_inc_t']...
+2025-09-02 14:28:32,809 - INFO - 回帰式: delta ~ 0 + C(town) + C(year) + event_housing_inc_t + event_housing_inc_t1 + event_housing_dec_t + event_housing_dec_t1 + event_transit_inc_t + event_transit_inc_t1 + event_transit_dec_t + event_transit_dec_t1 + event_public_edu_medical_inc_t + event_public_edu_medical_inc_t1 + event_public_edu_medical_dec_t + event_public_edu_medical_dec_t1 + event_employment_inc_t + event_employment_inc_t1 + event_employment_dec_t + event_employment_dec_t1 + event_disaster_inc_t + event_disaster_inc_t1 + event_disaster_dec_t + event_disaster_dec_t1 + event_policy_boundary_inc_t + event_policy_boundary_inc_t1 + event_policy_boundary_dec_t + event_policy_boundary_dec_t1 + event_unknown_inc_t + event_unknown_inc_t1 + event_unknown_dec_t + event_unknown_dec_t1 + event_commercial_inc_t + event_commercial_inc_t1 + event_commercial_dec_t + event_commercial_dec_t1 + growth_adj_log + policy_boundary_dummy + disaster_2016_dummy
+2025-09-02 14:28:32,809 - INFO - Ridge正則化付き推定を実行 (alpha=1.0)
+2025-09-02 14:28:48,716 - INFO - 推定完了: R² = 0.5431
+2025-09-02 14:28:48,717 - INFO - 推定結果を抽出中
+2025-09-02 14:28:48,718 - INFO - 結果を保存中
+2025-09-02 14:28:48,721 - INFO - 係数結果を保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/output/effects_coefficients.csv
+2025-09-02 14:28:48,722 - INFO - サマリを保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/logs/20250902_142832_b380e535/twfe_summary.txt
+2025-09-02 14:28:48,722 - INFO - === TWFE分析完了 ===

@@ -1,0 +1,8 @@
+2025-09-02 13:23:21,520 - INFO - データ読み込み開始
+2025-09-02 13:23:21,521 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-02 13:23:22,308 - INFO - events_matrix.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 13:23:22,325 - INFO - データマージ中
+2025-09-02 13:23:22,346 - INFO - 欠損値処理中
+2025-09-02 13:23:22,351 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-02 13:23:22,351 - INFO - マージ完了: 17381 行
+2025-09-02 13:23:22,352 - INFO - コントロール変数を追加中

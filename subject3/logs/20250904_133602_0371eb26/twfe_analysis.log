@@ -1,0 +1,17 @@
+2025-09-04 13:36:02,628 - INFO - === TWFE分析開始 ===
+2025-09-04 13:36:02,628 - INFO - データ読み込み開始
+2025-09-04 13:36:02,628 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-04 13:36:02,754 - INFO - events_matrix_signed.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix_signed.csv
+2025-09-04 13:36:02,756 - INFO - プレースボ検査: イベントを2年未来にシフト
+2025-09-04 13:36:02,763 - INFO - プレースボシフト完了: 29 個のイベント列を2年シフト
+2025-09-04 13:36:02,763 - INFO - events_labeled.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-04 13:36:02,765 - INFO - データマージ中
+2025-09-04 13:36:02,768 - INFO - 有向イベントを作成中
+2025-09-04 13:36:02,839 - INFO - 欠損値処理中
+2025-09-04 13:36:02,839 - INFO - 欠損値処理: 177 -> 177 行
+2025-09-04 13:36:02,839 - INFO - マージ完了: 177 行
+2025-09-04 13:36:02,839 - INFO - コントロール変数を追加中
+2025-09-04 13:36:02,841 - INFO - 事前トレンド制御変数を追加中
+2025-09-04 13:36:02,842 - INFO - 事前トレンド制御変数追加完了: d1, d2 (K=2)
+2025-09-04 13:36:02,842 - INFO - TWFE推定開始
+2025-09-04 13:36:02,842 - ERROR - 分析エラー: Unsigned event columns detected: ['event_commercial_t', 'event_disaster_t', 'event_employment_t', 'event_housing_t', 'event_policy_boundary_t', 'event_public_edu_medical_t'] ... signed 行列のみを使ってください。

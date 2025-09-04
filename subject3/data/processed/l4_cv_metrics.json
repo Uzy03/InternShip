@@ -1,0 +1,165 @@
+{
+  "folds": [
+    {
+      "MAE": 2.4569385517543583,
+      "RMSE": 7.60073301781184,
+      "MAPE": 0.46721301368885665,
+      "R2": 0.9442985052534637,
+      "fold": 1,
+      "train_years": {
+        "len": 20,
+        "first": 1999,
+        "last": 2018
+      },
+      "test_years": [
+        2019
+      ]
+    },
+    {
+      "MAE": 2.13184543666568,
+      "RMSE": 9.98572696321626,
+      "MAPE": 0.2610859354339827,
+      "R2": 0.9091571541933033,
+      "fold": 2,
+      "train_years": {
+        "len": 21,
+        "first": 1999,
+        "last": 2019
+      },
+      "test_years": [
+        2020
+      ]
+    },
+    {
+      "MAE": 1.4517543452205328,
+      "RMSE": 8.449873087261361,
+      "MAPE": 0.10421655211049435,
+      "R2": 0.9254449549763641,
+      "fold": 3,
+      "train_years": {
+        "len": 22,
+        "first": 1999,
+        "last": 2020
+      },
+      "test_years": [
+        2021
+      ]
+    },
+    {
+      "MAE": 3.477312069969677,
+      "RMSE": 45.811184192428875,
+      "MAPE": 0.6087362746859211,
+      "R2": 0.3416391560781624,
+      "fold": 4,
+      "train_years": {
+        "len": 23,
+        "first": 1999,
+        "last": 2021
+      },
+      "test_years": [
+        2022
+      ]
+    },
+    {
+      "MAE": 1.225572533751807,
+      "RMSE": 2.378049053098925,
+      "MAPE": 0.24411812687803744,
+      "R2": 0.9926162409344862,
+      "fold": 5,
+      "train_years": {
+        "len": 24,
+        "first": 1999,
+        "last": 2022
+      },
+      "test_years": [
+        2023
+      ]
+    },
+    {
+      "MAE": 1.4503978162737203,
+      "RMSE": 6.112898212429833,
+      "MAPE": 0.35202752552812877,
+      "R2": 0.9425882446324384,
+      "fold": 6,
+      "train_years": {
+        "len": 25,
+        "first": 1999,
+        "last": 2023
+      },
+      "test_years": [
+        2024
+      ]
+    },
+    {
+      "MAE": 0.9484039090833363,
+      "RMSE": 6.104047453490188,
+      "MAPE": 0.16819133726720095,
+      "R2": 0.9559849251669393,
+      "fold": 7,
+      "train_years": {
+        "len": 26,
+        "first": 1999,
+        "last": 2024
+      },
+      "test_years": [
+        2025
+      ]
+    }
+  ],
+  "aggregate": {
+    "MAE": 1.8774606661027302,
+    "RMSE": 12.34893028281961,
+    "MAPE": 0.31508410937037457,
+    "R2": 0.8588184544621654,
+    "fold": 4.0
+  },
+  "features": [
+    "pop_total",
+    "exp_all_h1",
+    "exp_all_h2",
+    "exp_all_h3",
+    "era_post2009",
+    "era_post2013",
+    "era_pre2013",
+    "exp_all_h1_pre2013",
+    "exp_all_h1_post2013",
+    "exp_all_h1_post2009",
+    "exp_all_h2_pre2013",
+    "exp_all_h2_post2013",
+    "exp_all_h2_post2009",
+    "exp_all_h3_pre2013",
+    "exp_all_h3_post2013",
+    "exp_all_h3_post2009",
+    "lag_d1",
+    "lag_d2",
+    "ma2_delta",
+    "era_covid",
+    "macro_delta",
+    "macro_ma3",
+    "macro_shock",
+    "town_trend5",
+    "town_ma5",
+    "town_std5",
+    "macro_excl",
+    "foreign_population",
+    "foreign_change",
+    "foreign_pct_change",
+    "foreign_log",
+    "foreign_ma3",
+    "foreign_population_covid",
+    "foreign_change_covid",
+    "foreign_pct_change_covid",
+    "foreign_log_covid",
+    "foreign_ma3_covid",
+    "era_post2022",
+    "exp_all_h1_post2022",
+    "exp_all_h2_post2022",
+    "exp_all_h3_post2022",
+    "foreign_population_post2022",
+    "foreign_change_post2022",
+    "foreign_pct_change_post2022",
+    "foreign_log_post2022",
+    "foreign_ma3_post2022"
+  ],
+  "use_lightgbm": true
+}

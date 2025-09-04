@@ -1,0 +1,18 @@
+2025-09-02 14:17:47,085 - INFO - === TWFE分析開始 ===
+2025-09-02 14:17:47,085 - INFO - データ読み込み開始
+2025-09-02 14:17:47,085 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-02 14:17:47,204 - INFO - events_matrix.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix.csv
+2025-09-02 14:17:47,217 - INFO - データマージ中
+2025-09-02 14:17:47,235 - INFO - 欠損値処理中
+2025-09-02 14:17:47,238 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-02 14:17:47,238 - INFO - マージ完了: 17381 行
+2025-09-02 14:17:47,239 - INFO - コントロール変数を追加中
+2025-09-02 14:17:47,240 - INFO - TWFE推定開始
+2025-09-02 14:17:47,240 - INFO - 符号なしイベント変数を使用: 14 個
+2025-09-02 14:17:47,241 - INFO - 回帰式: delta ~ 0 + C(town) + C(year) + event_policy_boundary_combined + event_commercial_combined + event_disaster_combined + event_housing_combined + event_transit_combined + event_public_edu_medical_combined + event_employment_combined + growth_adj_log + policy_boundary_dummy + disaster_2016_dummy
+2025-09-02 14:17:50,307 - INFO - 推定完了: R² = 0.9887
+2025-09-02 14:17:50,307 - INFO - 推定結果を抽出中
+2025-09-02 14:17:50,311 - INFO - 結果を保存中
+2025-09-02 14:17:50,331 - INFO - 係数結果を保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/output/effects_coefficients.csv
+2025-09-02 14:17:50,332 - INFO - サマリを保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/logs/20250902_141747_48fd6cd9/twfe_summary.txt
+2025-09-02 14:17:50,332 - INFO - === TWFE分析完了 ===

@@ -1,0 +1,44 @@
+2025-09-02 13:31:36,576 - INFO - データ読み込み開始
+2025-09-02 13:31:36,576 - INFO - features_panel.csv を読み込み中: ../../data/processed/features_panel.csv
+2025-09-02 13:31:36,717 - INFO - events_matrix.csv を読み込み中: ../../data/processed/events_matrix.csv
+2025-09-02 13:31:36,730 - INFO - データマージ中
+2025-09-02 13:31:36,748 - INFO - 欠損値処理中
+2025-09-02 13:31:36,751 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-02 13:31:36,752 - INFO - マージ完了: 17381 行
+2025-09-02 13:31:36,753 - INFO - コントロール変数を追加中
+2025-09-02 13:31:36,754 - INFO - === TWFE分析開始 ===
+2025-09-02 13:31:36,754 - INFO - データ読み込み開始
+2025-09-02 13:31:36,754 - INFO - features_panel.csv を読み込み中: ../../data/processed/features_panel.csv
+2025-09-02 13:31:36,869 - INFO - events_matrix.csv を読み込み中: ../../data/processed/events_matrix.csv
+2025-09-02 13:31:36,879 - INFO - データマージ中
+2025-09-02 13:31:36,889 - INFO - 欠損値処理中
+2025-09-02 13:31:36,893 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-02 13:31:36,893 - INFO - マージ完了: 17381 行
+2025-09-02 13:31:36,893 - INFO - コントロール変数を追加中
+2025-09-02 13:31:36,894 - INFO - TWFE推定開始
+2025-09-02 13:31:36,894 - INFO - 回帰式: delta ~ 0 + C(town) + C(year) + event_disaster_t + event_disaster_t1 + event_policy_boundary_t + event_policy_boundary_t1 + event_transit_t + event_transit_t1 + event_employment_t + event_employment_t1 + event_public_edu_medical_t + event_public_edu_medical_t1 + event_commercial_t + event_commercial_t1 + event_housing_t + event_housing_t1 + growth_adj_log + policy_boundary_dummy + disaster_2016_dummy
+2025-09-02 13:31:40,404 - INFO - 推定完了: R² = 0.9887
+2025-09-02 13:31:40,404 - INFO - 推定結果を抽出中
+2025-09-02 13:31:40,410 - INFO - 結果を保存中
+2025-09-02 13:31:40,415 - INFO - 係数結果を保存: ../../../data/processed/effects_coefficients.csv
+2025-09-02 13:31:40,416 - INFO - サマリを保存: ../../../logs/20250902_133136_12cff492/twfe_summary.txt
+2025-09-02 13:31:40,416 - INFO - === TWFE分析完了 ===
+2025-09-02 13:31:40,425 - INFO - === TWFE分析開始 ===
+2025-09-02 13:31:40,425 - INFO - データ読み込み開始
+2025-09-02 13:31:40,425 - INFO - features_panel.csv を読み込み中: ../../data/processed/features_panel.csv
+2025-09-02 13:31:40,572 - INFO - events_matrix.csv を読み込み中: ../../data/processed/events_matrix.csv
+2025-09-02 13:31:40,591 - INFO - events_labeled.csv を読み込み中: ../../data/processed/events_labeled.csv
+2025-09-02 13:31:40,594 - INFO - データマージ中
+2025-09-02 13:31:40,602 - INFO - 有向イベントを作成中
+2025-09-02 13:31:40,930 - INFO - 欠損値処理中
+2025-09-02 13:31:40,935 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-02 13:31:40,935 - INFO - マージ完了: 17381 行
+2025-09-02 13:31:40,935 - INFO - コントロール変数を追加中
+2025-09-02 13:31:40,936 - INFO - TWFE推定開始
+2025-09-02 13:31:40,936 - INFO - 回帰式: delta ~ 0 + C(town) + C(year) + event_disaster_t + event_disaster_t1 + event_policy_boundary_t + event_policy_boundary_t1 + event_transit_t + event_transit_t1 + event_employment_t + event_employment_t1 + event_public_edu_medical_t + event_public_edu_medical_t1 + event_commercial_t + event_commercial_t1 + event_housing_t + event_housing_t1 + event_housing_inc_t + event_housing_inc_t1 + event_housing_dec_t + event_housing_dec_t1 + event_transit_inc_t + event_transit_inc_t1 + event_transit_dec_t + event_transit_dec_t1 + event_public_edu_medical_inc_t + event_public_edu_medical_inc_t1 + event_public_edu_medical_dec_t + event_public_edu_medical_dec_t1 + event_employment_inc_t + event_employment_inc_t1 + event_employment_dec_t + event_employment_dec_t1 + event_disaster_inc_t + event_disaster_inc_t1 + event_disaster_dec_t + event_disaster_dec_t1 + event_policy_boundary_inc_t + event_policy_boundary_inc_t1 + event_policy_boundary_dec_t + event_policy_boundary_dec_t1 + event_unknown_inc_t + event_unknown_inc_t1 + event_unknown_dec_t + event_unknown_dec_t1 + event_commercial_inc_t + event_commercial_inc_t1 + event_commercial_dec_t + event_commercial_dec_t1 + growth_adj_log + policy_boundary_dummy + disaster_2016_dummy
+2025-09-02 13:31:44,444 - INFO - 推定完了: R² = 0.9890
+2025-09-02 13:31:44,444 - INFO - 推定結果を抽出中
+2025-09-02 13:31:44,451 - INFO - 結果を保存中
+2025-09-02 13:31:44,456 - INFO - 係数結果を保存: ../../../data/processed/effects_coefficients.csv
+2025-09-02 13:31:44,460 - INFO - サマリを保存: ../../../logs/20250902_133140_484dfcbf/twfe_summary.txt
+2025-09-02 13:31:44,460 - INFO - === TWFE分析完了 ===

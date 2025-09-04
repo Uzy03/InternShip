@@ -1,0 +1,26 @@
+2025-09-02 18:44:16,402 - INFO - === TWFE分析開始 ===
+2025-09-02 18:44:16,402 - INFO - データ読み込み開始
+2025-09-02 18:44:16,402 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-02 18:44:16,514 - INFO - events_matrix_signed.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix_signed.csv
+2025-09-02 18:44:16,533 - INFO - events_labeled.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-02 18:44:16,535 - INFO - データマージ中
+2025-09-02 18:44:16,555 - INFO - 有向イベントを作成中
+2025-09-02 18:44:16,808 - INFO - 欠損値処理中
+2025-09-02 18:44:16,811 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-02 18:44:16,812 - INFO - マージ完了: 17381 行
+2025-09-02 18:44:16,812 - INFO - コントロール変数を追加中
+2025-09-02 18:44:16,814 - INFO - TWFE推定開始
+2025-09-02 18:44:16,814 - INFO - 符号ありイベント変数を使用: 24 個
+2025-09-02 18:44:16,815 - INFO - 選択された変数: ['event_housing_inc_t', 'event_housing_inc_t1', 'event_housing_dec_t', 'event_housing_dec_t1', 'event_commercial_inc_t']...
+2025-09-02 18:44:16,816 - INFO - フィルタ後: 24 個のイベント変数
+2025-09-02 18:44:16,816 - INFO - 回帰式: delta ~ 0 + C(town) + C(year) + event_housing_inc_t + event_housing_inc_t1 + event_housing_dec_t + event_housing_dec_t1 + event_commercial_inc_t + event_commercial_inc_t1 + event_commercial_dec_t + event_commercial_dec_t1 + event_transit_inc_t + event_transit_inc_t1 + event_transit_dec_t + event_transit_dec_t1 + event_public_edu_medical_inc_t + event_public_edu_medical_inc_t1 + event_public_edu_medical_dec_t + event_public_edu_medical_dec_t1 + event_employment_inc_t + event_employment_inc_t1 + event_employment_dec_t + event_employment_dec_t1 + event_disaster_inc_t + event_disaster_inc_t1 + event_disaster_dec_t + event_disaster_dec_t1 + growth_adj_log + policy_boundary_dummy + disaster_2016_dummy
+2025-09-02 18:44:16,816 - INFO - split時は自動的にRidge正則化を有効化 (alpha=0.1)
+2025-09-02 18:44:16,816 - INFO - Ridge正則化付き推定を実行 (alpha=0.1)
+2025-09-02 18:44:27,626 - INFO - 推定完了: R² = 0.4664
+2025-09-02 18:44:27,628 - INFO - 推定結果を抽出中
+2025-09-02 18:44:27,628 - INFO - found_params: {'housing': {'t': True, 't1': True}, 'commercial': {'t': True, 't1': True}, 'transit': {'t': True, 't1': True}, 'public_edu_medical': {'t': True, 't1': True}, 'employment': {'t': True, 't1': True}, 'disaster': {'t': True, 't1': True}}
+2025-09-02 18:44:27,629 - INFO - nonzero_counts: {'housing_inc_t': 109, 'housing_inc_t1': 109, 'housing_dec_t': 2, 'housing_dec_t1': 2, 'commercial_inc_t': 25, 'commercial_inc_t1': 25, 'commercial_dec_t': 0, 'commercial_dec_t1': 0, 'transit_inc_t': 0, 'transit_inc_t1': 34, 'transit_dec_t': 3, 'transit_dec_t1': 6, 'public_edu_medical_inc_t': 0, 'public_edu_medical_inc_t1': 9, 'public_edu_medical_dec_t': 0, 'public_edu_medical_dec_t1': 0, 'employment_inc_t': 0, 'employment_inc_t1': 9, 'employment_dec_t': 0, 'employment_dec_t1': 0, 'disaster_inc_t': 1, 'disaster_inc_t1': 0, 'disaster_dec_t': 5, 'disaster_dec_t1': 0}
+2025-09-02 18:44:27,634 - INFO - 結果を保存中
+2025-09-02 18:44:27,641 - INFO - 係数結果を保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/output/effects_coefficients.csv
+2025-09-02 18:44:27,643 - INFO - サマリを保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/logs/20250902_184416_9bf94148/twfe_summary.txt
+2025-09-02 18:44:27,643 - INFO - === TWFE分析完了 ===

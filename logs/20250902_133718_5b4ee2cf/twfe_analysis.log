@@ -1,0 +1,4 @@
+2025-09-02 13:37:18,680 - INFO - === TWFE分析開始 ===
+2025-09-02 13:37:18,681 - INFO - データ読み込み開始
+2025-09-02 13:37:18,681 - INFO - features_panel.csv を読み込み中: ../../data/processed/features_panel.csv
+2025-09-02 13:37:18,681 - ERROR - 分析エラー: [Errno 2] No such file or directory: '../../data/processed/features_panel.csv'

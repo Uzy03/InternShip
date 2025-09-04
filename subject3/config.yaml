@@ -1,0 +1,27 @@
+# TWFE Effects Analysis Configuration
+
+effects:
+  use_signed_from_labeled: true
+  events_matrix_path: "events_matrix_signed.csv"
+  
+  # Analysis parameters
+  use_year_min: 1998
+  use_year_max: 2025
+  separate_t_and_t1: true
+  weight_mode: "sqrt_prev"
+  ridge_alpha: 0.1
+  
+  # Control variables
+  include_growth_adj: true
+  include_policy_boundary: true
+  include_disaster_2016: true
+
+# Data paths
+data:
+  features_panel_path: "features_panel.csv"
+  events_labeled_path: "events_labeled.csv"
+  
+# Output paths
+output:
+  results_dir: "output"
+  logs_dir: "logs"

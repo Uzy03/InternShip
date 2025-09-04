@@ -1,0 +1,25 @@
+2025-09-03 14:35:47,339 - INFO - === TWFE分析開始 ===
+2025-09-03 14:35:47,339 - INFO - データ読み込み開始
+2025-09-03 14:35:47,340 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-03 14:35:47,450 - INFO - events_matrix_signed.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix_signed.csv
+2025-09-03 14:35:47,470 - INFO - events_labeled.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-03 14:35:47,472 - INFO - データマージ中
+2025-09-03 14:35:47,486 - INFO - 有向イベントを作成中
+2025-09-03 14:35:47,740 - INFO - 欠損値処理中
+2025-09-03 14:35:47,744 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-03 14:35:47,744 - INFO - マージ完了: 17381 行
+2025-09-03 14:35:47,744 - INFO - コントロール変数を追加中
+2025-09-03 14:35:47,745 - INFO - 事前トレンド制御変数を追加中
+2025-09-03 14:35:47,750 - INFO - 事前トレンド制御変数追加完了: d1, d2 (K=2)
+2025-09-03 14:35:47,751 - INFO - TWFE推定開始
+2025-09-03 14:35:47,751 - INFO - 符号ありイベント変数を使用: 28 個
+2025-09-03 14:35:47,751 - INFO - 選択された変数: ['event_disaster_inc_t', 'event_disaster_inc_t1', 'event_disaster_dec_t', 'event_disaster_dec_t1', 'event_policy_boundary_inc_t']...
+2025-09-03 14:35:47,753 - INFO - フィルタ後: 28 個のイベント変数
+2025-09-03 14:35:47,753 - INFO - 事前トレンド制御変数を追加: d1
+2025-09-03 14:35:47,753 - INFO - 事前トレンド制御変数を追加: d2
+2025-09-03 14:35:47,753 - INFO - 回帰式: delta ~ 0 + C(town) + C(year) + event_disaster_inc_t + event_disaster_inc_t1 + event_disaster_dec_t + event_disaster_dec_t1 + event_policy_boundary_inc_t + event_policy_boundary_inc_t1 + event_policy_boundary_dec_t + event_policy_boundary_dec_t1 + event_transit_inc_t + event_transit_inc_t1 + event_transit_dec_t + event_transit_dec_t1 + event_employment_inc_t + event_employment_inc_t1 + event_employment_dec_t + event_employment_dec_t1 + event_public_edu_medical_inc_t + event_public_edu_medical_inc_t1 + event_public_edu_medical_dec_t + event_public_edu_medical_dec_t1 + event_commercial_inc_t + event_commercial_inc_t1 + event_commercial_dec_t + event_commercial_dec_t1 + event_housing_inc_t + event_housing_inc_t1 + event_housing_dec_t + event_housing_dec_t1 + growth_adj_log + policy_boundary_dummy + disaster_2016_dummy + d1 + d2
+2025-09-03 14:35:47,753 - INFO - Ridge正則化を有効化 (alpha=1.0)
+2025-09-03 14:35:47,753 - INFO - Ridge正則化付き推定を実行 (alpha=1.0)
+2025-09-03 14:36:01,196 - INFO - 推定完了: R² = 0.6042
+2025-09-03 14:36:01,196 - INFO - 推定結果を抽出中
+2025-09-03 14:36:01,196 - ERROR - 分析エラー: 'TWFEEstimator' object has no attribute 'config'

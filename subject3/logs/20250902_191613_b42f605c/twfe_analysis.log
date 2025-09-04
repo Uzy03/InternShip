@@ -1,0 +1,5 @@
+2025-09-02 19:16:13,697 - INFO - 設定ファイルを読み込み: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/config.yaml
+2025-09-02 19:16:13,697 - INFO - === TWFE分析開始 ===
+2025-09-02 19:16:13,697 - INFO - データ読み込み開始
+2025-09-02 19:16:13,697 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/data/processed/features_panel.csv
+2025-09-02 19:16:13,703 - ERROR - 分析エラー: [Errno 2] No such file or directory: '/Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/data/processed/features_panel.csv'

@@ -1,0 +1,38 @@
+=== TWFE Effects Analysis Summary ===
+
+実行ID: 20250902_132513_acc909f1
+実行日時: 2025-09-02 13:25:18
+
+=== データ情報 ===
+観測数: 17,381
+町丁数: 669
+年範囲: 1999-2025
+
+=== 推定結果 ===
+R² (within): 0.9890
+観測数: 17,381.0
+
+=== 主要係数 (95%信頼区間) ===
+disaster       : -77100672.733 [   nan,    nan]
+housing        :  122.627 [   nan,    nan]
+employment_inc :   24.799 [   nan,    nan]
+commercial     : 6674787391.933 [   nan,    nan]
+housing_inc    : -120.945 [   nan,    nan]
+commercial_dec : -6674787431.216 [   nan,    nan]
+policy_boundary_inc: -654.971 [   nan,    nan]
+unknown_inc    :    0.000 [ 0.000,  0.000]
+policy_boundary: -652.012 [   nan,    nan]
+public_edu_medical:  131.052 [   nan,    nan]
+transit_inc    :  156.025 [   nan,    nan]
+public_edu_medical_dec: 1279.120 [   nan,    nan]
+public_edu_medical_inc: -130.622 [   nan,    nan]
+commercial_inc : -6674787391.720 [   nan,    nan]
+employment     :  -24.583 [   nan,    nan]
+policy_boundary_dec: 1115.957 [   nan,    nan]
+disaster_inc   : 77100743.688 [   nan,    nan]
+transit_dec    : -18213081.889 [   nan,    nan]
+disaster_dec   : 77101743.517 [   nan,    nan]
+employment_dec : -684.650 [   nan,    nan]
+unknown_dec    :    0.000 [ 0.000,  0.000]
+housing_dec    : -119.060 [   nan,    nan]
+transit        : 18211938.304 [   nan,    nan]

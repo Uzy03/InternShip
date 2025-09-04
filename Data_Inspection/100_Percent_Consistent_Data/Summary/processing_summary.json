@@ -1,0 +1,43 @@
+{
+  "処理完了日時": "2025-08-28 10:04:19",
+  "100%達成ファイル数": 28,
+  "ファイル一覧": [
+    "H10-04_nan_filled_unified_100percent_final.csv",
+    "H11-04_nan_filled_unified_100percent_final.csv",
+    "H12-04_nan_filled_unified_100percent_final.csv",
+    "H13-04_nan_filled_unified_100percent_final.csv",
+    "H14-04_nan_filled_unified_100percent_final.csv",
+    "H15-04_nan_filled_unified_100percent_final.csv",
+    "H16-04_nan_filled_unified_100percent_final.csv",
+    "H17-04_nan_filled_unified_100percent_final.csv",
+    "H18-04_nan_filled_unified_100percent_final.csv",
+    "H19-04_nan_filled_unified_100percent_final.csv",
+    "H20-04_nan_filled_unified_100percent_final.csv",
+    "H21-04_nan_filled_unified_100percent_final.csv",
+    "H22-04_nan_filled_unified_100percent_final.csv",
+    "H23-04_nan_filled_unified_100percent_final.csv",
+    "H24-04_nan_filled_unified_100percent_final.csv",
+    "H25-04_nan_filled_unified_100percent_final.csv",
+    "H26-04_nan_filled_unified_100percent_final.csv",
+    "H27-04_nan_filled_unified_100percent_final.csv",
+    "H28-04_nan_filled_unified_100percent_final.csv",
+    "H29-04_nan_filled_unified_100percent_final.csv",
+    "H30-04_nan_filled_unified_100percent_final.csv",
+    "H31-04_nan_filled_unified_100percent_final.csv",
+    "R02-04_nan_filled_unified_100percent_final.csv",
+    "R03-04_nan_filled_unified_100percent_final.csv",
+    "R04-04_nan_filled_unified_100percent_final.csv",
+    "R05-04_nan_filled_unified_100percent_final.csv",
+    "R06-04_nan_filled_unified_100percent_final.csv",
+    "R07-04_nan_filled_unified_100percent_final.csv"
+  ],
+  "処理内容": [
+    "町丁一貫性分析",
+    "町丁データ統合（改善版）",
+    "2009年合併町NaN埋め",
+    "区制町丁統一",
+    "100%一貫性達成の最終統一"
+  ],
+  "最終一貫性率": "100.0%",
+  "対象年度": "H10-04 から R07-04（28年間）"
+}

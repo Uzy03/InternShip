@@ -1,0 +1,22 @@
+=== TWFE Effects Analysis Summary ===
+
+実行ID: 20250902_142901_0992d91d
+実行日時: 2025-09-02 14:29:04
+
+=== データ情報 ===
+観測数: 17,381
+町丁数: 669
+年範囲: 1999-2025
+
+=== 推定結果 ===
+R² (within): 0.9887
+観測数: 17,381.0
+
+=== 主要係数 (95%信頼区間) ===
+employment     :    0.296 [   nan,    nan]
+disaster       :   47.216 [   nan,    nan]
+public_edu_medical:    1.594 [   nan,    nan]
+policy_boundary: -1124.248 [   nan,    nan]
+housing        :    0.846 [   nan,    nan]
+commercial     :    0.770 [   nan,    nan]
+transit        :   -4.507 [   nan,    nan]

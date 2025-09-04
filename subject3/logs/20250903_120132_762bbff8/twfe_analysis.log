@@ -1,0 +1,162 @@
+2025-09-03 12:01:32,160 - INFO - 設定ファイルを読み込み: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/config.yaml
+2025-09-03 12:01:32,160 - INFO - === TWFE分析開始 ===
+2025-09-03 12:01:32,161 - INFO - データ読み込み開始
+2025-09-03 12:01:32,161 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-03 12:01:32,277 - INFO - events_matrix_signed.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix_signed.csv
+2025-09-03 12:01:32,297 - INFO - events_labeled.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-03 12:01:32,299 - INFO - データマージ中
+2025-09-03 12:01:32,316 - INFO - 有向イベントを作成中
+2025-09-03 12:01:32,559 - INFO - 欠損値処理中
+2025-09-03 12:01:32,563 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-03 12:01:32,563 - INFO - マージ完了: 17381 行
+2025-09-03 12:01:32,563 - INFO - コントロール変数を追加中
+2025-09-03 12:01:32,564 - INFO - TWFE推定開始
+2025-09-03 12:01:32,564 - INFO - 符号ありイベント変数を使用: 28 個
+2025-09-03 12:01:32,564 - INFO - 選択された変数: ['event_disaster_inc_t', 'event_disaster_inc_t1', 'event_disaster_dec_t', 'event_disaster_dec_t1', 'event_policy_boundary_inc_t']...
+2025-09-03 12:01:32,565 - INFO - フィルタ後: 28 個のイベント変数
+2025-09-03 12:01:32,565 - INFO - 回帰式: delta ~ 0 + C(town) + C(year) + event_disaster_inc_t + event_disaster_inc_t1 + event_disaster_dec_t + event_disaster_dec_t1 + event_policy_boundary_inc_t + event_policy_boundary_inc_t1 + event_policy_boundary_dec_t + event_policy_boundary_dec_t1 + event_transit_inc_t + event_transit_inc_t1 + event_transit_dec_t + event_transit_dec_t1 + event_employment_inc_t + event_employment_inc_t1 + event_employment_dec_t + event_employment_dec_t1 + event_public_edu_medical_inc_t + event_public_edu_medical_inc_t1 + event_public_edu_medical_dec_t + event_public_edu_medical_dec_t1 + event_commercial_inc_t + event_commercial_inc_t1 + event_commercial_dec_t + event_commercial_dec_t1 + event_housing_inc_t + event_housing_inc_t1 + event_housing_dec_t + event_housing_dec_t1 + growth_adj_log + policy_boundary_dummy + disaster_2016_dummy
+2025-09-03 12:01:32,565 - INFO - split時は自動的にRidge正則化を有効化 (alpha=0.1)
+2025-09-03 12:01:32,565 - INFO - Ridge正則化付き推定を実行 (alpha=0.1)
+2025-09-03 12:01:46,407 - INFO - 推定完了: R² = 0.5365
+2025-09-03 12:01:46,408 - INFO - 推定結果を抽出中
+2025-09-03 12:01:46,408 - INFO - present_bases: {'disaster_dec', 'transit_dec', 'commercial_dec', 'employment_inc', 'disaster_inc', 'employment_dec', 'public_edu_medical_dec', 'transit_inc', 'policy_boundary', 'housing_inc', 'public_edu_medical_inc', 'housing_dec', 'commercial_inc'}
+2025-09-03 12:01:46,408 - INFO - found_params: {'housing_inc': {'t': True, 't1': True}, 'housing_dec': {'t': True, 't1': True}, 'commercial_inc': {'t': True, 't1': True}, 'commercial_dec': {'t': True, 't1': True}, 'transit_inc': {'t': True, 't1': True}, 'transit_dec': {'t': True, 't1': True}, 'public_edu_medical_inc': {'t': True, 't1': True}, 'public_edu_medical_dec': {'t': True, 't1': True}, 'employment_inc': {'t': True, 't1': True}, 'employment_dec': {'t': True, 't1': True}, 'disaster_inc': {'t': True, 't1': True}, 'disaster_dec': {'t': True, 't1': True}}
+2025-09-03 12:01:46,410 - INFO - nonzero_counts: {'housing_inc_t': 109, 'housing_inc_t1': 109, 'housing_dec_t': 2, 'housing_dec_t1': 2, 'commercial_inc_t': 25, 'commercial_inc_t1': 25, 'commercial_dec_t': 0, 'commercial_dec_t1': 0, 'transit_inc_t': 0, 'transit_inc_t1': 36, 'transit_dec_t': 4, 'transit_dec_t1': 4, 'public_edu_medical_inc_t': 0, 'public_edu_medical_inc_t1': 9, 'public_edu_medical_dec_t': 0, 'public_edu_medical_dec_t1': 0, 'employment_inc_t': 0, 'employment_inc_t1': 9, 'employment_dec_t': 0, 'employment_dec_t1': 0, 'disaster_inc_t': 1, 'disaster_inc_t1': 0, 'disaster_dec_t': 5, 'disaster_dec_t1': 0}
+2025-09-03 12:01:46,410 - INFO - Processing housing_inc
+2025-09-03 12:01:46,410 - INFO - Added result for housing_inc: beta=0.391
+2025-09-03 12:01:46,410 - INFO - Processing housing_dec
+2025-09-03 12:01:46,410 - INFO - Added result for housing_dec: beta=29.357
+2025-09-03 12:01:46,410 - INFO - Processing commercial_inc
+2025-09-03 12:01:46,410 - INFO - Added result for commercial_inc: beta=-0.098
+2025-09-03 12:01:46,410 - INFO - Processing commercial_dec
+2025-09-03 12:01:46,410 - INFO - Added result for commercial_dec: beta=0.000
+2025-09-03 12:01:46,410 - INFO - Processing transit_inc
+2025-09-03 12:01:46,410 - INFO - Added result for transit_inc: beta=-0.179
+2025-09-03 12:01:46,410 - INFO - Processing transit_dec
+2025-09-03 12:01:46,410 - INFO - Added result for transit_dec: beta=-68.358
+2025-09-03 12:01:46,410 - INFO - Processing public_edu_medical_inc
+2025-09-03 12:01:46,410 - INFO - Added result for public_edu_medical_inc: beta=45.292
+2025-09-03 12:01:46,410 - INFO - Processing public_edu_medical_dec
+2025-09-03 12:01:46,410 - INFO - Added result for public_edu_medical_dec: beta=0.000
+2025-09-03 12:01:46,410 - INFO - Processing employment_inc
+2025-09-03 12:01:46,410 - INFO - Added result for employment_inc: beta=-0.156
+2025-09-03 12:01:46,410 - INFO - Processing employment_dec
+2025-09-03 12:01:46,410 - INFO - Added result for employment_dec: beta=0.000
+2025-09-03 12:01:46,410 - INFO - Processing disaster_inc
+2025-09-03 12:01:46,410 - INFO - Added result for disaster_inc: beta=25.165
+2025-09-03 12:01:46,410 - INFO - Processing disaster_dec
+2025-09-03 12:01:46,410 - INFO - Added result for disaster_dec: beta=4.490
+2025-09-03 12:01:46,412 - INFO - 結果を保存中
+2025-09-03 12:01:46,415 - INFO - 係数結果を保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/output/effects_coefficients.csv
+2025-09-03 12:01:46,417 - INFO - サマリを保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/logs/20250903_120132_762bbff8/twfe_summary.txt
+2025-09-03 12:01:46,417 - INFO - === TWFE分析完了 ===
+2025-09-03 12:01:46,420 - INFO - === プレースボ検査開始 (シフト: 2年) ===
+2025-09-03 12:01:46,420 - INFO - 本番分析を実行中...
+2025-09-03 12:01:46,420 - INFO - === TWFE分析開始 ===
+2025-09-03 12:01:46,420 - INFO - データ読み込み開始
+2025-09-03 12:01:46,421 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-03 12:01:46,528 - INFO - events_matrix_signed.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix_signed.csv
+2025-09-03 12:01:46,551 - INFO - events_labeled.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-03 12:01:46,553 - INFO - データマージ中
+2025-09-03 12:01:46,566 - INFO - 有向イベントを作成中
+2025-09-03 12:01:46,811 - INFO - 欠損値処理中
+2025-09-03 12:01:46,815 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-03 12:01:46,815 - INFO - マージ完了: 17381 行
+2025-09-03 12:01:46,815 - INFO - コントロール変数を追加中
+2025-09-03 12:01:46,816 - INFO - TWFE推定開始
+2025-09-03 12:01:46,816 - INFO - 符号ありイベント変数を使用: 28 個
+2025-09-03 12:01:46,816 - INFO - 選択された変数: ['event_disaster_inc_t', 'event_disaster_inc_t1', 'event_disaster_dec_t', 'event_disaster_dec_t1', 'event_policy_boundary_inc_t']...
+2025-09-03 12:01:46,817 - INFO - フィルタ後: 28 個のイベント変数
+2025-09-03 12:01:46,817 - INFO - 回帰式: delta ~ 0 + C(town) + C(year) + event_disaster_inc_t + event_disaster_inc_t1 + event_disaster_dec_t + event_disaster_dec_t1 + event_policy_boundary_inc_t + event_policy_boundary_inc_t1 + event_policy_boundary_dec_t + event_policy_boundary_dec_t1 + event_transit_inc_t + event_transit_inc_t1 + event_transit_dec_t + event_transit_dec_t1 + event_employment_inc_t + event_employment_inc_t1 + event_employment_dec_t + event_employment_dec_t1 + event_public_edu_medical_inc_t + event_public_edu_medical_inc_t1 + event_public_edu_medical_dec_t + event_public_edu_medical_dec_t1 + event_commercial_inc_t + event_commercial_inc_t1 + event_commercial_dec_t + event_commercial_dec_t1 + event_housing_inc_t + event_housing_inc_t1 + event_housing_dec_t + event_housing_dec_t1 + growth_adj_log + policy_boundary_dummy + disaster_2016_dummy
+2025-09-03 12:01:46,817 - INFO - split時は自動的にRidge正則化を有効化 (alpha=0.1)
+2025-09-03 12:01:46,817 - INFO - Ridge正則化付き推定を実行 (alpha=0.1)
+2025-09-03 12:01:59,080 - INFO - 推定完了: R² = 0.5365
+2025-09-03 12:01:59,081 - INFO - 推定結果を抽出中
+2025-09-03 12:01:59,081 - INFO - present_bases: {'disaster_dec', 'transit_dec', 'commercial_dec', 'employment_inc', 'disaster_inc', 'employment_dec', 'public_edu_medical_dec', 'transit_inc', 'policy_boundary', 'housing_inc', 'public_edu_medical_inc', 'housing_dec', 'commercial_inc'}
+2025-09-03 12:01:59,081 - INFO - found_params: {'housing_inc': {'t': True, 't1': True}, 'housing_dec': {'t': True, 't1': True}, 'commercial_inc': {'t': True, 't1': True}, 'commercial_dec': {'t': True, 't1': True}, 'transit_inc': {'t': True, 't1': True}, 'transit_dec': {'t': True, 't1': True}, 'public_edu_medical_inc': {'t': True, 't1': True}, 'public_edu_medical_dec': {'t': True, 't1': True}, 'employment_inc': {'t': True, 't1': True}, 'employment_dec': {'t': True, 't1': True}, 'disaster_inc': {'t': True, 't1': True}, 'disaster_dec': {'t': True, 't1': True}}
+2025-09-03 12:01:59,083 - INFO - nonzero_counts: {'housing_inc_t': 109, 'housing_inc_t1': 109, 'housing_dec_t': 2, 'housing_dec_t1': 2, 'commercial_inc_t': 25, 'commercial_inc_t1': 25, 'commercial_dec_t': 0, 'commercial_dec_t1': 0, 'transit_inc_t': 0, 'transit_inc_t1': 36, 'transit_dec_t': 4, 'transit_dec_t1': 4, 'public_edu_medical_inc_t': 0, 'public_edu_medical_inc_t1': 9, 'public_edu_medical_dec_t': 0, 'public_edu_medical_dec_t1': 0, 'employment_inc_t': 0, 'employment_inc_t1': 9, 'employment_dec_t': 0, 'employment_dec_t1': 0, 'disaster_inc_t': 1, 'disaster_inc_t1': 0, 'disaster_dec_t': 5, 'disaster_dec_t1': 0}
+2025-09-03 12:01:59,083 - INFO - Processing housing_inc
+2025-09-03 12:01:59,083 - INFO - Added result for housing_inc: beta=0.391
+2025-09-03 12:01:59,083 - INFO - Processing housing_dec
+2025-09-03 12:01:59,083 - INFO - Added result for housing_dec: beta=29.357
+2025-09-03 12:01:59,083 - INFO - Processing commercial_inc
+2025-09-03 12:01:59,083 - INFO - Added result for commercial_inc: beta=-0.098
+2025-09-03 12:01:59,083 - INFO - Processing commercial_dec
+2025-09-03 12:01:59,083 - INFO - Added result for commercial_dec: beta=0.000
+2025-09-03 12:01:59,083 - INFO - Processing transit_inc
+2025-09-03 12:01:59,083 - INFO - Added result for transit_inc: beta=-0.179
+2025-09-03 12:01:59,083 - INFO - Processing transit_dec
+2025-09-03 12:01:59,083 - INFO - Added result for transit_dec: beta=-68.358
+2025-09-03 12:01:59,083 - INFO - Processing public_edu_medical_inc
+2025-09-03 12:01:59,084 - INFO - Added result for public_edu_medical_inc: beta=45.292
+2025-09-03 12:01:59,084 - INFO - Processing public_edu_medical_dec
+2025-09-03 12:01:59,084 - INFO - Added result for public_edu_medical_dec: beta=0.000
+2025-09-03 12:01:59,084 - INFO - Processing employment_inc
+2025-09-03 12:01:59,084 - INFO - Added result for employment_inc: beta=-0.156
+2025-09-03 12:01:59,084 - INFO - Processing employment_dec
+2025-09-03 12:01:59,084 - INFO - Added result for employment_dec: beta=0.000
+2025-09-03 12:01:59,084 - INFO - Processing disaster_inc
+2025-09-03 12:01:59,084 - INFO - Added result for disaster_inc: beta=25.165
+2025-09-03 12:01:59,084 - INFO - Processing disaster_dec
+2025-09-03 12:01:59,084 - INFO - Added result for disaster_dec: beta=4.490
+2025-09-03 12:01:59,085 - INFO - 結果を保存中
+2025-09-03 12:01:59,086 - INFO - 係数結果を保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/output/effects_coefficients.csv
+2025-09-03 12:01:59,087 - INFO - サマリを保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/logs/20250903_120132_762bbff8/twfe_summary.txt
+2025-09-03 12:01:59,087 - INFO - === TWFE分析完了 ===
+2025-09-03 12:01:59,087 - INFO - プレースボ分析を実行中...
+2025-09-03 12:01:59,087 - INFO - === TWFE分析開始 ===
+2025-09-03 12:01:59,087 - INFO - データ読み込み開始
+2025-09-03 12:01:59,087 - INFO - features_panel.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/features_panel.csv
+2025-09-03 12:01:59,193 - INFO - events_matrix_signed.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_matrix_signed.csv
+2025-09-03 12:01:59,211 - INFO - プレースボ検査: イベントを2年未来にシフト
+2025-09-03 12:01:59,247 - INFO - プレースボシフト完了: 28 個のイベント列を2年シフト
+2025-09-03 12:01:59,247 - INFO - events_labeled.csv を読み込み中: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/data/processed/events_labeled.csv
+2025-09-03 12:01:59,249 - INFO - データマージ中
+2025-09-03 12:01:59,263 - INFO - 有向イベントを作成中
+2025-09-03 12:01:59,510 - INFO - 欠損値処理中
+2025-09-03 12:01:59,514 - INFO - 欠損値処理: 18732 -> 17381 行
+2025-09-03 12:01:59,514 - INFO - マージ完了: 17381 行
+2025-09-03 12:01:59,514 - INFO - コントロール変数を追加中
+2025-09-03 12:01:59,514 - INFO - TWFE推定開始
+2025-09-03 12:01:59,515 - INFO - 符号ありイベント変数を使用: 28 個
+2025-09-03 12:01:59,515 - INFO - 選択された変数: ['event_disaster_inc_t', 'event_disaster_inc_t1', 'event_disaster_dec_t', 'event_disaster_dec_t1', 'event_policy_boundary_inc_t']...
+2025-09-03 12:01:59,516 - INFO - フィルタ後: 28 個のイベント変数
+2025-09-03 12:01:59,516 - INFO - 回帰式: delta ~ 0 + C(town) + C(year) + event_disaster_inc_t + event_disaster_inc_t1 + event_disaster_dec_t + event_disaster_dec_t1 + event_policy_boundary_inc_t + event_policy_boundary_inc_t1 + event_policy_boundary_dec_t + event_policy_boundary_dec_t1 + event_transit_inc_t + event_transit_inc_t1 + event_transit_dec_t + event_transit_dec_t1 + event_employment_inc_t + event_employment_inc_t1 + event_employment_dec_t + event_employment_dec_t1 + event_public_edu_medical_inc_t + event_public_edu_medical_inc_t1 + event_public_edu_medical_dec_t + event_public_edu_medical_dec_t1 + event_commercial_inc_t + event_commercial_inc_t1 + event_commercial_dec_t + event_commercial_dec_t1 + event_housing_inc_t + event_housing_inc_t1 + event_housing_dec_t + event_housing_dec_t1 + growth_adj_log + policy_boundary_dummy + disaster_2016_dummy
+2025-09-03 12:01:59,516 - INFO - split時は自動的にRidge正則化を有効化 (alpha=0.1)
+2025-09-03 12:01:59,516 - INFO - Ridge正則化付き推定を実行 (alpha=0.1)
+2025-09-03 12:02:09,777 - INFO - 推定完了: R² = 0.4964
+2025-09-03 12:02:09,778 - INFO - 推定結果を抽出中
+2025-09-03 12:02:09,778 - INFO - present_bases: {'disaster_dec', 'transit_dec', 'commercial_dec', 'employment_inc', 'disaster_inc', 'employment_dec', 'public_edu_medical_dec', 'transit_inc', 'policy_boundary', 'housing_inc', 'public_edu_medical_inc', 'housing_dec', 'commercial_inc'}
+2025-09-03 12:02:09,779 - INFO - found_params: {'housing_inc': {'t': True, 't1': True}, 'housing_dec': {'t': True, 't1': True}, 'commercial_inc': {'t': True, 't1': True}, 'commercial_dec': {'t': True, 't1': True}, 'transit_inc': {'t': True, 't1': True}, 'transit_dec': {'t': True, 't1': True}, 'public_edu_medical_inc': {'t': True, 't1': True}, 'public_edu_medical_dec': {'t': True, 't1': True}, 'employment_inc': {'t': True, 't1': True}, 'employment_dec': {'t': True, 't1': True}, 'disaster_inc': {'t': True, 't1': True}, 'disaster_dec': {'t': True, 't1': True}}
+2025-09-03 12:02:09,780 - INFO - nonzero_counts: {'housing_inc_t': 204, 'housing_inc_t1': 204, 'housing_dec_t': 4, 'housing_dec_t1': 4, 'commercial_inc_t': 49, 'commercial_inc_t1': 49, 'commercial_dec_t': 0, 'commercial_dec_t1': 0, 'transit_inc_t': 0, 'transit_inc_t1': 70, 'transit_dec_t': 7, 'transit_dec_t1': 4, 'public_edu_medical_inc_t': 0, 'public_edu_medical_inc_t1': 17, 'public_edu_medical_dec_t': 0, 'public_edu_medical_dec_t1': 0, 'employment_inc_t': 0, 'employment_inc_t1': 17, 'employment_dec_t': 0, 'employment_dec_t1': 0, 'disaster_inc_t': 2, 'disaster_inc_t1': 0, 'disaster_dec_t': 10, 'disaster_dec_t1': 0}
+2025-09-03 12:02:09,780 - INFO - Processing housing_inc
+2025-09-03 12:02:09,780 - INFO - Added result for housing_inc: beta=0.173
+2025-09-03 12:02:09,780 - INFO - Processing housing_dec
+2025-09-03 12:02:09,780 - INFO - Added result for housing_dec: beta=12.405
+2025-09-03 12:02:09,780 - INFO - Processing commercial_inc
+2025-09-03 12:02:09,780 - INFO - Added result for commercial_inc: beta=-0.053
+2025-09-03 12:02:09,780 - INFO - Processing commercial_dec
+2025-09-03 12:02:09,781 - INFO - Added result for commercial_dec: beta=0.000
+2025-09-03 12:02:09,781 - INFO - Processing transit_inc
+2025-09-03 12:02:09,781 - INFO - Added result for transit_inc: beta=-0.074
+2025-09-03 12:02:09,781 - INFO - Processing transit_dec
+2025-09-03 12:02:09,781 - INFO - Added result for transit_dec: beta=-63.364
+2025-09-03 12:02:09,781 - INFO - Processing public_edu_medical_inc
+2025-09-03 12:02:09,781 - INFO - Added result for public_edu_medical_inc: beta=23.375
+2025-09-03 12:02:09,781 - INFO - Processing public_edu_medical_dec
+2025-09-03 12:02:09,781 - INFO - Added result for public_edu_medical_dec: beta=0.000
+2025-09-03 12:02:09,781 - INFO - Processing employment_inc
+2025-09-03 12:02:09,781 - INFO - Added result for employment_inc: beta=-0.059
+2025-09-03 12:02:09,781 - INFO - Processing employment_dec
+2025-09-03 12:02:09,781 - INFO - Added result for employment_dec: beta=0.000
+2025-09-03 12:02:09,781 - INFO - Processing disaster_inc
+2025-09-03 12:02:09,781 - INFO - Added result for disaster_inc: beta=13.937
+2025-09-03 12:02:09,781 - INFO - Processing disaster_dec
+2025-09-03 12:02:09,781 - INFO - Added result for disaster_dec: beta=-0.553
+2025-09-03 12:02:09,782 - INFO - 結果を保存中
+2025-09-03 12:02:09,783 - INFO - 係数結果を保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/output/effects_coefficients.csv
+2025-09-03 12:02:09,786 - INFO - サマリを保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/logs/20250903_120132_762bbff8/twfe_summary.txt
+2025-09-03 12:02:09,787 - INFO - === TWFE分析完了 ===
+2025-09-03 12:02:09,793 - INFO - プレースボレポートを保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/output/effects_placebo_report_2y.json
+2025-09-03 12:02:09,793 - INFO - プレースボサマリを保存: /Users/ujihara/インターンシップ本課題_地域科学研究所/subject3/logs/20250903_120132_762bbff8/placebo_summary_2y.txt
+2025-09-03 12:02:09,793 - INFO - === プレースボ検査完了 ===
