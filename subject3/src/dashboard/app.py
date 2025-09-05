@@ -1,29 +1,27 @@
+# -*- coding: utf-8 -*-
 """
-Streamlit ダッシュボードアプリ
+人口予測ダッシュボード
+シナリオファイルを選択して実行し、結果を可視化するダッシュボード
 """
 import streamlit as st
 import pandas as pd
+import plotly.graph_objects as go
+import plotly.express as px
+from plotly.subplots import make_subplots
 import json
 from pathlib import Path
 import sys
 import os
+import subprocess
+import tempfile
 
-# パスを追加
+# パス設定
 sys.path.append(os.path.dirname(__file__))
-
-from schema import Scenario, ScenarioEvent
-from service import run_scenario, load_metadata, check_dependencies
-from components import (
-    plot_population_path, 
-    plot_contrib_bars, 
-    plot_contribution_pie,
-    create_summary_cards,
-    display_summary_cards
-)
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'layer5'))
 
 # ページ設定
 st.set_page_config(
-    page_title="Kumamoto Town Forecast", 
+    page_title="人口予測ダッシュボード", 
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -32,215 +30,380 @@ st.set_page_config(
 st.title("🏘️ 熊本町丁人口予測ダッシュボード")
 st.markdown("---")
 
-# 依存ファイルのチェック
-if not check_dependencies():
-    st.error("必要なファイルが見つかりません。data/processed/ ディレクトリを確認してください。")
+# サイドバー: シナリオ選択と実行
+st.sidebar.header("🎯 シナリオ選択と実行")
+
+# シナリオファイルの検索
+scenario_dir = Path("../../src/layer5/scenario_examples")
+if not scenario_dir.exists():
+    scenario_dir = Path("../layer5/scenario_examples")
+
+json_files = list(scenario_dir.glob("*.json"))
+if not json_files:
+    st.error(f"シナリオファイルが見つかりません。ディレクトリ: {scenario_dir}")
     st.stop()
 
-# メタデータの読み込み
-towns, years = load_metadata()
+# シナリオファイル選択
+selected_scenario = st.sidebar.selectbox(
+    "シナリオファイルを選択",
+    json_files,
+    format_func=lambda x: x.name
+)
 
-if not towns or not years:
-    st.error("メタデータの読み込みに失敗しました。")
-    st.stop()
-
-# デバッグ情報
-st.sidebar.write(f"利用可能な町丁数: {len(towns)}")
-st.sidebar.write(f"利用可能な年数: {len(years)}")
-
-# セッション状態の初期化
-if "events" not in st.session_state:
-    st.session_state.events = []
-if "warnings" not in st.session_state:
-    st.session_state.warnings = []
-
-# --- サイドバー: 入力 ---
-st.sidebar.header("📋 シナリオ設定")
-
-# 基本設定
-st.sidebar.subheader("基本設定")
-town = st.sidebar.selectbox("町丁", towns, index=0, help="予測対象の町丁を選択")
-base_year = st.sidebar.selectbox("基準年", years, index=len(years)-1, help="予測の基準となる年")
-horizons = st.sidebar.multiselect("予測期間", [1, 2, 3], default=[1, 2, 3], help="何年先まで予測するか")
-
-# イベント設定
-st.sidebar.subheader("📅 イベント設定")
-st.sidebar.markdown("**イベントを追加**")
-
-col1, col2 = st.sidebar.columns(2)
-with col1:
-    etype = st.selectbox("タイプ", 
-        ["housing", "commercial", "transit", "policy_boundary", 
-         "public_edu_medical", "employment", "disaster"],
-        help="イベントの種類"
-    )
-    edir = st.selectbox("方向", ["increase", "decrease"], help="人口への影響方向")
-    yoff = st.slider("年オフセット", 0, 3, 0, help="基準年から何年後に発生するか")
-
-with col2:
-    conf = st.slider("信頼度", 0.0, 1.0, 1.0, 0.1, help="イベント発生の確実性")
-    inten = st.slider("強度", 0.0, 1.0, 1.0, 0.1, help="イベントの影響の強さ")
-    lag_t = st.checkbox("lag_t (当年効果)", value=True, help="当年に効果が現れるか")
-    lag_t1 = st.checkbox("lag_t1 (翌年効果)", value=True, help="翌年に効果が現れるか")
-
-note = st.sidebar.text_input("備考", placeholder="イベントの詳細説明（任意）")
-
-if st.sidebar.button("➕ イベント追加", type="primary"):
-    new_event = {
-        "year_offset": yoff,
-        "event_type": etype,
-        "effect_direction": edir,
-        "confidence": conf,
-        "intensity": inten,
-        "lag_t": int(lag_t),
-        "lag_t1": int(lag_t1),
-        "note": note
-    }
-    st.session_state.events.append(new_event)
-    st.sidebar.success(f"イベントを追加しました: {etype} ({edir})")
-    st.rerun()
-
-# イベント一覧
-if st.session_state.events:
-    st.sidebar.subheader("📝 追加済みイベント")
-    for i, event in enumerate(st.session_state.events):
-        with st.sidebar.container():
-            st.write(f"**{i+1}.** {event['event_type']} ({event['effect_direction']})")
-            st.write(f"   年: +{event['year_offset']}, 信頼度: {event['confidence']:.1f}, 強度: {event['intensity']:.1f}")
-            if event['note']:
-                st.write(f"   備考: {event['note']}")
-            
-            if st.button(f"🗑️ 削除", key=f"del_{i}"):
-                st.session_state.events.pop(i)
-                st.rerun()
-
-# マクロ設定
-st.sidebar.subheader("🌍 マクロ変数")
-st.sidebar.markdown("**外国人人口成長率 (%)**")
-st.sidebar.markdown("*未入力の場合はNaNのまま（木モデル任せ）*")
-
-f_h1 = st.sidebar.number_input("h1 成長率 %", value=0.00, step=0.01, format="%.2f")
-f_h2 = st.sidebar.number_input("h2 成長率 %", value=0.00, step=0.01, format="%.2f")
-f_h3 = st.sidebar.number_input("h3 成長率 %", value=0.00, step=0.01, format="%.2f")
-
-# 手動加算
-st.sidebar.subheader("🏭 手動加算")
-st.sidebar.markdown("**直接的な人口変化 (人)**")
-st.sidebar.markdown("*「工場で+100人」などの直接効果*")
-
-m_h1 = st.sidebar.number_input("h1 +人", value=0, step=10)
-m_h2 = st.sidebar.number_input("h2 +人", value=0, step=10)
-m_h3 = st.sidebar.number_input("h3 +人", value=0, step=10)
-
-# シナリオクリア
-if st.sidebar.button("🗑️ シナリオクリア", type="secondary"):
-    st.session_state.events = []
-    st.rerun()
-
-# --- メインエリア ---
-st.header("📊 予測結果")
+# シナリオの内容を表示
+st.sidebar.subheader("📋 選択されたシナリオ")
+try:
+    with open(selected_scenario, 'r', encoding='utf-8') as f:
+        scenario_data = json.load(f)
+    
+    st.sidebar.json(scenario_data)
+except Exception as e:
+    st.sidebar.error(f"シナリオファイルの読み込みに失敗: {e}")
 
 # 実行ボタン
-if st.button("🚀 予測実行", type="primary", use_container_width=True):
-    try:
-        # シナリオ作成
-        scn = Scenario(
-            town=town,
-            base_year=base_year,
-            horizons=horizons,
-            events=[ScenarioEvent(**e) for e in st.session_state.events],
-            macros={"foreign_population_growth_pct": {"h1": f_h1, "h2": f_h2, "h3": f_h3}} if any([f_h1, f_h2, f_h3]) else {},
-            manual_delta={"h1": m_h1, "h2": m_h2, "h3": m_h3} if any([m_h1, m_h2, m_h3]) else {}
-        )
-        
-        # 衝突チェック
-        warnings = scn.validate_conflicts()
-        if warnings:
-            st.warning("⚠️ 衝突が検出されました:")
-            for warning in warnings:
-                st.warning(f"  {warning}")
-        
-        # 予測実行
-        with st.spinner("予測を実行中..."):
-            result, debug_info = run_scenario(scn, debug=True)
-        
-        # 結果表示
-        st.success("✅ 予測が完了しました！")
-        
-        # サマリーカード
-        cards = create_summary_cards(result)
-        display_summary_cards(cards)
-        
-        # グラフ表示
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.subheader("📈 人口予測パス")
-            fig_pop = plot_population_path(result)
-            st.plotly_chart(fig_pop, use_container_width=True)
-        
-        with col2:
-            st.subheader("📊 寄与分解")
-            fig_contrib = plot_contrib_bars(result)
-            st.plotly_chart(fig_contrib, use_container_width=True)
-        
-        # 詳細結果
-        with st.expander("📋 詳細結果 (JSON)"):
-            st.json(result)
-        
-        # 寄与分解の円グラフ
-        st.subheader("🥧 年別寄与分解")
-        path = result["path"]
-        years_available = [p["year"] for p in path]
-        
-        if years_available:
-            selected_year = st.selectbox("年を選択", years_available)
-            fig_pie = plot_contribution_pie(result, selected_year)
-            st.plotly_chart(fig_pie, use_container_width=True)
-        
-        # デバッグ情報
-        if debug_info:
-            with st.expander("🔍 デバッグ情報"):
-                if "debug_features" in debug_info:
-                    st.subheader("将来特徴")
-                    st.dataframe(debug_info["debug_features"])
+if st.sidebar.button("🚀 シナリオ実行", type="primary", use_container_width=True):
+    with st.spinner("シナリオを実行中..."):
+        try:
+            # CLIを実行
+            cli_path = Path("../../src/layer5/cli_run_scenario.py")
+            if not cli_path.exists():
+                cli_path = Path("../layer5/cli_run_scenario.py")
+            
+            # 出力ファイル名を生成
+            output_file = f"output/forecast_result_{selected_scenario.stem}.json"
+            output_path = Path(output_file)
+            output_path.parent.mkdir(exist_ok=True)
+            
+            # CLI実行
+            result = subprocess.run([
+                "python", str(cli_path), 
+                str(selected_scenario), 
+                str(output_path)
+            ], capture_output=True, text=True, cwd=Path("../../src/layer5"))
+            
+            if result.returncode == 0:
+                st.success("✅ シナリオ実行が完了しました！")
+                st.session_state.last_result_file = str(output_path)
+                st.rerun()
+            else:
+                st.error(f"❌ シナリオ実行に失敗しました:\n{result.stderr}")
                 
-                if "debug_contrib" in debug_info:
-                    st.subheader("寄与分解詳細")
-                    st.dataframe(debug_info["debug_contrib"])
-        
-    except Exception as e:
-        st.error(f"❌ エラーが発生しました: {str(e)}")
-        st.exception(e)
+        except Exception as e:
+            st.error(f"❌ エラーが発生しました: {e}")
 
-# ヘルプ
-with st.expander("❓ ヘルプ"):
-    st.markdown("""
-    ### 使用方法
+# 結果ファイルの選択
+st.sidebar.subheader("📁 予測結果ファイル選択")
+
+# 結果ファイルの検索
+result_dir = Path("../../src/layer5/output")
+if not result_dir.exists():
+    result_dir = Path("../layer5/output")
+
+result_files = list(result_dir.glob("*.json"))
+if not result_files:
+    st.warning("予測結果ファイルが見つかりません。シナリオを実行してください。")
+    st.stop()
+
+# 最後に実行した結果をデフォルト選択
+default_index = 0
+if hasattr(st.session_state, 'last_result_file'):
+    for i, file in enumerate(result_files):
+        if str(file) == st.session_state.last_result_file:
+            default_index = i
+            break
+
+# ファイル選択
+selected_file = st.sidebar.selectbox(
+    "予測結果ファイルを選択",
+    result_files,
+    index=default_index,
+    format_func=lambda x: x.name
+)
+
+# 結果の読み込み
+@st.cache_data
+def load_forecast_result(file_path):
+    """予測結果を読み込む"""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception as e:
+        st.error(f"ファイルの読み込みに失敗しました: {e}")
+        return None
+
+result = load_forecast_result(selected_file)
+if result is None:
+    st.stop()
+
+# メイン表示エリア
+st.header("📊 予測結果")
+
+# 基本情報
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.metric("町丁", result["town"])
+with col2:
+    st.metric("基準年", result["base_year"])
+with col3:
+    st.metric("予測期間", f"{min(result['horizons'])}-{max(result['horizons'])}年先")
+
+st.markdown("---")
+
+# データフレーム作成
+path_df = pd.DataFrame(result["path"])
+
+# 人口予測の折れ線グラフ
+st.subheader("📈 人口予測パス")
+
+fig_pop = go.Figure()
+
+# 人口パス（線）
+fig_pop.add_trace(go.Scatter(
+    x=path_df["year"],
+    y=path_df["pop_hat"],
+    mode='lines+markers',
+    name='予測人口',
+    line=dict(color='#1f77b4', width=3),
+    marker=dict(size=10, color='#1f77b4')
+))
+
+# 信頼区間（帯）
+if "pi95_pop" in path_df.columns:
+    # pi95_popがリスト形式の場合
+    lower = [p[0] if isinstance(p, list) else p for p in path_df["pi95_pop"]]
+    upper = [p[1] if isinstance(p, list) else p for p in path_df["pi95_pop"]]
     
-    1. **基本設定**: 町丁、基準年、予測期間を選択
-    2. **イベント設定**: 人口に影響するイベントを追加
-    3. **マクロ変数**: 外国人人口の成長率を設定（任意）
-    4. **手動加算**: 直接的な人口変化を設定（任意）
-    5. **予測実行**: 「予測実行」ボタンをクリック
+    fig_pop.add_trace(go.Scatter(
+        x=path_df["year"].tolist() + path_df["year"].tolist()[::-1],
+        y=upper + lower[::-1],
+        fill='tonexty',
+        fillcolor='rgba(31, 119, 180, 0.2)',
+        line=dict(color='rgba(255,255,255,0)'),
+        name='95%信頼区間',
+        showlegend=True
+    ))
+
+fig_pop.update_layout(
+    title=f"人口予測パス: {result['town']} (基準年: {result['base_year']})",
+    xaxis_title="年",
+    yaxis_title="人口（人）",
+    hovermode='x unified',
+    template="plotly_white",
+    height=500
+)
+
+st.plotly_chart(fig_pop, use_container_width=True)
+
+# 人口変化量のグラフ
+st.subheader("📊 人口変化量（Δ人口）")
+
+fig_delta = go.Figure()
+
+# Δ人口のバー
+fig_delta.add_trace(go.Bar(
+    x=path_df["year"],
+    y=path_df["delta_hat"],
+    name='Δ人口',
+    marker_color=['#ff7f0e' if x > 0 else '#d62728' for x in path_df["delta_hat"]],
+    text=[f"{x:+.1f}" for x in path_df["delta_hat"]],
+    textposition='auto'
+))
+
+# 信頼区間
+if "pi95_delta" in path_df.columns:
+    lower_delta = [p[0] if isinstance(p, list) else p for p in path_df["pi95_delta"]]
+    upper_delta = [p[1] if isinstance(p, list) else p for p in path_df["pi95_delta"]]
     
-    ### イベントの説明
+    fig_delta.add_trace(go.Scatter(
+        x=path_df["year"],
+        y=upper_delta,
+        mode='markers',
+        marker=dict(color='red', size=8, symbol='triangle-up'),
+        name='95%信頼区間上限',
+        showlegend=True
+    ))
     
-    - **housing**: 住宅開発
-    - **commercial**: 商業施設
-    - **transit**: 交通インフラ
-    - **policy_boundary**: 政策境界変更
-    - **public_edu_medical**: 公共・教育・医療施設
-    - **employment**: 雇用創出
-    - **disaster**: 災害
-    
-    ### 注意事項
-    
-    - policy_boundary と transit を同年同町に入れた場合、transit が無効化されます
-    - 未入力のマクロ変数は NaN のまま（木モデル任せ）
-    - 手動加算は期待効果（exp）に直接加算されます
-    """)
+    fig_delta.add_trace(go.Scatter(
+        x=path_df["year"],
+        y=lower_delta,
+        mode='markers',
+        marker=dict(color='red', size=8, symbol='triangle-down'),
+        name='95%信頼区間下限',
+        showlegend=True
+    ))
+
+fig_delta.update_layout(
+    title="年別人口変化量",
+    xaxis_title="年",
+    yaxis_title="人口変化量（人）",
+    template="plotly_white",
+    height=400
+)
+
+st.plotly_chart(fig_delta, use_container_width=True)
+
+# 寄与分解のグラフ
+st.subheader("🥧 寄与分解")
+
+# 寄与データを準備
+contrib_data = []
+for _, row in path_df.iterrows():
+    contrib = row["contrib"]
+    contrib_data.append({
+        "year": row["year"],
+        "exp": contrib.get("exp", 0),
+        "macro": contrib.get("macro", 0),
+        "inertia": contrib.get("inertia", 0),
+        "other": contrib.get("other", 0),
+        "delta_hat": row["delta_hat"]
+    })
+
+contrib_df = pd.DataFrame(contrib_data)
+
+# 寄与分解の積み上げバー
+fig_contrib = go.Figure()
+
+colors = {
+    "exp": "#FF6B6B",      # 赤（期待効果）
+    "macro": "#4ECDC4",    # 青緑（マクロ）
+    "inertia": "#45B7D1",  # 青（慣性）
+    "other": "#96CEB4"     # 緑（その他）
+}
+
+for col in ["exp", "macro", "inertia", "other"]:
+    fig_contrib.add_trace(go.Bar(
+        x=contrib_df["year"],
+        y=contrib_df[col],
+        name=col,
+        marker_color=colors[col],
+        opacity=0.8
+    ))
+
+fig_contrib.update_layout(
+    title="寄与分解（積み上げバー）",
+    xaxis_title="年",
+    yaxis_title="寄与（人）",
+    barmode='relative',
+    template="plotly_white",
+    height=500
+)
+
+st.plotly_chart(fig_contrib, use_container_width=True)
+
+# 年別寄与分解の円グラフ
+st.subheader("🥧 年別寄与分解（円グラフ）")
+
+selected_year = st.selectbox("年を選択", path_df["year"].tolist())
+
+year_data = path_df[path_df["year"] == selected_year].iloc[0]
+contrib = year_data["contrib"]
+
+# 円グラフ用データ
+labels = []
+values = []
+colors_pie = []
+
+for key, value in contrib.items():
+    if abs(value) > 0.1:  # 0に近い値は除外
+        labels.append(key)
+        values.append(abs(value))
+        colors_pie.append(colors.get(key, "#CCCCCC"))
+
+fig_pie = go.Figure(data=[go.Pie(
+    labels=labels,
+    values=values,
+    marker_colors=colors_pie,
+    textinfo='label+percent+value',
+    texttemplate='%{label}<br>%{percent}<br>(%{value:.1f}人)'
+)])
+
+fig_pie.update_layout(
+    title=f"寄与分解: {selected_year}年",
+    template="plotly_white",
+    height=400
+)
+
+st.plotly_chart(fig_pie, use_container_width=True)
+
+# 詳細データテーブル
+st.subheader("📋 詳細データ")
+
+# 表示用データフレームの準備
+display_df = path_df.copy()
+display_df["人口"] = display_df["pop_hat"].round(1)
+display_df["Δ人口"] = display_df["delta_hat"].round(1)
+display_df["期待効果"] = display_df["contrib"].apply(lambda x: x.get("exp", 0)).round(1)
+display_df["マクロ"] = display_df["contrib"].apply(lambda x: x.get("macro", 0)).round(1)
+display_df["慣性"] = display_df["contrib"].apply(lambda x: x.get("inertia", 0)).round(1)
+display_df["その他"] = display_df["contrib"].apply(lambda x: x.get("other", 0)).round(1)
+
+# 信頼区間の表示
+if "pi95_pop" in display_df.columns:
+    display_df["人口95%CI"] = display_df["pi95_pop"].apply(
+        lambda x: f"[{x[0]:.1f}, {x[1]:.1f}]" if isinstance(x, list) else f"[{x:.1f}, {x:.1f}]"
+    )
+
+if "pi95_delta" in display_df.columns:
+    display_df["Δ人口95%CI"] = display_df["pi95_delta"].apply(
+        lambda x: f"[{x[0]:.1f}, {x[1]:.1f}]" if isinstance(x, list) else f"[{x:.1f}, {x:.1f}]"
+    )
+
+# 表示する列を選択
+display_columns = ["年", "人口", "Δ人口", "期待効果", "マクロ", "慣性", "その他"]
+if "人口95%CI" in display_df.columns:
+    display_columns.append("人口95%CI")
+if "Δ人口95%CI" in display_df.columns:
+    display_columns.append("Δ人口95%CI")
+
+# 列名を日本語に変更
+display_df = display_df.rename(columns={
+    "year": "年",
+    "人口": "人口",
+    "Δ人口": "Δ人口",
+    "期待効果": "期待効果",
+    "マクロ": "マクロ",
+    "慣性": "慣性",
+    "その他": "その他"
+})
+
+st.dataframe(display_df[display_columns], use_container_width=True)
+
+# サマリー統計
+st.subheader("📊 サマリー統計")
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    final_pop = path_df["pop_hat"].iloc[-1]
+    initial_pop = path_df["pop_hat"].iloc[0]
+    total_change = final_pop - initial_pop
+    st.metric(
+        "総人口変化",
+        f"{total_change:+.1f}人",
+        f"{initial_pop:.1f} → {final_pop:.1f}"
+    )
+
+with col2:
+    avg_delta = path_df["delta_hat"].mean()
+    st.metric(
+        "平均年次変化",
+        f"{avg_delta:+.1f}人/年"
+    )
+
+with col3:
+    max_exp = path_df["contrib"].apply(lambda x: x.get("exp", 0)).max()
+    st.metric(
+        "最大期待効果",
+        f"{max_exp:+.1f}人"
+    )
+
+with col4:
+    total_exp = path_df["contrib"].apply(lambda x: x.get("exp", 0)).sum()
+    st.metric(
+        "期待効果合計",
+        f"{total_exp:+.1f}人"
+    )
 
 # フッター
 st.markdown("---")
-st.markdown("**熊本町丁人口予測システム** - Layer 5 ダッシュボード")
+st.markdown("**熊本町丁人口予測システム** - 結果表示ダッシュボード")

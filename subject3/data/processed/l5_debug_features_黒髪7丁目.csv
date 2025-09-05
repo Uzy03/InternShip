@@ -1,0 +1,4 @@
+year,exp_rate_all_h1,exp_rate_all_h2,exp_rate_all_h3,lag_d1,lag_d2,foreign_population,foreign_change,horizon
+2026,0.0746268656716417,0.0,0.0,,,,,1
+2027,0.0,-0.0001751575971207,0.0,,,,,2
+2028,0.0,0.0,0.0298507462686567,,,,,3

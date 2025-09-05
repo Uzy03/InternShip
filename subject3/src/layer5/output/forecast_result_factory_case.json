@@ -1,0 +1,68 @@
+{
+  "town": "四方寄町",
+  "base_year": 2025,
+  "horizons": [
+    1,
+    2,
+    3
+  ],
+  "path": [
+    {
+      "year": 2026,
+      "delta_hat": 266.2,
+      "pop_hat": 3154.2,
+      "pi95_delta": [
+        -12.0,
+        12.0
+      ],
+      "pi95_pop": [
+        3142.2,
+        3166.2
+      ],
+      "contrib": {
+        "exp": 300.0,
+        "macro": -0.7,
+        "inertia": -7.9,
+        "other": -25.2
+      }
+    },
+    {
+      "year": 2027,
+      "delta_hat": 289.6,
+      "pop_hat": 3443.8,
+      "pi95_delta": [
+        -12.0,
+        12.0
+      ],
+      "pi95_pop": [
+        3426.9,
+        3460.7
+      ],
+      "contrib": {
+        "exp": 192.3,
+        "macro": 2.5,
+        "inertia": -68.5,
+        "other": 163.3
+      }
+    },
+    {
+      "year": 2028,
+      "delta_hat": 185.7,
+      "pop_hat": 3629.5,
+      "pi95_delta": [
+        -12.0,
+        12.0
+      ],
+      "pi95_pop": [
+        3608.8,
+        3650.2
+      ],
+      "contrib": {
+        "exp": 90.0,
+        "macro": 1.6,
+        "inertia": -69.2,
+        "other": 163.3
+      }
+    }
+  ]
+}

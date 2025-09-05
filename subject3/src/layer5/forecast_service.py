@@ -46,25 +46,25 @@ def load_effects_coefficients() -> pd.DataFrame:
     return pd.read_csv(P_EFFECTS_COEF)
 
 def choose_features(df: pd.DataFrame) -> List[str]:
-    """L4の実際に使用された特徴を選択"""
-    # L4で実際に使用された特徴リスト（l4_cv_metrics.jsonから）
+    """L4の実際に使用された特徴を選択（率ベース対応）"""
+    # L4で実際に使用された特徴リスト（率ベースに更新）
     l4_features = [
         "pop_total",
-        "exp_all_h1",
-        "exp_all_h2", 
-        "exp_all_h3",
+        "exp_rate_all_h1",  # 率ベースに変更
+        "exp_rate_all_h2", 
+        "exp_rate_all_h3",
         "era_post2009",
         "era_post2013",
         "era_pre2013",
-        "exp_all_h1_pre2013",
-        "exp_all_h1_post2013",
-        "exp_all_h1_post2009",
-        "exp_all_h2_pre2013",
-        "exp_all_h2_post2013",
-        "exp_all_h2_post2009",
-        "exp_all_h3_pre2013",
-        "exp_all_h3_post2013",
-        "exp_all_h3_post2009",
+        "exp_rate_all_h1_pre2013",  # 率ベースに変更
+        "exp_rate_all_h1_post2013",
+        "exp_rate_all_h1_post2009",
+        "exp_rate_all_h2_pre2013",
+        "exp_rate_all_h2_post2013",
+        "exp_rate_all_h2_post2009",
+        "exp_rate_all_h3_pre2013",
+        "exp_rate_all_h3_post2013",
+        "exp_rate_all_h3_post2009",
         "lag_d1",
         "lag_d2",
         "ma2_delta",
@@ -87,9 +87,9 @@ def choose_features(df: pd.DataFrame) -> List[str]:
         "foreign_log_covid",
         "foreign_ma3_covid",
         "era_post2022",
-        "exp_all_h1_post2022",
-        "exp_all_h2_post2022",
-        "exp_all_h3_post2022",
+        "exp_rate_all_h1_post2022",  # 率ベースに変更
+        "exp_rate_all_h2_post2022",
+        "exp_rate_all_h3_post2022",
         "foreign_population_post2022",
         "foreign_change_post2022",
         "foreign_pct_change_post2022",
@@ -117,14 +117,15 @@ def predict_delta_population_sequential(model: Any, features_df: pd.DataFrame, b
     delta_predictions = []
     population_path = []
     contributions = []
+    debug_rows = []  # デバッグ用の詳細情報
     
     # 初期状態
     pop = base_population
     prev_deltas = []  # 直近のΔを先頭に積む
     
-    # 使う列グループを定義
-    EXP_COLS = [c for c in feature_cols if c.startswith("exp_all_h")]
-    EXP_POST_COLS = [c for c in feature_cols if c.startswith("exp_all_h") and c.endswith("_post2022")]
+    # 使う列グループを定義（率ベース対応、二重加算回避）
+    EXP_RATE_COLS = [c for c in feature_cols if c.startswith("exp_rate_all_h") and not c.endswith("_post2022")]
+    # EXP_RATE_POST_COLS は使わない（二重加算を避けるため）
     MACRO_COLS = [c for c in feature_cols if c.startswith(("foreign_", "macro_"))]
     INERTIA_COLS = [c for c in feature_cols if c.startswith(("lag_", "town_ma", "town_std", "town_trend"))]
     
@@ -151,20 +152,43 @@ def predict_delta_population_sequential(model: Any, features_df: pd.DataFrame, b
         Xrow = Xrow.replace([np.inf, -np.inf], np.nan)
         
         # ① GBM の「exp 抜き」予測
-        X_noexp = zero_cols(Xrow.copy(), EXP_COLS + EXP_POST_COLS)
+        X_noexp = zero_cols(Xrow.copy(), EXP_RATE_COLS)
         y_noexp = float(model.predict(X_noexp)[0])
         
-        # ② 期待効果（人ベース）をそのまま加算
-        exp_terms = 0.0
-        for c in EXP_COLS + EXP_POST_COLS:
+        # ② 期待効果（率ベース）を人数に変換して加算（二重加算回避）
+        exp_rate_terms = 0.0
+        for c in EXP_RATE_COLS:
             if c in Xrow.columns:
                 val = Xrow[c].values[0]
                 if not pd.isna(val):
-                    exp_terms += float(val)
+                    exp_rate_terms += float(val)
         
+        # 安全弁：レートをクリップ（±50%以内）
+        MAX_RATE = 0.5  # ±50%
+        raw_rate = exp_rate_terms
+        safe_rate = max(-MAX_RATE, min(MAX_RATE, raw_rate))
+        if safe_rate != raw_rate:
+            year = features_df.iloc[i]["year"]
+            print(f"[L5][WARN] exp_rate clipped: {raw_rate:.4f} -> {safe_rate:.4f} (year={year})")
         
-        # ③ 最終Δ予測 = 「GBM（exp抜き）」＋「期待効果」
-        delta_hat = y_noexp + exp_terms
+        # 率 → 人数変換（動的母数）
+        base_for_rate = max(pop, 1.0)
+        exp_people_from_rate = safe_rate * base_for_rate
+        
+        # 手動人数（もし build で別列に保持しているなら拾う）
+        manual_people_cols = [c for c in Xrow.columns if c.startswith("manual_people_h")]
+        exp_people_manual = 0.0
+        if manual_people_cols:
+            for c in manual_people_cols:
+                val = Xrow[c].values[0]
+                if not pd.isna(val):
+                    exp_people_manual += float(val)
+        
+        # 総和（これを足し戻しに使う）
+        exp_people = exp_people_from_rate + exp_people_manual
+        
+        # ③ 最終Δ予測 = 「GBM（exp抜き）」＋「期待効果（人数）」
+        delta_hat = y_noexp + exp_people
         
         # ④ 人口パス更新
         pop = pop + delta_hat
@@ -173,7 +197,7 @@ def predict_delta_population_sequential(model: Any, features_df: pd.DataFrame, b
         
         # ⑤ 寄与分解（ノックアウト基準を y_noexp に合わせる）
         contrib = {}
-        contrib["exp"] = exp_terms
+        contrib["exp"] = exp_people  # 人数ベース
         
         # macro 寄与 = y_noexp - y_without_macro
         y_wo_macro = float(model.predict(zero_cols(X_noexp.copy(), MACRO_COLS))[0])
@@ -186,18 +210,35 @@ def predict_delta_population_sequential(model: Any, features_df: pd.DataFrame, b
         # other = 残差
         contrib["other"] = delta_hat - (contrib["exp"] + contrib["macro"] + contrib["inertia"])
         
+        # デバッグ行（CSV出力用）
+        year = features_df.iloc[i]["year"]
+        debug_rows.append({
+            "year": year,
+            "delta_noexp": y_noexp,
+            "exp_rate_terms": exp_rate_terms,
+            "exp_rate_terms_clipped": safe_rate,
+            "base_pop_for_rate": base_for_rate,
+            "exp_people_from_rate": exp_people_from_rate,
+            "exp_people_manual": exp_people_manual,
+            "exp_people_total": exp_people,
+            "delta_hat": delta_hat,
+            "pop_after": pop,
+            "lag_d1": features_df.iloc[i]["lag_d1"] if "lag_d1" in features_df.columns else np.nan,
+            "lag_d2": features_df.iloc[i]["lag_d2"] if "lag_d2" in features_df.columns else np.nan
+        })
+        
         # 結果格納
         delta_predictions.append(delta_hat)
         population_path.append(pop)
         contributions.append(contrib)
     
-    return delta_predictions, population_path, contributions
+    return delta_predictions, population_path, contributions, debug_rows
 
 def calculate_contribution_knockout(model: Any, X: pd.DataFrame, feature_cols: List[str]) -> Dict[str, float]:
-    """グループ・ノックアウトによる寄与分解"""
-    # グループ定義（厳密化）
+    """グループ・ノックアウトによる寄与分解（率ベース対応）"""
+    # グループ定義（率ベース対応）
     GROUPS = {
-        "exp": list(set([c for c in feature_cols if c.startswith("exp_all_h")] + [c for c in feature_cols if c.startswith("exp_all_h") and c.endswith("_post2022")])),
+        "exp": list(set([c for c in feature_cols if c.startswith("exp_rate_all_h")] + [c for c in feature_cols if c.startswith("exp_rate_all_h") and c.endswith("_post2022")])),
         "macro": [c for c in feature_cols if c.startswith(("foreign_", "macro_"))],
         "inertia": [c for c in feature_cols if c.startswith(("lag_", "town_ma", "town_std", "town_trend"))],
     }
@@ -289,7 +330,7 @@ def create_forecast_result(town: str, base_year: int, horizons: List[int],
     return result
 
 def forecast_population(town: str, base_year: int, horizons: List[int], 
-                       base_population: float) -> Dict[str, Any]:
+                       base_population: float, debug_output_dir: str = None) -> Dict[str, Any]:
     """人口予測の実行"""
     print(f"[L5] 人口予測を実行中: {town}, {base_year}, horizons={horizons}")
     
@@ -314,14 +355,14 @@ def forecast_population(town: str, base_year: int, horizons: List[int],
     town_features = town_features.sort_values("year")
     
     # 逐次予測（ラグ更新付き）
-    delta_predictions, population_path, contributions = predict_delta_population_sequential(
+    delta_predictions, population_path, contributions, debug_rows = predict_delta_population_sequential(
         model, town_features, base_population)
     
     # 予測区間の計算
     prediction_intervals = estimate_intervals(delta_predictions, target_years, base_year)
     
     # デバッグ出力の保存
-    save_debug_outputs(town, town_features, delta_predictions, contributions, base_year)
+    save_debug_outputs(town, town_features, delta_predictions, contributions, population_path, base_population, base_year, debug_rows, debug_output_dir)
     
     # 結果の作成
     result = create_forecast_result(town, base_year, horizons, delta_predictions, 
@@ -330,27 +371,50 @@ def forecast_population(town: str, base_year: int, horizons: List[int],
     return result
 
 def save_debug_outputs(town: str, features_df: pd.DataFrame, delta_predictions: List[float], 
-                      contributions: List[Dict[str, float]], base_year: int) -> None:
+                      contributions: List[Dict[str, float]], population_path: List[float], 
+                      base_population: float, base_year: int, debug_rows: List[Dict], 
+                      debug_output_dir: str = None) -> None:
     """デバッグ出力の保存"""
-    # 特徴デバッグ
-    debug_features = features_df[["year", "exp_all_h1", "exp_all_h2", "exp_all_h3", 
+    # 出力ディレクトリの設定
+    if debug_output_dir is None:
+        debug_output_dir = "../../data/processed"
+    
+    debug_output_path = Path(debug_output_dir)
+    debug_output_path.mkdir(parents=True, exist_ok=True)
+    
+    # 特徴デバッグ（率ベース対応）
+    debug_features = features_df[["year", "exp_rate_all_h1", "exp_rate_all_h2", "exp_rate_all_h3", 
                                  "lag_d1", "lag_d2", "foreign_population", "foreign_change"]].copy()
     debug_features["horizon"] = debug_features["year"] - base_year
-    debug_features.to_csv(f"../../data/processed/l5_debug_features_{town.replace(' ', '_')}.csv", index=False)
+    debug_features.to_csv(debug_output_path / f"l5_debug_features_{town.replace(' ', '_')}.csv", index=False)
     
-    # 寄与デバッグ
+    # 寄与デバッグ（詳細版）
+    # 配列の長さを統一
+    n_rows = len(features_df)
+    
     debug_contrib = pd.DataFrame({
-        "year": features_df["year"],
-        "horizon": features_df["year"] - base_year,
+        "year": features_df["year"].values,
+        "horizon": (features_df["year"] - base_year).values,
         "delta_full": delta_predictions,
         "contrib_exp": [c["exp"] for c in contributions],
         "contrib_macro": [c["macro"] for c in contributions],
         "contrib_inertia": [c["inertia"] for c in contributions],
-        "contrib_other": [c["other"] for c in contributions]
+        "contrib_other": [c["other"] for c in contributions],
+        # 率関連のデバッグ情報
+        "exp_rate_all_h1": features_df["exp_rate_all_h1"].values if "exp_rate_all_h1" in features_df.columns else np.full(n_rows, np.nan),
+        "exp_rate_all_h2": features_df["exp_rate_all_h2"].values if "exp_rate_all_h2" in features_df.columns else np.full(n_rows, np.nan),
+        "exp_rate_all_h3": features_df["exp_rate_all_h3"].values if "exp_rate_all_h3" in features_df.columns else np.full(n_rows, np.nan),
+        "base_pop_for_rate": [max(pop, 1.0) for pop in population_path],  # population_pathの長さに合わせる
+        "lag_d1": features_df["lag_d1"].values if "lag_d1" in features_df.columns else np.full(n_rows, np.nan),
+        "lag_d2": features_df["lag_d2"].values if "lag_d2" in features_df.columns else np.full(n_rows, np.nan)
     })
-    debug_contrib.to_csv(f"../../data/processed/l5_debug_contrib_{town.replace(' ', '_')}.csv", index=False)
+    debug_contrib.to_csv(debug_output_path / f"l5_debug_contrib_{town.replace(' ', '_')}.csv", index=False)
     
-    print(f"[L5] デバッグ出力を保存: l5_debug_features_{town.replace(' ', '_')}.csv, l5_debug_contrib_{town.replace(' ', '_')}.csv")
+    # 詳細デバッグ（内訳透明化）
+    debug_detail = pd.DataFrame(debug_rows)
+    debug_detail.to_csv(debug_output_path / f"l5_debug_detail_{town.replace(' ', '_')}.csv", index=False)
+    
+    print(f"[L5] デバッグ出力を保存: {debug_output_path}/l5_debug_features_{town.replace(' ', '_')}.csv, {debug_output_path}/l5_debug_contrib_{town.replace(' ', '_')}.csv, {debug_output_path}/l5_debug_detail_{town.replace(' ', '_')}.csv")
 
 def main(town: str, base_year: int, horizons: List[int], base_population: float) -> Dict[str, Any]:
     """メイン処理"""

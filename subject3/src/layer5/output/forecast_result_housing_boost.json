@@ -1,0 +1,68 @@
+{
+  "town": "九品寺5丁目",
+  "base_year": 2025,
+  "horizons": [
+    1,
+    2,
+    3
+  ],
+  "path": [
+    {
+      "year": 2026,
+      "delta_hat": -29.1,
+      "pop_hat": 1689.9,
+      "pi95_delta": [
+        -12.0,
+        12.0
+      ],
+      "pi95_pop": [
+        1677.9,
+        1701.8
+      ],
+      "contrib": {
+        "exp": 0.0,
+        "macro": -0.4,
+        "inertia": -4.5,
+        "other": -24.2
+      }
+    },
+    {
+      "year": 2027,
+      "delta_hat": 14.3,
+      "pop_hat": 1704.2,
+      "pi95_delta": [
+        -12.0,
+        12.0
+      ],
+      "pi95_pop": [
+        1687.3,
+        1721.1
+      ],
+      "contrib": {
+        "exp": 43.9,
+        "macro": -0.2,
+        "inertia": 29.6,
+        "other": -59.0
+      }
+    },
+    {
+      "year": 2028,
+      "delta_hat": -28.8,
+      "pop_hat": 1675.4,
+      "pi95_delta": [
+        -12.0,
+        12.0
+      ],
+      "pi95_pop": [
+        1654.7,
+        1696.1
+      ],
+      "contrib": {
+        "exp": 0.0,
+        "macro": -0.1,
+        "inertia": -12.9,
+        "other": -15.8
+      }
+    }
+  ]
+}

@@ -24,6 +24,10 @@ import re
 RIDGE_ALPHA = 1.0
 PLACEBO_SHIFT_YEARS = 0  # 本番時:0
 
+# 率ターゲット設定
+USE_RATE_TARGET = True
+POP_FLOOR = 50  # 0割り回避のための最小人口
+
 # 警告を抑制
 warnings.filterwarnings('ignore')
 
@@ -123,7 +127,8 @@ class TWFEEstimator:
                   use_year_max: int = 2025,
                   separate_t_and_t1: bool = True,
                   use_signed_from_labeled: bool = False,
-                  placebo_shift_years: int = 0) -> pd.DataFrame:
+                  placebo_shift_years: int = 0,
+                  use_rate_target: bool = True) -> pd.DataFrame:
         """
         データを読み込み、マージする
         
@@ -139,6 +144,8 @@ class TWFEEstimator:
             events_labeled.csvから有向イベントを作成するか
         placebo_shift_years : int
             プレースボ検査用の年シフト（0=通常、+2=未来のイベントを現在に）
+        use_rate_target : bool
+            人口変化率をターゲット変数として使用するか
             
         Returns:
         --------
@@ -198,6 +205,10 @@ class TWFEEstimator:
         # 欠損値処理
         self._handle_missing_values()
         
+        # 率ターゲット変数の作成
+        if use_rate_target:
+            self._create_rate_target()
+        
         self.logger.info(f"マージ完了: {len(self.merged_df)} 行")
         return self.merged_df
         
@@ -220,6 +231,27 @@ class TWFEEstimator:
         
         self.logger.info(f"プレースボシフト完了: {len(event_cols)} 個のイベント列を{shift_years}年シフト")
         return events_shifted
+    
+    def _create_rate_target(self):
+        """人口変化率ターゲット変数を作成"""
+        self.logger.info("人口変化率ターゲット変数を作成中")
+        
+        # 前年人口を計算
+        self.merged_df["pop_prev"] = self.merged_df.groupby("town")["pop_total"].shift(1)
+        
+        # 分母（0割り回避のため最小値を設定）
+        self.merged_df["denom"] = self.merged_df["pop_prev"].clip(lower=POP_FLOOR)
+        
+        # 人口変化率を計算: (pop_t - pop_{t-1}) / max(pop_{t-1}, POP_FLOOR)
+        self.merged_df["y_rate"] = (self.merged_df["pop_total"] - self.merged_df["pop_prev"]) / self.merged_df["denom"]
+        
+        # 欠損値を除去
+        initial_rows = len(self.merged_df)
+        self.merged_df = self.merged_df.dropna(subset=["y_rate"])
+        final_rows = len(self.merged_df)
+        
+        self.logger.info(f"率ターゲット作成完了: {initial_rows} -> {final_rows} 行")
+        self.logger.info(f"POP_FLOOR: {POP_FLOOR}")
         
     def _create_signed_events(self):
         """有向イベントを作成"""
@@ -345,18 +377,19 @@ class TWFEEstimator:
         self.logger.info(f"事前トレンド制御変数追加完了: d1, d2 (K={K})")
             
     def estimate_twfe(self,
-                     weight_mode: str = "sqrt_prev",
+                     weight_mode: str = "pop_prev",
                      ridge_alpha: float = 0.0,
                      separate_t_and_t1: bool = True,
                      use_signed_from_labeled: bool = False,
-                     add_ridge: bool = False) -> pd.DataFrame:
+                     add_ridge: bool = False,
+                     use_rate_target: bool = True) -> pd.DataFrame:
         """
         TWFE推定を実行
         
         Parameters:
         -----------
         weight_mode : str
-            重み付けモード ("unit", "sqrt_prev")
+            重み付けモード ("unit", "sqrt_prev", "pop_prev")
         ridge_alpha : float
             Ridge正則化パラメータ
         separate_t_and_t1 : bool
@@ -365,6 +398,8 @@ class TWFEEstimator:
             符号ありイベント変数を使用するか
         add_ridge : bool
             Ridge正則化を有効にするか
+        use_rate_target : bool
+            人口変化率をターゲット変数として使用するか
             
         Returns:
         --------
@@ -374,7 +409,10 @@ class TWFEEstimator:
         self.logger.info("TWFE推定開始")
         
         # 重みの計算
-        if weight_mode == "sqrt_prev":
+        if weight_mode == "pop_prev":
+            # 前年人口を重みとして使用（分散安定化）
+            self.merged_df['weight'] = self.merged_df['pop_prev'].clip(lower=POP_FLOOR)
+        elif weight_mode == "sqrt_prev":
             # 前年人口の平方根を重みとして使用
             prev_pop = self.merged_df['pop_total'].shift(1)
             self.merged_df['weight'] = np.sqrt(np.maximum(prev_pop.fillna(1), 1))
@@ -472,7 +510,11 @@ class TWFEEstimator:
         fe_cols = ['town', 'year']
         
         # 回帰式の構築
-        formula_parts = ['delta ~ 0']  # 定数項なし
+        if use_rate_target:
+            target_var = 'y_rate'
+        else:
+            target_var = 'delta'
+        formula_parts = [f'{target_var} ~ 0']  # 定数項なし
         
         # 固定効果
         for fe_col in fe_cols:
@@ -1039,7 +1081,10 @@ class TWFEEstimator:
         self.logger.info("結果を保存中")
         
         # 係数結果を保存
-        output_file = self.output_dir / "effects_coefficients.csv"
+        if USE_RATE_TARGET:
+            output_file = self.output_dir / "effects_coefficients_rate.csv"
+        else:
+            output_file = self.output_dir / "effects_coefficients.csv"
         self.results_df.to_csv(output_file, index=False, encoding='utf-8')
         self.logger.info(f"係数結果を保存: {output_file}")
         
@@ -1073,6 +1118,8 @@ class TWFEEstimator:
             # 主要係数
             if self.results_df is not None:
                 f.write("=== 主要係数 (95%信頼区間) ===\n")
+                if USE_RATE_TARGET:
+                    f.write("※ 係数は人口変化率（%）を表します\n")
                 for _, row in self.results_df.iterrows():
                     f.write(f"{row['event_var']:15s}: {row['beta']:8.3f} "
                            f"[{row['ci_low']:6.3f}, {row['ci_high']:6.3f}]\n")
@@ -1084,13 +1131,14 @@ class TWFEEstimator:
                     use_year_max: int = 2025,
                     separate_t_and_t1: bool = True,
                     use_signed_from_labeled: bool = False,
-                    weight_mode: str = "sqrt_prev",
+                    weight_mode: str = "pop_prev",
                     ridge_alpha: float = 0.0,
                     include_growth_adj: bool = True,
                     include_policy_boundary: bool = True,
                     include_disaster_2016: bool = True,
                     placebo_shift_years: int = 0,
-                    add_ridge: bool = False) -> pd.DataFrame:
+                    add_ridge: bool = False,
+                    use_rate_target: bool = True) -> pd.DataFrame:
         """
         分析を実行
         
@@ -1105,7 +1153,7 @@ class TWFEEstimator:
         use_signed_from_labeled : bool
             events_labeled.csvから有向イベントを作成するか
         weight_mode : str
-            重み付けモード
+            重み付けモード ("unit", "sqrt_prev", "pop_prev")
         ridge_alpha : float
             Ridge正則化パラメータ
         include_growth_adj : bool
@@ -1118,6 +1166,8 @@ class TWFEEstimator:
             プレースボ検査用の年シフト
         add_ridge : bool
             Ridge正則化を有効にするか
+        use_rate_target : bool
+            人口変化率をターゲット変数として使用するか
             
         Returns:
         --------
@@ -1133,7 +1183,8 @@ class TWFEEstimator:
                 use_year_max=use_year_max,
                 separate_t_and_t1=separate_t_and_t1,
                 use_signed_from_labeled=use_signed_from_labeled,
-                placebo_shift_years=placebo_shift_years
+                placebo_shift_years=placebo_shift_years,
+                use_rate_target=use_rate_target
             )
             
             # コントロール変数追加（事前トレンド制御は必須）
@@ -1150,7 +1201,8 @@ class TWFEEstimator:
                 ridge_alpha=ridge_alpha,
                 separate_t_and_t1=separate_t_and_t1,
                 use_signed_from_labeled=use_signed_from_labeled,
-                add_ridge=add_ridge
+                add_ridge=add_ridge,
+                use_rate_target=use_rate_target
             )
             
             # 結果保存
@@ -1300,13 +1352,14 @@ def main():
         use_year_max=2025,
         separate_t_and_t1=True,  # 多重共線性回避のため分離
         use_signed_from_labeled=True,  # 符号ありイベントを使用
-        weight_mode="sqrt_prev",
+        weight_mode="pop_prev",  # 前年人口を重みとして使用（分散安定化）
         ridge_alpha=RIDGE_ALPHA,  # 直接パラメータから取得
         include_growth_adj=True,
         include_policy_boundary=True,
         include_disaster_2016=True,
         placebo_shift_years=PLACEBO_SHIFT_YEARS,  # 直接パラメータから取得
-        add_ridge=False
+        add_ridge=False,
+        use_rate_target=USE_RATE_TARGET  # 人口変化率をターゲットに使用
     )
     
     print("通常分析完了")
@@ -1326,12 +1379,13 @@ def main():
         use_year_max=2025,
         separate_t_and_t1=True,
         use_signed_from_labeled=True,
-        weight_mode="sqrt_prev",
+        weight_mode="pop_prev",  # 前年人口を重みとして使用（分散安定化）
         ridge_alpha=RIDGE_ALPHA,  # 直接パラメータから取得
         include_growth_adj=True,
         include_policy_boundary=True,
         include_disaster_2016=True,
-        add_ridge=False
+        add_ridge=False,
+        use_rate_target=USE_RATE_TARGET  # 人口変化率をターゲットに使用
     )
     
     print("プレースボ検査完了")
