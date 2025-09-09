@@ -1,0 +1,48 @@
+{
+  "feature_columns": [
+    "era_covid",
+    "era_post2009",
+    "era_post2013",
+    "era_post2022",
+    "era_pre2013",
+    "foreign_change",
+    "foreign_change_covid",
+    "foreign_change_post2022",
+    "foreign_log",
+    "foreign_log_covid",
+    "foreign_log_post2022",
+    "foreign_ma3",
+    "foreign_ma3_covid",
+    "foreign_ma3_post2022",
+    "foreign_pct_change",
+    "foreign_pct_change_covid",
+    "foreign_pct_change_post2022",
+    "foreign_population",
+    "foreign_population_covid",
+    "foreign_population_post2022",
+    "lag_d1",
+    "lag_d2",
+    "ma2_delta",
+    "macro_delta",
+    "macro_excl",
+    "macro_ma3",
+    "macro_shock",
+    "pop_total",
+    "town_ma5",
+    "town_std5",
+    "town_trend5"
+  ],
+  "n_features": 31,
+  "exclude_patterns": [
+    "^exp_",
+    "^ring1_exp_",
+    "^ring2_exp_",
+    "^manual_people_",
+    "^ring1_manual_people_",
+    "^ring2_manual_people_"
+  ],
+  "allowed_ring_patterns": [
+    "^ring1_(?!exp_|manual_people_)",
+    "^ring2_(?!exp_|manual_people_)"
+  ]
+}

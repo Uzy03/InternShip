@@ -1,0 +1,16 @@
+{
+  "town": "test_town",
+  "base_year": 2025,
+  "horizons": [
+    1,
+    2,
+    3
+  ],
+  "events": [],
+  "macros": {},
+  "manual_delta": {
+    "h1": 0.0,
+    "h2": 0.0,
+    "h3": 0.0
+  }
+}

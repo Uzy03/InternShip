@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "total_towns": 1,
+    "total_rows": 3,
+    "scenario_template": {
+      "town": "test_town",
+      "base_year": 2025,
+      "horizons": [
+        1,
+        2,
+        3
+      ],
+      "events": [],
+      "macros": {},
+      "manual_delta": {
+        "h1": 0.0,
+        "h2": 0.0,
+        "h3": 0.0
+      }
+    },
+    "output_timestamp": "2025-09-08T18:09:23.291834"
+  },
+  "data": [
+    {
+      "town": "万楽寺町",
+      "baseline_year": 2025,
+      "year": 2026,
+      "h": 1,
+      "delta": -20.6,
+      "pop": 221.4,
+      "exp": -0.1,
+      "macro": 0.0,
+      "inertia": 0.5,
+      "other": -21.1,
+      "pi_delta_low": -12.8,
+      "pi_delta_high": 12.8,
+      "pi_pop_low": 208.6,
+      "pi_pop_high": 234.1
+    },
+    {
+      "town": "万楽寺町",
+      "baseline_year": 2025,
+      "year": 2027,
+      "h": 2,
+      "delta": -20.4,
+      "pop": 201.0,
+      "exp": -0.1,
+      "macro": 0.0,
+      "inertia": 20.0,
+      "other": -40.3,
+      "pi_delta_low": -12.8,
+      "pi_delta_high": 12.8,
+      "pi_pop_low": 182.9,
+      "pi_pop_high": 219.0
+    },
+    {
+      "town": "万楽寺町",
+      "baseline_year": 2025,
+      "year": 2028,
+      "h": 3,
+      "delta": -21.5,
+      "pop": 179.5,
+      "exp": -0.0,
+      "macro": 0.0,
+      "inertia": 18.8,
+      "other": -40.3,
+      "pi_delta_low": -12.8,
+      "pi_delta_high": 12.8,
+      "pi_pop_low": 157.4,
+      "pi_pop_high": 201.6
+    }
+  ]
+}

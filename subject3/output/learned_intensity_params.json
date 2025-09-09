@@ -1,0 +1,37 @@
+{
+  "housing": {
+    "intensity": 0.8,
+    "lag_t": 0.7,
+    "lag_t1": 0.3
+  },
+  "commercial": {
+    "intensity": 0.9,
+    "lag_t": 0.8,
+    "lag_t1": 0.4
+  },
+  "employment": {
+    "intensity": 0.85,
+    "lag_t": 0.6,
+    "lag_t1": 0.2
+  },
+  "transit": {
+    "intensity": 0.7,
+    "lag_t": 0.5,
+    "lag_t1": 0.1
+  },
+  "disaster": {
+    "intensity": 0.6,
+    "lag_t": 0.4,
+    "lag_t1": 0.1
+  },
+  "policy_boundary": {
+    "intensity": 0.9,
+    "lag_t": 0.8,
+    "lag_t1": 0.5
+  },
+  "public_edu_medical": {
+    "intensity": 0.75,
+    "lag_t": 0.6,
+    "lag_t1": 0.3
+  }
+}

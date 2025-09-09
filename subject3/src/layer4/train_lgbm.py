@@ -14,6 +14,9 @@ from pathlib import Path
 import json, sys
 import numpy as np
 import pandas as pd
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from common.feature_gate import select_feature_columns, save_feature_list
 
 # パス
 P_FEAT = "subject3/data/processed/features_l4.csv"
@@ -45,52 +48,7 @@ from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import joblib
 
-def choose_features(df: pd.DataFrame):
-    drop = set(ID_KEYS + [TARGET, "y_pred", "abs_err", "signed_err"])
-    keep = []
-    for c in df.columns:
-        if c in drop: 
-            continue
-        if c in [
-            # 既存
-            "lag_d1","lag_d2","ma2_delta","town_ma5","town_std5","town_trend5",
-            "macro_delta","macro_ma3","macro_excl","macro_shock",
-            "exp_all_h1","exp_all_h2","exp_all_h3",
-            "exp_all_h1_pre2013","exp_all_h1_post2009","exp_all_h1_post2013",
-            "exp_all_h2_pre2013","exp_all_h2_post2009","exp_all_h2_post2013",
-            "exp_all_h3_pre2013","exp_all_h3_post2009","exp_all_h3_post2013",
-            "era_pre2013","era_post2009","era_post2013","era_covid",
-            # 新規（外国人マクロ）
-            "foreign_population","foreign_change","foreign_pct_change","foreign_log","foreign_ma3",
-            # 参考で規模
-            "pop_total",
-        ]:
-            if np.issubdtype(df[c].dtype, np.number):
-                keep.append(c)
-    
-    # 相互作用特徴（外国人マクロ × COVID期）
-    for c in [
-        "foreign_population_covid",
-        "foreign_change_covid",
-        "foreign_pct_change_covid",
-        "foreign_log_covid",
-        "foreign_ma3_covid",
-    ]:
-        if c in df.columns and np.issubdtype(df[c].dtype, np.number):
-            keep.append(c)
-    
-    # --- post-2022 追加特徴を含める ---
-    post_cols = [
-        "era_post2022",
-        "exp_all_h1_post2022", "exp_all_h2_post2022", "exp_all_h3_post2022",
-        "foreign_population_post2022", "foreign_change_post2022",
-        "foreign_pct_change_post2022", "foreign_log_post2022", "foreign_ma3_post2022",
-    ]
-    for c in post_cols:
-        if c in df.columns and np.issubdtype(df[c].dtype, np.number):
-            keep.append(c)
-    
-    return keep
+# choose_features関数は削除（select_feature_columnsを使用）
 
 def time_series_folds(years, min_train_years=20, test_window=1, last_n_tests=None):
     """
@@ -143,7 +101,14 @@ def main():
     year_counts = df.groupby("year").size().reset_index(name="n")
     year_counts.to_csv("subject3/data/processed/l4_year_counts.csv", index=False)
 
-    Xcols = choose_features(df)
+    # 特徴量選択（ゲート機能を使用）
+    Xcols = select_feature_columns(df)
+    print(f"[L4] 選択された特徴量数: {len(Xcols)}")
+    
+    # 特徴量リストを保存
+    feature_list_path = "subject3/src/layer4/feature_list.json"
+    save_feature_list(Xcols, feature_list_path)
+    
     years = sorted(df["year"].unique().tolist())
     print(f"[L4] year span: {years[0]}..{years[-1]} (#years={len(years)})")
     if len(years) < 21:

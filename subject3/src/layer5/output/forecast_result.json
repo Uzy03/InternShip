@@ -9,60 +9,89 @@
   "path": [
     {
       "year": 2026,
-      "delta_hat": 266.2,
-      "pop_hat": 3154.2,
+      "delta_hat": -18.8,
+      "pop_hat": 2869.2,
       "pi95_delta": [
-        -12.0,
-        12.0
+        -12.8,
+        12.8
       ],
       "pi95_pop": [
-        3142.2,
-        3166.2
+        2856.5,
+        2882.0
       ],
       "contrib": {
-        "exp": 300.0,
-        "macro": -0.7,
-        "inertia": -7.9,
-        "other": -25.2
+        "exp": 0.4,
+        "macro": 0.0,
+        "inertia": 2.4,
+        "other": -21.5
       }
     },
     {
       "year": 2027,
-      "delta_hat": 289.6,
-      "pop_hat": 3443.8,
+      "delta_hat": 45.7,
+      "pop_hat": 2914.9,
       "pi95_delta": [
-        -12.0,
-        12.0
+        -12.8,
+        12.8
       ],
       "pi95_pop": [
-        3426.9,
-        3460.7
+        2896.9,
+        2933.0
       ],
       "contrib": {
-        "exp": 192.3,
-        "macro": 2.5,
-        "inertia": -68.5,
-        "other": 163.3
+        "exp": 64.1,
+        "macro": 0.0,
+        "inertia": 19.1,
+        "other": -37.5
       }
     },
     {
       "year": 2028,
-      "delta_hat": 185.7,
-      "pop_hat": 3629.5,
+      "delta_hat": -20.2,
+      "pop_hat": 2894.7,
       "pi95_delta": [
-        -12.0,
-        12.0
+        -12.8,
+        12.8
       ],
       "pi95_pop": [
-        3608.8,
-        3650.2
+        2872.6,
+        2916.9
       ],
       "contrib": {
-        "exp": 90.0,
-        "macro": 1.6,
-        "inertia": -69.2,
-        "other": 163.3
+        "exp": 0.1,
+        "macro": 0.0,
+        "inertia": 17.2,
+        "other": -37.5
       }
     }
-  ]
+  ],
+  "explain": {
+    "2026": {
+      "exp_rate_terms": 0.0001299120511359,
+      "base_pop_for_rate": 2888.0,
+      "exp_people_from_rate": 0.3751860036804792,
+      "exp_people_manual": 0.0,
+      "exp_people_total": 0.3751860036804792,
+      "delta_noexp": -19.50948792032918,
+      "delta_hat": -19.134301916648703
+    },
+    "2027": {
+      "exp_rate_terms": 0.0223604964007775,
+      "base_pop_for_rate": 2868.865698083351,
+      "exp_people_from_rate": 64.1492611163068,
+      "exp_people_manual": 0.0,
+      "exp_people_total": 64.1492611163068,
+      "delta_noexp": -82.55941097210398,
+      "delta_hat": -18.410149855797172
+    },
+    "2028": {
+      "exp_rate_terms": 3.8973615340775006e-05,
+      "base_pop_for_rate": 2850.455548227554,
+      "exp_people_from_rate": 0.11109255808259863,
+      "exp_people_manual": 0.0,
+      "exp_people_total": 0.11109255808259863,
+      "delta_noexp": -20.412804977653796,
+      "delta_hat": -20.301712419571196
+    }
+  }
 }

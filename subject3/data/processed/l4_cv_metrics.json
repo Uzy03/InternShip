@@ -1,10 +1,10 @@
 {
   "folds": [
     {
-      "MAE": 2.4569385517543583,
-      "RMSE": 7.60073301781184,
-      "MAPE": 0.46721301368885665,
-      "R2": 0.9442985052534637,
+      "MAE": 3.3481673796129954,
+      "RMSE": 8.318445168018464,
+      "MAPE": 0.7759465828509355,
+      "R2": 0.9332824314639377,
       "fold": 1,
       "train_years": {
         "len": 20,
@@ -16,10 +16,10 @@
       ]
     },
     {
-      "MAE": 2.13184543666568,
-      "RMSE": 9.98572696321626,
-      "MAPE": 0.2610859354339827,
-      "R2": 0.9091571541933033,
+      "MAE": 5.323578861491021,
+      "RMSE": 11.521373003843726,
+      "MAPE": 2.119214481913428,
+      "R2": 0.8790683911133905,
       "fold": 2,
       "train_years": {
         "len": 21,
@@ -31,10 +31,10 @@
       ]
     },
     {
-      "MAE": 1.4517543452205328,
-      "RMSE": 8.449873087261361,
-      "MAPE": 0.10421655211049435,
-      "R2": 0.9254449549763641,
+      "MAE": 1.78840473422187,
+      "RMSE": 8.952000403238019,
+      "MAPE": 0.31876261577401993,
+      "R2": 0.9163209288647725,
       "fold": 3,
       "train_years": {
         "len": 22,
@@ -46,10 +46,10 @@
       ]
     },
     {
-      "MAE": 3.477312069969677,
-      "RMSE": 45.811184192428875,
-      "MAPE": 0.6087362746859211,
-      "R2": 0.3416391560781624,
+      "MAE": 3.2865809208650822,
+      "RMSE": 45.530511420030244,
+      "MAPE": 0.5187674868653103,
+      "R2": 0.34968164202529217,
       "fold": 4,
       "train_years": {
         "len": 23,
@@ -61,10 +61,10 @@
       ]
     },
     {
-      "MAE": 1.225572533751807,
-      "RMSE": 2.378049053098925,
-      "MAPE": 0.24411812687803744,
-      "R2": 0.9926162409344862,
+      "MAE": 9.0315688565104,
+      "RMSE": 18.480119513660682,
+      "MAPE": 2.009035717955507,
+      "R2": 0.5540918084461888,
       "fold": 5,
       "train_years": {
         "len": 24,
@@ -76,10 +76,10 @@
       ]
     },
     {
-      "MAE": 1.4503978162737203,
-      "RMSE": 6.112898212429833,
-      "MAPE": 0.35202752552812877,
-      "R2": 0.9425882446324384,
+      "MAE": 1.6945369270349373,
+      "RMSE": 6.129264060274514,
+      "MAPE": 0.4431580610443493,
+      "R2": 0.9422804201640571,
       "fold": 6,
       "train_years": {
         "len": 25,
@@ -91,10 +91,10 @@
       ]
     },
     {
-      "MAE": 0.9484039090833363,
-      "RMSE": 6.104047453490188,
-      "MAPE": 0.16819133726720095,
-      "R2": 0.9559849251669393,
+      "MAE": 1.4009362620699792,
+      "RMSE": 6.522149405898005,
+      "MAPE": 0.22416154807921157,
+      "R2": 0.9497487200106752,
       "fold": 7,
       "train_years": {
         "len": 26,
@@ -107,59 +107,44 @@
     }
   ],
   "aggregate": {
-    "MAE": 1.8774606661027302,
-    "RMSE": 12.34893028281961,
-    "MAPE": 0.31508410937037457,
-    "R2": 0.8588184544621654,
+    "MAE": 3.6962534202580413,
+    "RMSE": 15.06483756785195,
+    "MAPE": 0.9155780706403946,
+    "R2": 0.7892106202983306,
     "fold": 4.0
   },
   "features": [
-    "pop_total",
-    "exp_all_h1",
-    "exp_all_h2",
-    "exp_all_h3",
+    "era_covid",
     "era_post2009",
     "era_post2013",
+    "era_post2022",
     "era_pre2013",
-    "exp_all_h1_pre2013",
-    "exp_all_h1_post2013",
-    "exp_all_h1_post2009",
-    "exp_all_h2_pre2013",
-    "exp_all_h2_post2013",
-    "exp_all_h2_post2009",
-    "exp_all_h3_pre2013",
-    "exp_all_h3_post2013",
-    "exp_all_h3_post2009",
+    "foreign_change",
+    "foreign_change_covid",
+    "foreign_change_post2022",
+    "foreign_log",
+    "foreign_log_covid",
+    "foreign_log_post2022",
+    "foreign_ma3",
+    "foreign_ma3_covid",
+    "foreign_ma3_post2022",
+    "foreign_pct_change",
+    "foreign_pct_change_covid",
+    "foreign_pct_change_post2022",
+    "foreign_population",
+    "foreign_population_covid",
+    "foreign_population_post2022",
     "lag_d1",
     "lag_d2",
     "ma2_delta",
-    "era_covid",
     "macro_delta",
+    "macro_excl",
     "macro_ma3",
     "macro_shock",
-    "town_trend5",
+    "pop_total",
     "town_ma5",
     "town_std5",
-    "macro_excl",
-    "foreign_population",
-    "foreign_change",
-    "foreign_pct_change",
-    "foreign_log",
-    "foreign_ma3",
-    "foreign_population_covid",
-    "foreign_change_covid",
-    "foreign_pct_change_covid",
-    "foreign_log_covid",
-    "foreign_ma3_covid",
-    "era_post2022",
-    "exp_all_h1_post2022",
-    "exp_all_h2_post2022",
-    "exp_all_h3_post2022",
-    "foreign_population_post2022",
-    "foreign_change_post2022",
-    "foreign_pct_change_post2022",
-    "foreign_log_post2022",
-    "foreign_ma3_post2022"
+    "town_trend5"
   ],
   "use_lightgbm": true
 }

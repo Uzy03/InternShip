@@ -5,11 +5,21 @@
   "events": [
     {
       "year_offset": 0,
-      "event_type": "employment",
+      "event_type": "commercial",
       "effect_direction": "increase",
       "confidence": 1.0,
       "intensity": 1.0,
       "lag_t": 1,
+      "lag_t1": 1,
+      "note": "工場設置による商業施設増加"
+    },
+    {
+      "year_offset": 0,
+      "event_type": "employment",
+      "effect_direction": "increase",
+      "confidence": 1.0,
+      "intensity": 1.0,
+      "lag_t": 0,
       "lag_t1": 1,
       "note": "工場設置による雇用創出"
     }

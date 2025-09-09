@@ -30,6 +30,25 @@ EVENT_TYPES = {
     "public_edu_medical", "employment", "disaster"
 }
 
+# イベントタイプと列名のマッピング
+VALID_TYPES = {
+    "housing": ("exp_housing_inc_h{h}", "exp_housing_dec_h{h}"),
+    "commercial": ("exp_commercial_inc_h{h}", "exp_commercial_dec_h{h}"),
+    "public_edu_medical": ("exp_public_edu_medical_inc_h{h}", "exp_public_edu_medical_dec_h{h}"),
+    "employment": ("exp_employment_inc_h{h}", "exp_employment_dec_h{h}"),
+    "transit": ("exp_transit_inc_h{h}", "exp_transit_dec_h{h}"),
+    "disaster": ("exp_disaster_inc_h{h}", "exp_disaster_dec_h{h}"),
+    "policy_boundary": ("exp_policy_boundary_inc_h{h}", "exp_policy_boundary_dec_h{h}"),
+    "unknown": ("exp_unknown_inc_h{h}", "exp_unknown_dec_h{h}"),
+}
+
+def columns_for_event(event_type: str, effect_direction: str, horizons=(1,2,3)):
+    """イベントタイプと方向から列名配列を取得"""
+    assert event_type in VALID_TYPES, f"Unknown event_type={event_type}"
+    inc_tpl, dec_tpl = VALID_TYPES[event_type]
+    tpl = inc_tpl if effect_direction == "increase" else dec_tpl
+    return [tpl.format(h=h) for h in horizons]
+
 def validate_scenario(scenario: Dict[str, Any]) -> None:
     """シナリオJSONのバリデーション"""
     # 基本キーの存在チェック
@@ -77,27 +96,34 @@ def validate_scenario(scenario: Dict[str, Any]) -> None:
         if not (0 <= event["intensity"] <= 1):
             raise ValueError(f"イベント {i}: intensity {event['intensity']} が範囲 [0,1] 外です")
         
-        if event["lag_t"] not in {0, 1}:
-            raise ValueError(f"イベント {i}: lag_t {event['lag_t']} が {0,1} 外です")
+        if not (0 <= event["lag_t"] <= 1):
+            raise ValueError(f"イベント {i}: lag_t {event['lag_t']} が範囲 [0,1] 外です")
         
-        if event["lag_t1"] not in {0, 1}:
-            raise ValueError(f"イベント {i}: lag_t1 {event['lag_t1']} が {0,1} 外です")
+        if not (0 <= event["lag_t1"] <= 1):
+            raise ValueError(f"イベント {i}: lag_t1 {event['lag_t1']} が範囲 [0,1] 外です")
 
 def apply_conflict_rules(events_df: pd.DataFrame) -> pd.DataFrame:
-    """衝突ルールの適用：policy_boundary 優先で transit 無効化"""
+    """衝突ルールの適用：policy_boundary 優先で transit 無効化（方向付き列対応）"""
     # 同じ (town, year) で policy_boundary と transit が併存する場合
     conflict_mask = (
-        (events_df["event_policy_boundary_t"] != 0) | 
-        (events_df["event_policy_boundary_t1"] != 0)
+        (events_df["event_policy_boundary_inc_t"] != 0) | 
+        (events_df["event_policy_boundary_inc_t1"] != 0) |
+        (events_df["event_policy_boundary_dec_t"] != 0) | 
+        (events_df["event_policy_boundary_dec_t1"] != 0)
     ) & (
-        (events_df["event_transit_t"] != 0) | 
-        (events_df["event_transit_t1"] != 0)
+        (events_df["event_transit_inc_t"] != 0) | 
+        (events_df["event_transit_inc_t1"] != 0) |
+        (events_df["event_transit_dec_t"] != 0) | 
+        (events_df["event_transit_dec_t1"] != 0)
     )
     
     if conflict_mask.any():
         print(f"[WARN] {conflict_mask.sum()} 行で policy_boundary と transit の衝突を検出。transit を無効化します。")
-        events_df.loc[conflict_mask, "event_transit_t"] = 0
-        events_df.loc[conflict_mask, "event_transit_t1"] = 0
+        # 方向付き列のtransitを無効化
+        for direction in ["inc", "dec"]:
+            for lag in ["t", "t1"]:
+                col = f"event_transit_{direction}_{lag}"
+                events_df.loc[conflict_mask, col] = 0
     
     return events_df
 
@@ -114,20 +140,30 @@ def scenario_to_events(scenario: Dict[str, Any]) -> pd.DataFrame:
     max_horizon = max(scenario["horizons"])
     years = list(range(base_year, base_year + max_horizon + 1))
     
-    # イベント行列の初期化
+    # イベント行列の初期化（正しい列名を使用）
     event_cols = []
     for event_type in EVENT_TYPES:
-        event_cols.extend([f"event_{event_type}_t", f"event_{event_type}_t1"])
+        # 方向付き列を追加
+        for direction in ["inc", "dec"]:
+            event_cols.extend([f"event_{event_type}_{direction}_t", f"event_{event_type}_{direction}_t1"])
+        # 期待効果列も追加
+        for h in [1, 2, 3]:
+            event_cols.extend([f"exp_{event_type}_inc_h{h}", f"exp_{event_type}_dec_h{h}"])
+    
+    # 後方互換性のため古い列も追加（ゼロで埋める）
+    legacy_cols = []
+    for event_type in EVENT_TYPES:
+        legacy_cols.extend([f"event_{event_type}_t", f"event_{event_type}_t1"])
     
     events_df = pd.DataFrame({
         "town": [town] * len(years),
         "year": years
     })
     
-    for col in event_cols:
+    for col in event_cols + legacy_cols:
         events_df[col] = 0.0
     
-    # イベントの処理
+    # イベントの処理（正しい列名を使用）
     for event in events:
         year_offset = event["year_offset"]
         event_type = event["event_type"]
@@ -137,9 +173,8 @@ def scenario_to_events(scenario: Dict[str, Any]) -> pd.DataFrame:
         lag_t = event["lag_t"]
         lag_t1 = event["lag_t1"]
         
-        # スコアと符号の計算
+        # スコアの計算（符号は掛けない）
         s = np.clip(confidence * intensity, 0, 1)
-        sign = 1 if effect_direction == "increase" else -1
         
         # 対象年
         target_year = base_year + year_offset
@@ -147,22 +182,35 @@ def scenario_to_events(scenario: Dict[str, Any]) -> pd.DataFrame:
         if target_year in years:
             year_idx = years.index(target_year)
             
-            # 当年効果
-            if lag_t == 1:
-                col_t = f"event_{event_type}_t"
-                events_df.loc[year_idx, col_t] += sign * s
+            # 当年効果（event列とexp列の両方に設定）
+            if lag_t > 0:
+                # event列
+                event_col_t = f"event_{event_type}_{'inc' if effect_direction == 'increase' else 'dec'}_t"
+                events_df.loc[year_idx, event_col_t] += s * lag_t
+                
+                # exp列（全horizonに設定）
+                exp_cols = columns_for_event(event_type, effect_direction, [1, 2, 3])
+                for col in exp_cols:
+                    events_df.loc[year_idx, col] += s * lag_t
             
-            # 翌年効果
-            if lag_t1 == 1 and target_year + 1 in years:
+            # 翌年効果（event列とexp列の両方に設定）
+            if lag_t1 > 0 and target_year + 1 in years:
                 next_year_idx = years.index(target_year + 1)
-                col_t1 = f"event_{event_type}_t1"
-                events_df.loc[next_year_idx, col_t1] += sign * s
+                # event列
+                event_col_t1 = f"event_{event_type}_{'inc' if effect_direction == 'increase' else 'dec'}_t1"
+                events_df.loc[next_year_idx, event_col_t1] += s * lag_t1
+                
+                # exp列（全horizonに設定）
+                exp_cols = columns_for_event(event_type, effect_direction, [1, 2, 3])
+                for col in exp_cols:
+                    events_df.loc[next_year_idx, col] += s * lag_t1
     
-    # 同じ (town,year,type) の重複をクリップ
+    # 同じ (town,year,type) の重複をクリップ（方向付き列）
     for event_type in EVENT_TYPES:
-        for lag in ["t", "t1"]:
-            col = f"event_{event_type}_{lag}"
-            events_df[col] = np.clip(events_df[col], -1, 1)
+        for direction in ["inc", "dec"]:
+            for lag in ["t", "t1"]:
+                col = f"event_{event_type}_{direction}_{lag}"
+                events_df[col] = np.clip(events_df[col], 0, 1)  # 方向付きなので0-1の範囲
     
     # 衝突ルールの適用
     events_df = apply_conflict_rules(events_df)

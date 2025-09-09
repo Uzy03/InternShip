@@ -18,12 +18,20 @@ L3の係数とイベント行列から、L4用の「期待効果特徴」を作�
 from pathlib import Path
 import pandas as pd
 import numpy as np
+import sys
+import os
+# プロジェクトルートをパスに追加
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, project_root)
+from src.common.spatial import calculate_spatial_lags_simple, detect_cols_to_lag
+from src.common.feature_gate import drop_excluded_columns
 
 # ---- ハードコードパス ----
 P_PANEL  = "subject3/data/processed/features_panel.csv"
 P_EVENTS = "subject3/data/processed/events_matrix_signed.csv"
 P_COEF   = "subject3/output/effects_coefficients.csv"
 P_OUT    = "subject3/data/processed/features_l4.csv"
+P_CENTROIDS = "subject3/data/processed/town_centroids.csv"
 
 # ---- 減衰率（任意に調整可）----
 DECAY_H2 = 0.5
@@ -248,9 +256,57 @@ def main():
     
     # ==== 追記ここまで ====
     
+    # ==== 空間ラグ特徴の追加 ====
+    print("[L4] 空間ラグ特徴を計算中...")
+    
+    # 重心データの読み込み
+    if Path(P_CENTROIDS).exists():
+        centroids_df = pd.read_csv(P_CENTROIDS)
+        print(f"[L4] 重心データを読み込み: {len(centroids_df)}件")
+        
+        # ラグ対象列の自動検出
+        cols_to_lag = detect_cols_to_lag(out)
+        print(f"[L4] ラグ対象列: {cols_to_lag[:10]}...")  # 最初の10列を表示
+        
+        # 空間ラグの計算（処理時間短縮のため、主要な列のみに限定）
+        # 全列だと時間がかかりすぎるため、主要な期待効果列のみに限定
+        main_cols_to_lag = [col for col in cols_to_lag if col.startswith('exp_all_') or col.startswith('exp_')]
+        if len(main_cols_to_lag) > 20:  # 20列を超える場合は上位20列のみ
+            main_cols_to_lag = main_cols_to_lag[:20]
+        
+        print(f"[L4] 空間ラグ対象列を制限: {len(main_cols_to_lag)}列（全{len(cols_to_lag)}列から）")
+        
+        out = calculate_spatial_lags_simple(
+            out, 
+            centroids_df, 
+            main_cols_to_lag, 
+            town_col="town", 
+            year_col="year", 
+            k_neighbors=5
+        )
+        
+        # 生成されたring1_*列の確認
+        ring1_cols = [col for col in out.columns if col.startswith('ring1_')]
+        print(f"[L4] 生成されたring1_*列数: {len(ring1_cols)}")
+        if ring1_cols:
+            print(f"[L4] ring1_*列の例: {ring1_cols[:5]}")
+    else:
+        print(f"[L4][WARN] 重心データが見つかりません: {P_CENTROIDS}")
+    
+    # ==== 空間ラグ特徴の追加ここまで ====
+    
+    # ==== 特徴量ゲート適用（期待効果を除外） ====
+    print("[L4] 特徴量ゲートを適用中...")
+    out_kept, removed_cols = drop_excluded_columns(out)
+    print(f"[L4] 除外された列数: {len(removed_cols)}")
+    if removed_cols:
+        print(f"[L4] 除外された列の例: {removed_cols[:10]}...")
+    print(f"[L4] 残存列数: {len(out_kept.columns)}")
+    
+    # 除外後のデータで保存
     Path(P_OUT).parent.mkdir(parents=True, exist_ok=True)
-    out.to_csv(P_OUT, index=False)
-    print(f"[L4] features_l4.csv saved: rows={len(out)}, cols={len(out.columns)}")
+    out_kept.to_csv(P_OUT, index=False)
+    print(f"[L4] features_l4.csv saved: rows={len(out_kept)}, cols={len(out_kept.columns)}")
 
 if __name__ == "__main__":
     main()

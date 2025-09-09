@@ -1,0 +1,29 @@
+{
+    "town": "四方寄町",
+    "base_year": 2025,
+    "horizons": [1, 2, 3],
+    "events": [
+      {
+        "year_offset": 0,
+        "event_type": "employment",
+        "effect_direction": "increase",
+        "confidence": 1.0,
+        "intensity": 1.0,
+        "lag_t": 1,
+        "lag_t1": 1,
+        "note": "工場設置による雇用創出"
+      }
+    ],
+    "macros": {},
+    "manual_delta": {
+      "h1": 100,
+      "h2": 60,
+      "h3": 30
+    },
+    "manual_delta_rate": {
+      "h1": 0.0,
+      "h2": 0.0,
+      "h3": 0.0
+    }
+  }
+  

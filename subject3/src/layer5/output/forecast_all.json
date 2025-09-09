@@ -1,0 +1,99 @@
+{
+  "metadata": {
+    "total_towns": 1,
+    "total_rows": 3,
+    "scenario_template": {
+      "town": "四方寄町",
+      "base_year": 2025,
+      "horizons": [
+        1,
+        2,
+        3
+      ],
+      "events": [
+        {
+          "year_offset": 0,
+          "event_type": "commercial",
+          "effect_direction": "increase",
+          "confidence": 1.0,
+          "intensity": 1.0,
+          "lag_t": 1,
+          "lag_t1": 1,
+          "note": "工場設置による商業施設増加"
+        },
+        {
+          "year_offset": 0,
+          "event_type": "employment",
+          "effect_direction": "increase",
+          "confidence": 1.0,
+          "intensity": 1.0,
+          "lag_t": 0,
+          "lag_t1": 1,
+          "note": "工場設置による雇用創出"
+        }
+      ],
+      "macros": {},
+      "manual_delta": {
+        "h1": 100,
+        "h2": 60,
+        "h3": 30
+      },
+      "manual_delta_rate": {
+        "h1": 0.0,
+        "h2": 0.0,
+        "h3": 0.0
+      }
+    },
+    "output_timestamp": "2025-09-08T19:17:10.002178"
+  },
+  "data": [
+    {
+      "town": "万楽寺町",
+      "baseline_year": 2025,
+      "year": 2026,
+      "h": 1,
+      "delta": -20.6,
+      "pop": 221.4,
+      "exp": 99.9,
+      "macro": 0.0,
+      "inertia": 0.5,
+      "other": -121.1,
+      "pi_delta_low": -12.8,
+      "pi_delta_high": 12.8,
+      "pi_pop_low": 208.6,
+      "pi_pop_high": 234.1
+    },
+    {
+      "town": "万楽寺町",
+      "baseline_year": 2025,
+      "year": 2027,
+      "h": 2,
+      "delta": -20.4,
+      "pop": 201.0,
+      "exp": 59.9,
+      "macro": 0.0,
+      "inertia": 20.0,
+      "other": -100.3,
+      "pi_delta_low": -12.8,
+      "pi_delta_high": 12.8,
+      "pi_pop_low": 182.9,
+      "pi_pop_high": 219.0
+    },
+    {
+      "town": "万楽寺町",
+      "baseline_year": 2025,
+      "year": 2028,
+      "h": 3,
+      "delta": -21.5,
+      "pop": 179.5,
+      "exp": 30.0,
+      "macro": 0.0,
+      "inertia": 18.8,
+      "other": -70.3,
+      "pi_delta_low": -12.8,
+      "pi_delta_high": 12.8,
+      "pi_pop_low": 157.4,
+      "pi_pop_high": 201.6
+    }
+  ]
+}

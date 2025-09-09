@@ -16,6 +16,14 @@ import numpy as np
 from pathlib import Path
 from typing import Dict, Any, List
 import json
+from scipy.spatial.distance import cdist
+import sys
+import os
+# プロジェクトルートをパスに追加
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, project_root)
+from src.common.spatial import calculate_spatial_lags_simple, detect_cols_to_lag
+from src.common.feature_gate import drop_excluded_columns
 
 # パス設定
 P_FEATURES_PANEL = "../../data/processed/features_panel.csv"
@@ -23,6 +31,11 @@ P_FUTURE_EVENTS = "../../data/processed/l5_future_events.csv"
 P_EFFECTS_COEF = "../../output/effects_coefficients.csv"
 P_EFFECTS_COEF_RATE = "../../output/effects_coefficients_rate.csv"
 P_OUTPUT = "../../data/processed/l5_future_features.csv"
+
+# 空間ラグ設定
+SPATIAL_CENTROIDS_CSV = "../../data/processed/town_centroids.csv"
+SPATIAL_TOWN_COL = "town"  # 町名の列名
+SPATIAL_JOIN_COL = "town"  # 結合キーの列名（town_id または town）
 
 # イベントタイプの定義
 EVENT_TYPES = {
@@ -57,6 +70,109 @@ def load_effects_coefficients_rate() -> pd.DataFrame:
     
     return coef_df
 
+def load_spatial_centroids() -> pd.DataFrame:
+    """空間重心データを読み込み"""
+    if not Path(SPATIAL_CENTROIDS_CSV).exists():
+        print(f"[L5][WARN] 空間重心ファイルが見つかりません: {SPATIAL_CENTROIDS_CSV}")
+        return None
+    
+    centroids_df = pd.read_csv(SPATIAL_CENTROIDS_CSV)
+    
+    # 必要な列の確認
+    required_cols = ["lon", "lat", SPATIAL_JOIN_COL]
+    missing_cols = [col for col in required_cols if col not in centroids_df.columns]
+    if missing_cols:
+        print(f"[L5][WARN] 空間重心ファイルに列不足: {missing_cols}")
+        return None
+    
+    print(f"[L5] 空間重心データを読み込み: {len(centroids_df)}件")
+    return centroids_df
+
+def normalize_town_name(town_name: str) -> str:
+    """町丁名を正規化（重心データの形式に合わせる）"""
+    if pd.isna(town_name):
+        return town_name
+    
+    town_name = str(town_name)
+    
+    # 漢数字を半角数字に変換（「九」は固有名詞の一部なので除外）
+    kanji_to_num = {
+        '一': '1', '二': '2', '三': '3', '四': '4', '五': '5',
+        '六': '6', '七': '7', '八': '8', '十': '10'
+    }
+    
+    for kanji, num in kanji_to_num.items():
+        town_name = town_name.replace(kanji, num)
+    
+    # 全角数字を半角数字に変換
+    town_name = town_name.replace('０', '0').replace('１', '1').replace('２', '2').replace('３', '3').replace('４', '4')
+    town_name = town_name.replace('５', '5').replace('６', '6').replace('７', '7').replace('８', '8').replace('９', '9')
+    
+    return town_name
+
+def calculate_spatial_lags(future_events: pd.DataFrame, centroids_df: pd.DataFrame) -> pd.DataFrame:
+    """空間ラグ特徴を計算"""
+    if centroids_df is None:
+        print("[L5][WARN] 空間重心データが利用できないため、空間ラグをスキップします")
+        return future_events
+    
+    result = future_events.copy()
+    
+    # 各町丁の座標を取得（正規化された町丁名で）
+    town_coords = {}
+    for _, row in centroids_df.iterrows():
+        town_key = normalize_town_name(row[SPATIAL_JOIN_COL])
+        town_coords[town_key] = (row['lon'], row['lat'])
+    
+    print(f"[L5] 正規化後の町丁名（最初の5件）: {list(town_coords.keys())[:5]}")
+    
+    # 距離行列を計算
+    towns = list(town_coords.keys())
+    coords = np.array([town_coords[town] for town in towns])
+    distances = cdist(coords, coords, metric='euclidean')
+    
+    # 距離行列をDataFrameに変換
+    dist_df = pd.DataFrame(distances, index=towns, columns=towns)
+    
+    # 各町丁について空間ラグを計算
+    for i, (_, row) in enumerate(future_events.iterrows()):
+        town = normalize_town_name(row[SPATIAL_TOWN_COL])
+        
+        if town not in town_coords:
+            print(f"[L5][WARN] 町丁 '{town}' の座標が見つかりません")
+            continue
+        
+        # 距離による重み付け（近いほど重い）
+        distances_to_town = dist_df[town]
+        
+        # リング1: 最も近い5つの町丁（自分を除く）
+        ring1_towns = distances_to_town.nsmallest(6).index[1:6]  # 自分を除く
+        
+        # リング2: 次の5つの町丁
+        ring2_towns = distances_to_town.nsmallest(11).index[6:11]
+        
+        # リング3: 次の10の町丁
+        ring3_towns = distances_to_town.nsmallest(21).index[11:21]
+        
+        # 各リングの特徴を計算（例：人口密度、イベント数など）
+        # ここでは簡易的に距離の逆数を重みとして使用
+        for ring_num, ring_towns in enumerate([ring1_towns, ring2_towns, ring3_towns], 1):
+            if len(ring_towns) > 0:
+                # 距離の逆数を重みとして使用
+                weights = 1.0 / (distances_to_town[ring_towns] + 1e-6)  # ゼロ除算を防ぐ
+                weights = weights / weights.sum()  # 正規化
+                
+                # 例：人口密度の空間ラグ（実際のデータに応じて調整）
+                ring_col = f"ring{ring_num}_pop_density"
+                result.loc[i, ring_col] = 0.0  # デフォルト値
+                
+                # 例：イベント数の空間ラグ
+                ring_col = f"ring{ring_num}_event_count"
+                result.loc[i, ring_col] = 0.0  # デフォルト値
+    
+    print(f"[L5] 空間ラグ特徴を計算完了: {len(result)}件")
+    return result
+
 def coef_rate(event_type: str, direction: str, horizon: int, coef_df: pd.DataFrame) -> float:
     """率係数を取得（単位統一）"""
     event_var = f"{event_type}_{direction}"
@@ -77,17 +193,50 @@ def coef_rate(event_type: str, direction: str, horizon: int, coef_df: pd.DataFra
     
     return v
 
+def _event_col(event_type: str, effect_direction: str, h: int) -> str:
+    """イベント列名を生成（列選択で方向を表現）"""
+    dir_key = "inc" if effect_direction == "increase" else "dec"
+    return f"exp_{event_type}_{dir_key}_h{h}"
+
+def _sum_rate_for_h(Xrow, h: int, effects_coef_rate: pd.DataFrame) -> float:
+    """horizon hの期待効果率を計算（係数×該当列の総和、符号そのまま）"""
+    families = ["housing", "commercial", "public_edu_medical", "employment", "transit", "disaster", "policy_boundary"]
+    total = 0.0
+    
+    for fam in families:
+        # inc と dec を別々に処理（両方加算しない）
+        for dir_key in ("inc", "dec"):
+            col = f"exp_{fam}_{dir_key}_h{h}"
+            val = float(Xrow.get(col, 0.0))
+            if val == 0.0:
+                continue
+            coef = coef_rate(fam, dir_key, h, effects_coef_rate)
+            contrib = coef * val
+            total += contrib  # 符号そのまま加算
+            
+            # デバッグログ（クイック自己診断用）
+            print(f"[apply-check] {fam}_{dir_key}_h{h}: val={val:.6f}, coef={coef:.6f}, contrib={contrib:.6f}")
+    
+    return total
+
 def calculate_expected_effects_rate(future_events: pd.DataFrame, effects_coef_rate: pd.DataFrame, 
                                    manual_delta: Dict[str, float], manual_delta_rate: Dict[str, float],
                                    base_population: float, base_year: int) -> pd.DataFrame:
     """期待効果の計算（率ベース、hごとに正しい年配置）"""
     result = future_events[["town", "year"]].copy()
     
+    # 個別イベント列を初期化
+    for event_type in EVENT_TYPES:
+        for direction in ["inc", "dec"]:
+            for horizon in [1, 2, 3]:
+                col = _event_col(event_type, direction, horizon)
+                result[col] = 0.0
+    
     # 各年でexp_rate_all_h{h}を初期化
     for horizon in [1, 2, 3]:
         result[f"exp_rate_all_h{horizon}"] = 0.0
     
-    # 各年ごとに期待効果を計算（率ベース）
+    # 各年ごとに個別イベント列を埋める（列選択で方向を表現）
     for i, (_, row) in enumerate(future_events.iterrows()):
         year = row["year"]
         horizon = year - base_year
@@ -95,100 +244,77 @@ def calculate_expected_effects_rate(future_events: pd.DataFrame, effects_coef_ra
         if horizon not in [1, 2, 3]:
             continue
         
-        exp_col = f"exp_rate_all_h{horizon}"
-        exp_rate = 0.0
-        
-        # 各イベントタイプの効果を計算（率ベース）
+        # 各イベントタイプの効果を個別列に設定（方向別列から読み取り）
         for event_type in EVENT_TYPES:
-            # 率係数の取得
-            inc_coef = coef_rate(event_type, "inc", horizon, effects_coef_rate)
-            dec_coef = coef_rate(event_type, "dec", horizon, effects_coef_rate)
+            # 方向別のイベント強度を取得（無ければ 0）
+            v_t_inc = row.get(f"event_{event_type}_inc_t", 0.0) or 0.0
+            v_t1_inc = row.get(f"event_{event_type}_inc_t1", 0.0) or 0.0
+            v_t_dec = row.get(f"event_{event_type}_dec_t", 0.0) or 0.0
+            v_t1_dec = row.get(f"event_{event_type}_dec_t1", 0.0) or 0.0
             
-            # 仕様通りの年割付（率ベース）
+            # 古い形式（方向なし）へのフォールバック（片方向のみ採用）
+            if (v_t_inc == v_t_dec == 0.0):
+                v_t = row.get(f"event_{event_type}_t", 0.0) or 0.0
+                v_t1 = row.get(f"event_{event_type}_t1", 0.0) or 0.0
+                # デフォルトは「increase」を優先（必要なら scenario 側で dec を入れる）
+                v_t_inc, v_t1_inc = v_t, v_t1
+            
+            # 仕様通りの年割付（個別列ベース）
             if horizon == 1:
-                # h=1: Σ v_t(type) * coef_rate(type,inc/dec)
-                event_t_col = f"event_{event_type}_t"
-                if event_t_col in future_events.columns and not pd.isna(row[event_t_col]):
-                    v_t = float(row[event_t_col])
-                    exp_rate += v_t * inc_coef  # increase効果
-                    exp_rate += v_t * dec_coef  # decrease効果
+                # h=1: v_t(type) を inc/dec 列に設定
+                inc_col = _event_col(event_type, "increase", horizon)
+                dec_col = _event_col(event_type, "decrease", horizon)
+                result.at[i, inc_col] = v_t_inc
+                result.at[i, dec_col] = v_t_dec
             
             elif horizon == 2:
-                # h=2: Σ v_t(type) * coef_rate(type,h2) + Σ v_t1(type) * coef_rate(type,h1)
-                # v_t効果
-                event_t_col = f"event_{event_type}_t"
-                if event_t_col in future_events.columns and not pd.isna(row[event_t_col]):
-                    v_t = float(row[event_t_col])
-                    exp_rate += v_t * inc_coef  # increase効果
-                    exp_rate += v_t * dec_coef  # decrease効果
-                
-                # v_t1効果（前年のt1が当年のh2に効く）
-                prev_year = year - 1
-                prev_row = future_events[future_events["year"] == prev_year]
-                if len(prev_row) > 0:
-                    prev_row = prev_row.iloc[0]
-                    event_t1_col = f"event_{event_type}_t1"
-                    if event_t1_col in future_events.columns and not pd.isna(prev_row[event_t1_col]):
-                        v_t1 = float(prev_row[event_t1_col])
-                        # h=1の係数を使用
-                        inc_coef_h1 = coef_rate(event_type, "inc", 1, effects_coef_rate)
-                        dec_coef_h1 = coef_rate(event_type, "dec", 1, effects_coef_rate)
-                        exp_rate += v_t1 * inc_coef_h1  # increase効果
-                        exp_rate += v_t1 * dec_coef_h1  # decrease効果
+                # h=2: v_t(type) + v_t1(type) を inc/dec 列に設定
+                inc_col = _event_col(event_type, "increase", horizon)
+                dec_col = _event_col(event_type, "decrease", horizon)
+                result.at[i, inc_col] = v_t_inc + v_t1_inc
+                result.at[i, dec_col] = v_t_dec + v_t1_dec
             
             elif horizon == 3:
-                # h=3: Σ v_t(type) * coef_rate(type,h3) + Σ v_t1(type) * coef_rate(type,h2)
-                # v_t効果
-                event_t_col = f"event_{event_type}_t"
-                if event_t_col in future_events.columns and not pd.isna(row[event_t_col]):
-                    v_t = float(row[event_t_col])
-                    exp_rate += v_t * inc_coef  # increase効果
-                    exp_rate += v_t * dec_coef  # decrease効果
-                
-                # v_t1効果（前年のt1が当年のh3に効く）
-                prev_year = year - 1
-                prev_row = future_events[future_events["year"] == prev_year]
-                if len(prev_row) > 0:
-                    prev_row = prev_row.iloc[0]
-                    event_t1_col = f"event_{event_type}_t1"
-                    if event_t1_col in future_events.columns and not pd.isna(prev_row[event_t1_col]):
-                        v_t1 = float(prev_row[event_t1_col])
-                        # h=2の係数を使用
-                        inc_coef_h2 = coef_rate(event_type, "inc", 2, effects_coef_rate)
-                        dec_coef_h2 = coef_rate(event_type, "dec", 2, effects_coef_rate)
-                        exp_rate += v_t1 * inc_coef_h2  # increase効果
-                        exp_rate += v_t1 * dec_coef_h2  # decrease効果
+                # h=3: v_t(type) + v_t1(type) を inc/dec 列に設定
+                inc_col = _event_col(event_type, "increase", horizon)
+                dec_col = _event_col(event_type, "decrease", horizon)
+                result.at[i, inc_col] = v_t_inc + v_t1_inc
+                result.at[i, dec_col] = v_t_dec + v_t1_dec
         
-        # manual_deltaの加算（率化）
+        # manual_deltaの加算（個別列に設定）
         manual_key = f"h{horizon}"
-        add_rate = 0.0
         
         # manual_delta_rate（% → 小数）
+        manual_rate = 0.0
         if manual_key in manual_delta_rate:
-            add_rate += float(manual_delta_rate[manual_key]) / 100.0
+            manual_rate += float(manual_delta_rate[manual_key]) / 100.0
         
         # manual_delta（人数 → 率）
         manual_people = 0.0
         if manual_key in manual_delta:
             manual_people = float(manual_delta[manual_key])
-            add_rate += manual_people / max(base_population, 1.0)
+            manual_rate += manual_people / max(base_population, 1.0)
         
-        exp_rate += add_rate
-        
-        # 安全弁：レートをクリップ（±100%以内）
-        def clip_rate(x, lim=1.0):
-            return max(-lim, min(lim, x))
-        
-        safe_rate = clip_rate(exp_rate, 1.0)
-        if safe_rate != exp_rate:
-            print(f"[L5][WARN] exp_rate clipped in build: {exp_rate:.4f} -> {safe_rate:.4f} (year={year}, h={horizon})")
-        
-        result.at[i, exp_col] = safe_rate
+        # 手動効果を全イベントタイプのinc/dec列に加算
+        if manual_rate != 0.0:
+            for event_type in EVENT_TYPES:
+                inc_col = _event_col(event_type, "increase", horizon)
+                dec_col = _event_col(event_type, "decrease", horizon)
+                result.at[i, inc_col] += manual_rate
+                result.at[i, dec_col] += manual_rate
         
         # 手動人数を別列に保存（デバッグ専用）
         manual_people_col = f"manual_people_h{horizon}"
         result[manual_people_col] = 0.0
         result.at[i, manual_people_col] = manual_people
+    
+    # exp_rate_all_h{1,2,3}を係数×該当列の総和で計算（符号そのまま）
+    for horizon in [1, 2, 3]:
+        exp_col = f"exp_rate_all_h{horizon}"
+        result[exp_col] = result.apply(lambda row: _sum_rate_for_h(row, horizon, effects_coef_rate), axis=1)
+        
+        # 符号を保持（クリップしない）
+        print(f"[L5] exp_rate_all_h{horizon} 計算完了（符号保持）")
     
     # post-2022相互作用の計算（率ベース）
     for horizon in [1, 2, 3]:
@@ -201,16 +327,21 @@ def calculate_expected_effects_rate(future_events: pd.DataFrame, effects_coef_ra
             if year >= 2023:  # post-2022
                 result.at[i, post_col] = result.at[i, exp_col]
     
-    # デバッグ出力: 各年のexp_rate_all_h1/2/3を表示
+    # デバッグ出力: 各年のexp_rate_all_h1/2/3を表示（符号保持で確認）
     print("[L5] 期待効果の健全性チェック（率ベース）:")
     for i, (_, row) in enumerate(future_events.iterrows()):
         year = row["year"]
         horizon = year - base_year
         if horizon in [1, 2, 3]:
-            exp_h1 = result.at[i, "exp_rate_all_h1"]
-            exp_h2 = result.at[i, "exp_rate_all_h2"]
-            exp_h3 = result.at[i, "exp_rate_all_h3"]
-            print(f"  年 {year} (h={horizon}): exp_rate_all_h1={exp_h1:.4f}, exp_rate_all_h2={exp_h2:.4f}, exp_rate_all_h3={exp_h3:.4f}")
+            # 符号保持で確認
+            exp_h1 = result.iloc[i][f"exp_rate_all_h1"]
+            exp_h2 = result.iloc[i][f"exp_rate_all_h2"]
+            exp_h3 = result.iloc[i][f"exp_rate_all_h3"]
+            print(f"  年 {year} (h={horizon}): exp_rate_all_h1={exp_h1:+.4f}, exp_rate_all_h2={exp_h2:+.4f}, exp_rate_all_h3={exp_h3:+.4f}")
+    
+    # exp_rate_terms列を追加（年次合計）
+    result['exp_rate_terms'] = result[['exp_rate_all_h1', 'exp_rate_all_h2', 'exp_rate_all_h3']].sum(axis=1).fillna(0.0)
+    print(f"[L5] exp_rate_terms の例: {result['exp_rate_terms'].head(3).tolist()}")
     
     return result
 
@@ -513,6 +644,9 @@ def build_future_features(baseline: pd.DataFrame, future_events: pd.DataFrame,
         future_events = future_events[future_events["town"] == target_town].copy()
         print(f"[L5] 町丁 '{target_town}' のデータを処理中...")
     
+    # 空間重心データの読み込み
+    centroids_df = load_spatial_centroids()
+    
     # 効果係数の読み込み（率ベース）
     effects_coef_rate = load_effects_coefficients_rate()
     
@@ -562,6 +696,85 @@ def build_future_features(baseline: pd.DataFrame, future_events: pd.DataFrame,
     # 町丁トレンド特徴を計算（L4互換）
     features_df = calculate_town_trend_features(features_df, baseline)
     
+    # 空間ラグ特徴を計算（共通モジュールを使用）
+    if centroids_df is not None:
+        print("[L5] 空間ラグ特徴を計算中...")
+        
+        # ラグ対象列の自動検出
+        cols_to_lag = detect_cols_to_lag(features_df)
+        print(f"[L5] ラグ対象列: {cols_to_lag[:10]}...")  # 最初の10列を表示
+        
+        # 空間ラグの計算
+        features_df = calculate_spatial_lags_simple(
+            features_df, 
+            centroids_df, 
+            cols_to_lag, 
+            town_col="town", 
+            year_col="year", 
+            k_neighbors=5
+        )
+        
+        # 生成されたring1_*列の確認
+        ring1_cols = [col for col in features_df.columns if col.startswith('ring1_')]
+        print(f"[L5] 生成されたring1_*列数: {len(ring1_cols)}")
+        if ring1_cols:
+            print(f"[L5] ring1_*列の例: {ring1_cols[:5]}")
+    else:
+        print("[L5][WARN] 重心データが利用できないため、空間ラグをスキップします")
+    
+    # 不足している特徴を追加
+    features_df = add_missing_features(features_df)
+    
+    # exp_rate_terms列を追加（年次合計）
+    features_df['exp_rate_terms'] = (
+        features_df[["exp_rate_all_h1", "exp_rate_all_h2", "exp_rate_all_h3"]]
+        .sum(axis=1)
+        .fillna(0.0)
+    )
+    
+    # ∞をNaNに置換
+    features_df = features_df.replace([np.inf, -np.inf], np.nan)
+    
+    # デバッグログ（exp_rate_termsの確認）
+    print(f"[L5] exp_rate_terms サンプル: {features_df['exp_rate_terms'].head(3).tolist()}")
+    
+    # ゲート前の完全版データフレームを返す（CSV保存用）
+    return features_df
+
+def build_future_features_full(baseline: pd.DataFrame, future_events: pd.DataFrame, scenario: Dict[str, Any]) -> pd.DataFrame:
+    """将来特徴の構築（完全版 - ゲート適用前）"""
+    # 基本構造の作成
+    features_df = future_events[["town", "year"]].copy()
+    
+    # 各特徴の計算
+    features_df = calculate_expected_effects(future_events, baseline, scenario)
+    features_df = calculate_macro_features(future_events, baseline, scenario.get("macros", {}))
+    features_df = calculate_town_trend_features(future_events, baseline)
+    
+    # 空間ラグ特徴の計算
+    centroids_path = "../../data/processed/town_centroids.csv"
+    if os.path.exists(centroids_path):
+        centroids_df = pd.read_csv(centroids_path)
+        print(f"[L5] 空間重心データを読み込み: {len(centroids_df)}件")
+        
+        # ラグ対象列を検出
+        cols_to_lag = detect_cols_to_lag(features_df)
+        print(f"[L5] ラグ対象列: {cols_to_lag[:10]}...")
+        
+        # 空間ラグを計算
+        features_df = calculate_spatial_lags_simple(
+            features_df, centroids_df, cols_to_lag, 
+            town_col="town", year_col="year", k_neighbors=5
+        )
+        
+        # 生成されたring1_*列の確認
+        ring1_cols = [col for col in features_df.columns if col.startswith('ring1_')]
+        print(f"[L5] 生成されたring1_*列数: {len(ring1_cols)}")
+        if ring1_cols:
+            print(f"[L5] ring1_*列の例: {ring1_cols[:5]}")
+    else:
+        print("[L5][WARN] 重心データが利用できないため、空間ラグをスキップします")
+    
     # 不足している特徴を追加
     features_df = add_missing_features(features_df)
     
@@ -579,13 +792,13 @@ def main(baseline_path: str, future_events_path: str, scenario_path: str) -> Non
     with open(scenario_path, 'r', encoding='utf-8') as f:
         scenario = json.load(f)
     
-    # 将来特徴の構築
+    # 将来特徴の構築（完全版 - ゲート前）
     future_features = build_future_features(baseline, future_events, scenario)
     
     # 出力ディレクトリの作成
     Path(P_OUTPUT).parent.mkdir(parents=True, exist_ok=True)
     
-    # 保存
+    # 完全版をCSV保存（exp_rate_terms含む）
     future_features.to_csv(P_OUTPUT, index=False)
     print(f"[L5] 将来特徴を保存しました: {P_OUTPUT}")
     print(f"[L5] 行数: {len(future_features)}, 列数: {len(future_features.columns)}")
@@ -606,6 +819,11 @@ def main(baseline_path: str, future_events_path: str, scenario_path: str) -> Non
           f"{(future_features['exp_rate_all_h1']!=0).sum()}/"
           f"{(future_features['exp_rate_all_h2']!=0).sum()}/"
           f"{(future_features['exp_rate_all_h3']!=0).sum()}")
+    
+    # exp_rate_termsの確認
+    if 'exp_rate_terms' in future_features.columns:
+        non_zero_terms = (future_features['exp_rate_terms'] != 0).sum()
+        print(f"[L5] exp_rate_terms nonzero rows = {non_zero_terms}")
 
 if __name__ == "__main__":
     import sys

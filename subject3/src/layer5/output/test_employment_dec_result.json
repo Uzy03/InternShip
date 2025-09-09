@@ -1,0 +1,127 @@
+{
+  "town": "四方寄町",
+  "base_year": 2025,
+  "horizons": [
+    1,
+    2,
+    3
+  ],
+  "path": [
+    {
+      "year": 2026,
+      "delta_hat": -184.2,
+      "pop_hat": 2703.8,
+      "pi95_delta": [
+        -12.8,
+        12.8
+      ],
+      "pi95_pop": [
+        2691.0,
+        2716.6
+      ],
+      "contrib": {
+        "exp": -165.1,
+        "macro": 0.0,
+        "inertia": 2.4,
+        "other": -21.5
+      }
+    },
+    {
+      "year": 2027,
+      "delta_hat": -100.4,
+      "pop_hat": 2603.4,
+      "pi95_delta": [
+        -12.8,
+        12.8
+      ],
+      "pi95_pop": [
+        2585.3,
+        2621.5
+      ],
+      "contrib": {
+        "exp": -82.0,
+        "macro": 0.0,
+        "inertia": 19.1,
+        "other": -37.5
+      }
+    },
+    {
+      "year": 2028,
+      "delta_hat": -61.0,
+      "pop_hat": 2542.4,
+      "pi95_delta": [
+        -12.8,
+        12.8
+      ],
+      "pi95_pop": [
+        2520.2,
+        2564.5
+      ],
+      "contrib": {
+        "exp": -40.7,
+        "macro": 0.0,
+        "inertia": 17.2,
+        "other": -37.5
+      }
+    }
+  ],
+  "explain": {
+    "2026": {
+      "exp_rate_terms": -0.05715674705850625,
+      "base_pop_for_rate": 2888.0,
+      "exp_people_from_rate": -165.06868550496606,
+      "exp_people_manual": 0.0,
+      "exp_people_total": -165.06868550496606,
+      "delta_noexp": 145.93438358831736,
+      "delta_hat": -19.134301916648703,
+      "exp_people_by_category": {
+        "disaster_dec_h1": -30.68149629443768,
+        "housing_dec_h1": -77.45129797037077,
+        "transit_dec_h1": -36.15818808382292,
+        "disaster_inc_h1": -22.99902001729381,
+        "commercial_inc_h1": 7.2805873863435195,
+        "employment_inc_h1": -5.2960963420459,
+        "housing_inc_h1": 0.017806394208227383,
+        "transit_inc_h1": 0.21901942245329004
+      }
+    },
+    "2027": {
+      "exp_rate_terms": -0.02857837352925307,
+      "base_pop_for_rate": 2868.865698083351,
+      "exp_people_from_rate": -81.98751552508737,
+      "exp_people_manual": 0.0,
+      "exp_people_total": -81.98751552508737,
+      "delta_noexp": 63.5773656692902,
+      "delta_hat": -18.410149855797172,
+      "exp_people_by_category": {
+        "disaster_dec_h2": -15.239108775100977,
+        "housing_dec_h2": -38.4690741030521,
+        "transit_dec_h2": -17.959311893789085,
+        "disaster_inc_h2": -11.423320570835626,
+        "commercial_inc_h2": 3.6161751064022236,
+        "employment_inc_h2": -2.630503658144066,
+        "housing_inc_h2": 0.00884420940971842,
+        "transit_inc_h2": 0.10878416002254934
+      }
+    },
+    "2028": {
+      "exp_rate_terms": -0.014289186764626479,
+      "base_pop_for_rate": 2850.455548227554,
+      "exp_people_from_rate": -40.73069169288928,
+      "exp_people_manual": 0.0,
+      "exp_people_total": -40.73069169288928,
+      "delta_noexp": 20.428979273318085,
+      "delta_hat": -20.301712419571196,
+      "exp_people_by_category": {
+        "disaster_dec_h3": -7.57065801076892,
+        "housing_dec_h3": -19.111104745244756,
+        "transit_dec_h3": -8.922031495618809,
+        "disaster_inc_h3": -5.67500728982783,
+        "commercial_inc_h3": 1.79648465285305,
+        "employment_inc_h3": -1.3068115652815258,
+        "housing_inc_h3": 0.004393727074513495,
+        "transit_inc_h3": 0.054043033924995675
+      }
+    }
+  }
+}
