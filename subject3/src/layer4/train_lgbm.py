@@ -32,11 +32,16 @@ ID_KEYS = ["town","year"]
 USE_HUBER = True     # 外れ値が目立つ年に強い推奨オプション
 HUBER_ALPHA = 0.9
 
-# かなり大きめにして EarlyStopping に任せる
-N_ESTIMATORS = 20000
-LEARNING_RATE = 0.01
-EARLY_STOPPING_ROUNDS = 600
+# バランスの取れた設定（元の設定をベースに微調整）
+N_ESTIMATORS = 25000
+LEARNING_RATE = 0.008  # 元の0.01より少し小さく
+EARLY_STOPPING_ROUNDS = 800  # 元の600より少し長く
 LOG_EVERY_N = 200
+
+# === サンプル重み調整のパラメータ ===
+TIME_DECAY = 0.05  # 最近の年を重視する係数
+ANOMALY_YEARS = [2022, 2023]  # 異常値期間（重みを下げる年）
+ANOMALY_WEIGHT = 0.3  # 異常値期間の重み係数
 
 # LightGBM が無ければ HistGradientBoosting にフォールバック
 USE_LGBM = True
@@ -127,9 +132,9 @@ def main():
             alpha=(HUBER_ALPHA if USE_HUBER else None),
             n_estimators=N_ESTIMATORS,
             learning_rate=LEARNING_RATE,
-            subsample=0.9, colsample_bytree=0.9,
-            reg_alpha=0.1, reg_lambda=0.3,
-            num_leaves=63, min_child_samples=20,
+            subsample=0.85, colsample_bytree=0.85,  # 元の0.9より少し保守的に
+            reg_alpha=0.15, reg_lambda=0.4,  # 元の設定より少し強化
+            num_leaves=50, min_child_samples=25,  # 元の設定より少し保守的に
             random_state=42, n_jobs=-1
         )
     else:
@@ -138,13 +143,24 @@ def main():
             random_state=42
         )
 
-    # サンプル重み: 規模×時間減衰（最近をやや重視）
-    time_decay = 0.0  # ← まず無効化して様子を見る
+    # サンプル重み: 規模×時間減衰×異常値期間調整
     def make_weights(s):
-        w_pop  = np.sqrt(np.maximum(1.0, s["pop_total"].values)) if "pop_total" in s.columns else np.ones(len(s))
-        w_time = (1.0 + time_decay) ** (s["year"].values - s["year"].min())
-        w = w_pop * w_time
+        # 人口規模による重み（人口が多い地域を重視）
+        w_pop = np.sqrt(np.maximum(1.0, s["pop_total"].values)) if "pop_total" in s.columns else np.ones(len(s))
+        
+        # 時間減衰（最近の年を重視）
+        w_time = (1.0 + TIME_DECAY) ** (s["year"].values - s["year"].min())
+        
+        # 異常値期間の重み調整（2022-2023年の重みを下げる）
+        w_anomaly = np.where(s["year"].isin(ANOMALY_YEARS), ANOMALY_WEIGHT, 1.0)
+        
+        # 最終的な重み
+        w = w_pop * w_time * w_anomaly
         w[~np.isfinite(w)] = 1.0
+        
+        # 重みの正規化（平均が1になるように）
+        w = w / np.mean(w)
+        
         return w
 
     # 時系列CV
@@ -156,6 +172,13 @@ def main():
         tr_X = tr[Xcols].replace([np.inf, -np.inf], np.nan)
         te_X = te[Xcols].replace([np.inf, -np.inf], np.nan)
         sw = make_weights(tr)
+        
+        # 重みの統計情報をログ出力（最初のfoldのみ）
+        if fi == 1:
+            print(f"[L4] Sample weights stats: mean={np.mean(sw):.3f}, std={np.std(sw):.3f}, min={np.min(sw):.3f}, max={np.max(sw):.3f}")
+            anomaly_mask = tr["year"].isin(ANOMALY_YEARS)
+            if np.any(anomaly_mask):
+                print(f"[L4] Anomaly years weight: {np.mean(sw[anomaly_mask]):.3f} (normal: {np.mean(sw[~anomaly_mask]):.3f})")
 
         # 学習データが空になっていないか（安全装置）
         if len(tr_X) == 0 or len(te_X) == 0:
@@ -164,8 +187,14 @@ def main():
 
         # 学習用 y を軽くウィンズライズ（上下0.5%）
         y_tr = tr[TARGET].values
-        ql, qh = np.quantile(y_tr, [0.005, 0.995])
+        ql, qh = np.quantile(y_tr, [0.005, 0.995])  # 元の設定に戻す
         y_tr = np.clip(y_tr, ql, qh)
+        
+        # 外れ値の統計情報をログ出力（最初のfoldのみ）
+        if fi == 1:
+            original_std = np.std(tr[TARGET].values)
+            clipped_std = np.std(y_tr)
+            print(f"[L4] Winsorizing: original_std={original_std:.3f}, clipped_std={clipped_std:.3f}")
 
         if USE_LGBM:
             model = lgb.LGBMRegressor(**base_params)

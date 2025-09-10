@@ -28,21 +28,39 @@
     "macro_ma3",
     "macro_shock",
     "pop_total",
+    "ring1_exp_commercial_inc_h1",
+    "ring1_exp_commercial_inc_h2",
+    "ring1_exp_commercial_inc_h3",
+    "ring1_exp_disaster_dec_h1",
+    "ring1_exp_disaster_dec_h2",
+    "ring1_exp_disaster_dec_h3",
+    "ring1_exp_disaster_inc_h1",
+    "ring1_exp_disaster_inc_h2",
+    "ring1_exp_disaster_inc_h3",
+    "ring1_exp_employment_inc_h1",
+    "ring1_exp_employment_inc_h2",
+    "ring1_exp_employment_inc_h3",
+    "ring1_exp_housing_dec_h1",
+    "ring1_exp_housing_dec_h2",
+    "ring1_exp_housing_dec_h3",
+    "ring1_exp_housing_inc_h1",
+    "ring1_exp_housing_inc_h2",
+    "ring1_exp_housing_inc_h3",
+    "ring1_exp_public_edu_medical_dec_h1",
+    "ring1_exp_public_edu_medical_dec_h2",
     "town_ma5",
     "town_std5",
     "town_trend5"
   ],
-  "n_features": 31,
+  "n_features": 51,
   "exclude_patterns": [
     "^exp_",
-    "^ring1_exp_",
-    "^ring2_exp_",
     "^manual_people_",
     "^ring1_manual_people_",
     "^ring2_manual_people_"
   ],
   "allowed_ring_patterns": [
-    "^ring1_(?!exp_|manual_people_)",
-    "^ring2_(?!exp_|manual_people_)"
+    "^ring1_(?!manual_people_)",
+    "^ring2_(?!manual_people_)"
   ]
 }

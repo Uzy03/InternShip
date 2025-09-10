@@ -13,20 +13,18 @@ import re
 from pathlib import Path
 from typing import List, Tuple, Optional
 
-# 除外パターン（期待効果と手動人数を完全除外）
+# 除外パターン（期待効果と手動人数を完全除外、空間ラグは含める）
 EXCLUDE_PATTERNS = [
-    r'^exp_',                    # 期待効果関連
-    r'^ring1_exp_',             # 空間ラグの期待効果
-    r'^ring2_exp_',             # 空間ラグの期待効果
+    r'^exp_',                    # 期待効果関連（直接効果のみ除外）
     r'^manual_people_',         # 手動人数
     r'^ring1_manual_people_',   # 空間ラグの手動人数
     r'^ring2_manual_people_',   # 空間ラグの手動人数
 ]
 
-# 許容する空間ラグパターン（ring1_* のうち、exp/manual 以外）
+# 許容する空間ラグパターン（ring1_* のうち、manual 以外）
 ALLOWED_RING_PATTERNS = [
-    r'^ring1_(?!exp_|manual_people_)',  # ring1_* のうち exp_ と manual_people_ 以外
-    r'^ring2_(?!exp_|manual_people_)',  # ring2_* のうち exp_ と manual_people_ 以外
+    r'^ring1_(?!manual_people_)',  # ring1_* のうち manual_people_ 以外（exp_も含む）
+    r'^ring2_(?!manual_people_)',  # ring2_* のうち manual_people_ 以外（exp_も含む）
 ]
 
 def drop_excluded_columns(df: pd.DataFrame, exclude_patterns: List[str] = None) -> Tuple[pd.DataFrame, List[str]]:

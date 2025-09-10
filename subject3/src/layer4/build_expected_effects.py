@@ -106,7 +106,7 @@ def main():
         out["lag_d1"] = out.groupby("town")["delta_people"].shift(1)
         out["lag_d2"] = out.groupby("town")["delta_people"].shift(2)
         out["rate_d1"] = out["lag_d1"] / np.maximum(100.0, out.groupby("town")["pop_total"].shift(1))
-        out["ma2_delta"] = out.groupby("town")["delta_people"].apply(lambda s: s.rolling(2).mean())
+        out["ma2_delta"] = out.groupby("town")["delta_people"].rolling(2).mean().reset_index(0, drop=True)
     
     # --- ポスト2020（COVID期）ダミー & 期待効果との相互作用 ---
     out["era_covid"] = ((out["year"] >= 2020) & (out["year"] <= 2022)).astype(int)
@@ -131,13 +131,11 @@ def main():
         A = np.vstack([x, np.ones(len(v))]).T
         m,_ = np.linalg.lstsq(A, np.nan_to_num(v), rcond=None)[0]
         return m
-    out["town_trend5"] = out.groupby("town")["delta_people"].apply(
-        lambda s: s.rolling(5, min_periods=3).apply(_slope, raw=False)
-    ).shift(1)
+    out["town_trend5"] = out.groupby("town")["delta_people"].rolling(5, min_periods=3).apply(_slope, raw=False).reset_index(0, drop=True).shift(1)
 
     # 町丁の過去傾向（直近5年の移動平均・分散）→ 1期先読み防止のためシフト
-    out["town_ma5"]  = out.groupby("town")["delta_people"].apply(lambda s: s.rolling(5, min_periods=2).mean()).shift(1)
-    out["town_std5"] = out.groupby("town")["delta_people"].apply(lambda s: s.rolling(5, min_periods=2).std()).shift(1)
+    out["town_ma5"]  = out.groupby("town")["delta_people"].rolling(5, min_periods=2).mean().reset_index(0, drop=True).shift(1)
+    out["town_std5"] = out.groupby("town")["delta_people"].rolling(5, min_periods=2).std().reset_index(0, drop=True).shift(1)
 
     out["macro_excl"] = out["macro_delta"] - out["delta_people"].fillna(0.0)
     
