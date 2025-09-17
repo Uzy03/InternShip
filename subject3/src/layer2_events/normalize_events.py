@@ -655,8 +655,8 @@ class EventNormalizer:
         output_path = Path(output_dir).resolve()
         ensure_parent(output_path / 'dummy.csv')
         
-        # ロング形式出力
-        long_output_file = output_path / 'events_labeled.csv'
+        # ロング形式出力（既存ファイルを上書きしない）
+        long_output_file = output_path / 'events_labeled_new.csv'
         events_df.to_csv(str(long_output_file), index=False, encoding='utf-8')
         self.logger.info(f"Long format output saved to: {long_output_file}")
         
@@ -1000,6 +1000,10 @@ def main():
     ensure_parent(mat_output_path)
     mat.to_csv(mat_output_path, index=False)
     normalizer.logger.info(f"[normalize] events_matrix_signed saved → {mat_output_path}")
+    
+    # 4) events_labeled.csvは上書きしない（既存ファイルを保持）
+    # cleanデータは既にevents_labeled_clean.csvとして保存済み
+    normalizer.logger.info(f"[normalize] events_labeled.csv preserved (not overwritten)")
     
     return {
         'events_clean': clean,

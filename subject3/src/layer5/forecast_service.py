@@ -43,16 +43,21 @@ def parse_exp_col(col: str):
     return cat, dir_, h
 
 # パス設定
-P_MODEL = "../../models/l4_model.joblib"
+P_MODEL = "../../models/l4_model_no_macro.joblib"  # no_macroモデルを使用
 P_FUTURE_FEATURES = "../../data/processed/l5_future_features.csv"
 P_EFFECTS_COEF = "../../output/effects_coefficients.csv"
 
 def load_model() -> Any:
-    """L4モデルを読み込み"""
+    """L4モデルを読み込み（no_macro対応）"""
     if not Path(P_MODEL).exists():
         raise FileNotFoundError(f"モデルファイルが見つかりません: {P_MODEL}")
     
-    return joblib.load(P_MODEL)
+    try:
+        model = joblib.load(P_MODEL)
+        print(f"[L5] no_macroモデルを読み込みました: {P_MODEL}")
+        return model
+    except Exception as e:
+        raise RuntimeError(f"モデルの読み込みに失敗: {e}")
 
 def load_future_features() -> pd.DataFrame:
     """将来特徴を読み込み"""
@@ -62,11 +67,58 @@ def load_future_features() -> pd.DataFrame:
     return pd.read_csv(P_FUTURE_FEATURES)
 
 def load_effects_coefficients() -> pd.DataFrame:
-    """効果係数を読み込み"""
-    if not Path(P_EFFECTS_COEF).exists():
-        raise FileNotFoundError(f"効果係数ファイルが見つかりません: {P_EFFECTS_COEF}")
+    """効果係数を読み込み（Colab対応）"""
+    # 複数のパスを試す
+    possible_paths = [
+        P_EFFECTS_COEF,
+        "../../output/effects_coefficients.csv",
+        "output/effects_coefficients.csv",
+        "subject3-5/output/effects_coefficients.csv",
+        "subject3-4/output/effects_coefficients.csv",
+        "subject3-3/output/effects_coefficients.csv"
+    ]
     
-    return pd.read_csv(P_EFFECTS_COEF)
+    for path in possible_paths:
+        if Path(path).exists():
+            print(f"[L5] 効果係数ファイルを読み込み: {path}")
+            return pd.read_csv(path)
+    
+    # effects_coefficients.csvが見つからない場合は、effects_coefficients_rate.csvから生成
+    print(f"[L5] effects_coefficients.csvが見つかりません。rateファイルから生成します...")
+    try:
+        # effects_coefficients_rate.csvを読み込み
+        rate_paths = [
+            "../../output/effects_coefficients_rate.csv",
+            "output/effects_coefficients_rate.csv",
+            "subject3-5/output/effects_coefficients_rate.csv",
+            "subject3-4/output/effects_coefficients_rate.csv",
+            "subject3-3/output/effects_coefficients_rate.csv"
+        ]
+        
+        rate_df = None
+        for path in rate_paths:
+            if Path(path).exists():
+                print(f"[L5] 率効果係数ファイルを読み込み: {path}")
+                rate_df = pd.read_csv(path)
+                break
+        
+        if rate_df is None:
+            raise FileNotFoundError("effects_coefficients_rate.csvも見つかりません")
+        
+        # effects_coefficients.csvの形式に変換
+        effects_df = rate_df.copy()
+        if 'beta' in effects_df.columns:
+            effects_df['beta_t'] = effects_df['beta']
+            effects_df['beta_t1'] = effects_df['beta']  # 同じ値を使用
+            effects_df = effects_df.drop('beta', axis=1)
+        
+        print(f"[L5] effects_coefficients.csvを生成しました（{len(effects_df)}行）")
+        return effects_df
+        
+    except Exception as e:
+        print(f"[WARN] rateファイルからの生成に失敗: {e}")
+        # 空のDataFrameを返す（エラーを回避）
+        return pd.DataFrame(columns=['event_var', 'beta_t', 'beta_t1'])
 
 # 係数辞書（グローバル変数として保持）
 COEF_RATE = {}
@@ -112,16 +164,56 @@ def compute_exp_rate_terms(row) -> Dict[int, float]:
     return out
 
 def load_model_features() -> Optional[List[str]]:
-    """学習時に使用された特徴量リストを読み込み（feature_list.jsonから）"""
-    feature_list_path = Path("../../src/layer4/feature_list.json")
+    """学習時に使用された特徴量リストを読み込み（no_macro対応）"""
+    # no_macroモデルの場合は専用の特徴量リストを使用
+    feature_list_path = Path("../../src/layer4/feature_reduced_training/feature_list_no_macro.json")
+    
     if not feature_list_path.exists():
-        print(f"[WARN] 特徴量リストファイルが見つかりません: {feature_list_path}")
-        return None
+        print(f"[WARN] no_macro特徴量リストファイルが見つかりません: {feature_list_path}")
+        # フォールバック: アブレーション研究の結果から特徴量リストを生成
+        print(f"[L5] アブレーション研究から特徴量リストを生成中...")
+        return generate_no_macro_features()
     
     try:
         return load_feature_list(str(feature_list_path))
     except Exception as e:
         print(f"[WARN] 特徴量リストファイルの読み込みに失敗: {e}")
+        return generate_no_macro_features()
+
+def generate_no_macro_features() -> List[str]:
+    """no_macroモデル用の特徴量リストを生成（アブレーション研究の結果から）"""
+    try:
+        # アブレーション研究の結果から特徴量リストを読み込み
+        ablation_path = Path("../../data/processed/ablation_study/ablation_metrics_no_macro.json")
+        if ablation_path.exists():
+            with open(ablation_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                remaining_features = data.get('remaining_features', [])
+                if remaining_features:
+                    print(f"[L5] アブレーション研究から特徴量リストを読み込み: {len(remaining_features)}列")
+                    return remaining_features
+        
+        # フォールバック: 手動でno_macroの特徴量リストを定義
+        print(f"[L5] フォールバック: 手動でno_macro特徴量リストを生成")
+        return [
+            "era_covid", "era_post2009", "era_post2013", "era_post2022", "era_pre2013",
+            "foreign_change", "foreign_change_covid", "foreign_change_post2022",
+            "foreign_log", "foreign_log_covid", "foreign_log_post2022",
+            "foreign_ma3", "foreign_ma3_covid", "foreign_ma3_post2022",
+            "foreign_pct_change", "foreign_pct_change_covid", "foreign_pct_change_post2022",
+            "foreign_population", "foreign_population_covid", "foreign_population_post2022",
+            "lag_d1", "lag_d2", "ma2_delta", "pop_total",
+            "ring1_exp_commercial_inc_h1", "ring1_exp_commercial_inc_h2", "ring1_exp_commercial_inc_h3",
+            "ring1_exp_disaster_dec_h1", "ring1_exp_disaster_dec_h2", "ring1_exp_disaster_dec_h3",
+            "ring1_exp_disaster_inc_h1", "ring1_exp_disaster_inc_h2", "ring1_exp_disaster_inc_h3",
+            "ring1_exp_employment_inc_h1", "ring1_exp_employment_inc_h2", "ring1_exp_employment_inc_h3",
+            "ring1_exp_housing_dec_h1", "ring1_exp_housing_dec_h2", "ring1_exp_housing_dec_h3",
+            "ring1_exp_housing_inc_h1", "ring1_exp_housing_inc_h2", "ring1_exp_housing_inc_h3",
+            "ring1_exp_public_edu_medical_dec_h1", "ring1_exp_public_edu_medical_dec_h2",
+            "town_ma5", "town_std5", "town_trend5"
+        ]
+    except Exception as e:
+        print(f"[WARN] no_macro特徴量リストの生成に失敗: {e}")
         return None
 
 def choose_features(df: pd.DataFrame, model_features: Optional[List[str]] = None) -> List[str]:

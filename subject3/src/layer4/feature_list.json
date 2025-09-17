@@ -8,6 +8,8 @@
     "foreign_change",
     "foreign_change_covid",
     "foreign_change_post2022",
+    "foreign_change_rate",
+    "foreign_change_rate_2022_2023",
     "foreign_log",
     "foreign_log_covid",
     "foreign_log_post2022",
@@ -52,7 +54,7 @@
     "town_std5",
     "town_trend5"
   ],
-  "n_features": 51,
+  "n_features": 53,
   "exclude_patterns": [
     "^exp_",
     "^manual_people_",

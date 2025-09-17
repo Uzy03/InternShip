@@ -561,6 +561,33 @@ def calculate_macro_features_l4_style(features_df: pd.DataFrame, base_year: int)
     
     return result
 
+def add_enhanced_features_future(features_df: pd.DataFrame) -> pd.DataFrame:
+    """将来年用の拡張特徴量を追加（L4互換）"""
+    result = features_df.copy()
+    
+    # 年次トレンドの非線形変換（将来年でも生成可能）
+    year_min, year_max = result['year'].min(), result['year'].max()
+    result['year_normalized'] = (result['year'] - year_min) / (year_max - year_min)
+    result['year_squared'] = result['year_normalized'] ** 2
+    result['year_cubic'] = result['year_normalized'] ** 3
+    
+    # 周期性の特徴量（10年周期を想定、将来年でも生成可能）
+    result['year_sin_10'] = np.sin(2 * np.pi * result['year_normalized'] * 10)
+    result['year_cos_10'] = np.cos(2 * np.pi * result['year_normalized'] * 10)
+    
+    # 期間別フラグ特徴量（将来年でも生成可能）
+    result['is_anomaly_period'] = result['year'].isin([2022, 2023]).astype(int)
+    result['is_covid_period'] = result['year'].isin([2020, 2021]).astype(int)
+    result['is_post_covid'] = (result['year'] >= 2022).astype(int)
+    
+    # 人口規模の非線形変換（将来年でも生成可能）
+    if 'pop_total' in result.columns:
+        result['pop_total_log'] = np.log1p(result['pop_total'])
+        result['pop_total_sqrt'] = np.sqrt(result['pop_total'])
+        result['pop_total_squared'] = result['pop_total'] ** 2
+    
+    return result
+
 def calculate_town_trend_features(features_df: pd.DataFrame, baseline: pd.DataFrame) -> pd.DataFrame:
     """町丁トレンド特徴を計算（L4互換）"""
     result = features_df.copy()
@@ -586,6 +613,44 @@ def calculate_town_trend_features(features_df: pd.DataFrame, baseline: pd.DataFr
     result["lag_d2"] = np.nan
     result["ma2_delta"] = np.nan
     
+    return result
+
+def select_no_macro_features(features_df: pd.DataFrame) -> pd.DataFrame:
+    """no_macroモデル用の特徴量選択（47個の特徴量のみ）"""
+    # no_macroモデルで使用される特徴量リスト
+    no_macro_features = [
+        "era_covid", "era_post2009", "era_post2013", "era_post2022", "era_pre2013",
+        "foreign_change", "foreign_change_covid", "foreign_change_post2022",
+        "foreign_log", "foreign_log_covid", "foreign_log_post2022",
+        "foreign_ma3", "foreign_ma3_covid", "foreign_ma3_post2022",
+        "foreign_pct_change", "foreign_pct_change_covid", "foreign_pct_change_post2022",
+        "foreign_population", "foreign_population_covid", "foreign_population_post2022",
+        "lag_d1", "lag_d2", "ma2_delta", "pop_total",
+        "ring1_exp_commercial_inc_h1", "ring1_exp_commercial_inc_h2", "ring1_exp_commercial_inc_h3",
+        "ring1_exp_disaster_dec_h1", "ring1_exp_disaster_dec_h2", "ring1_exp_disaster_dec_h3",
+        "ring1_exp_disaster_inc_h1", "ring1_exp_disaster_inc_h2", "ring1_exp_disaster_inc_h3",
+        "ring1_exp_employment_inc_h1", "ring1_exp_employment_inc_h2", "ring1_exp_employment_inc_h3",
+        "ring1_exp_housing_dec_h1", "ring1_exp_housing_dec_h2", "ring1_exp_housing_dec_h3",
+        "ring1_exp_housing_inc_h1", "ring1_exp_housing_inc_h2", "ring1_exp_housing_inc_h3",
+        "ring1_exp_public_edu_medical_dec_h1", "ring1_exp_public_edu_medical_dec_h2",
+        "town_ma5", "town_std5", "town_trend5"
+    ]
+    
+    # 基本列（town, year）は必ず保持
+    basic_cols = ["town", "year"]
+    available_features = [col for col in no_macro_features if col in features_df.columns]
+    
+    # 選択された特徴量でデータフレームを構築
+    selected_cols = basic_cols + available_features
+    result = features_df[selected_cols].copy()
+    
+    # 不足している特徴量は0で埋める
+    for feature in no_macro_features:
+        if feature not in result.columns:
+            result[feature] = 0.0
+            print(f"[L5] 不足特徴量を0で埋め: {feature}")
+    
+    print(f"[L5] no_macro特徴量選択完了: {len(result.columns)}列（基本列2 + 特徴量{len(available_features)}）")
     return result
 
 def add_missing_features(features_df: pd.DataFrame) -> pd.DataFrame:
@@ -738,6 +803,11 @@ def build_future_features(baseline: pd.DataFrame, future_events: pd.DataFrame,
     # デバッグログ（exp_rate_termsの確認）
     print(f"[L5] exp_rate_terms サンプル: {features_df['exp_rate_terms'].head(3).tolist()}")
     
+    # no_macroモデル用の特徴量選択を適用
+    print(f"[L5] 特徴量選択前の列数: {len(features_df.columns)}")
+    features_df = select_no_macro_features(features_df)
+    print(f"[L5] 特徴量選択後の列数: {len(features_df.columns)}")
+    
     # ゲート前の完全版データフレームを返す（CSV保存用）
     return features_df
 
@@ -794,6 +864,14 @@ def main(baseline_path: str, future_events_path: str, scenario_path: str) -> Non
     
     # 将来特徴の構築（完全版 - ゲート前）
     future_features = build_future_features(baseline, future_events, scenario)
+    
+    # 拡張特徴量を追加（L4互換）
+    future_features = add_enhanced_features_future(future_features)
+    
+    # no_macroモデル用の特徴量選択を適用
+    print(f"[L5] 特徴量選択前の列数: {len(future_features.columns)}")
+    future_features = select_no_macro_features(future_features)
+    print(f"[L5] 特徴量選択後の列数: {len(future_features.columns)}")
     
     # 出力ディレクトリの作成
     Path(P_OUTPUT).parent.mkdir(parents=True, exist_ok=True)

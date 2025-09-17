@@ -1,0 +1,287 @@
+{
+  "full_model_metrics": {
+    "MAE": 2.7754187656709775,
+    "RMSE": 14.4119961640663,
+    "MAPE": 0.5655219959343789,
+    "R2": 0.8202869786213369,
+    "fold": 4.0
+  },
+  "studies": {
+    "no_foreign": {
+      "description": "外国人人数関連特徴量を除外",
+      "excluded_features": [
+        "foreign_change",
+        "foreign_change_covid",
+        "foreign_change_post2022",
+        "foreign_log",
+        "foreign_log_covid",
+        "foreign_log_post2022",
+        "foreign_ma3",
+        "foreign_ma3_covid",
+        "foreign_ma3_post2022",
+        "foreign_pct_change",
+        "foreign_pct_change_covid",
+        "foreign_pct_change_post2022",
+        "foreign_population",
+        "foreign_population_covid",
+        "foreign_population_post2022"
+      ],
+      "ablation_metrics": {
+        "fold": 4.0,
+        "MAE": 2.543986949399005,
+        "RMSE": 13.458536277961581,
+        "R2": 0.8374609880298249,
+        "train_years": 23.0,
+        "test_year": 2022.0
+      },
+      "comparison": {
+        "MAE": {
+          "full_model": 2.7754187656709775,
+          "ablation_model": 2.543986949399005,
+          "difference": 0.2314318162719724,
+          "improvement_pct": 8.338626917658031
+        },
+        "RMSE": {
+          "full_model": 14.4119961640663,
+          "ablation_model": 13.458536277961581,
+          "difference": 0.953459886104719,
+          "improvement_pct": 6.615737856508722
+        },
+        "R2": {
+          "full_model": 0.8202869786213369,
+          "ablation_model": 0.8374609880298249,
+          "difference": 0.01717400940848801,
+          "improvement_pct": 2.0936586653310663
+        }
+      }
+    },
+    "no_spatial": {
+      "description": "全空間ラグ特徴量を除外",
+      "excluded_features": [
+        "ring1_exp_commercial_inc_h1",
+        "ring1_exp_commercial_inc_h2",
+        "ring1_exp_commercial_inc_h3",
+        "ring1_exp_disaster_dec_h1",
+        "ring1_exp_disaster_dec_h2",
+        "ring1_exp_disaster_dec_h3",
+        "ring1_exp_disaster_inc_h1",
+        "ring1_exp_disaster_inc_h2",
+        "ring1_exp_disaster_inc_h3",
+        "ring1_exp_employment_inc_h1",
+        "ring1_exp_employment_inc_h2",
+        "ring1_exp_employment_inc_h3",
+        "ring1_exp_housing_dec_h1",
+        "ring1_exp_housing_dec_h2",
+        "ring1_exp_housing_dec_h3",
+        "ring1_exp_housing_inc_h1",
+        "ring1_exp_housing_inc_h2",
+        "ring1_exp_housing_inc_h3",
+        "ring1_exp_public_edu_medical_dec_h1",
+        "ring1_exp_public_edu_medical_dec_h2"
+      ],
+      "ablation_metrics": {
+        "fold": 4.0,
+        "MAE": 2.769846160419939,
+        "RMSE": 14.18097439453179,
+        "R2": 0.8256527570543645,
+        "train_years": 23.0,
+        "test_year": 2022.0
+      },
+      "comparison": {
+        "MAE": {
+          "full_model": 2.7754187656709775,
+          "ablation_model": 2.769846160419939,
+          "difference": 0.0055726052510385315,
+          "improvement_pct": 0.20078430397480265
+        },
+        "RMSE": {
+          "full_model": 14.4119961640663,
+          "ablation_model": 14.18097439453179,
+          "difference": 0.23102176953451092,
+          "improvement_pct": 1.6029824522887526
+        },
+        "R2": {
+          "full_model": 0.8202869786213369,
+          "ablation_model": 0.8256527570543645,
+          "difference": 0.005365778433027546,
+          "improvement_pct": 0.6541342935914762
+        }
+      }
+    },
+    "no_macro": {
+      "description": "マクロ経済指標を除外",
+      "excluded_features": [
+        "macro_delta",
+        "macro_excl",
+        "macro_ma3",
+        "macro_shock"
+      ],
+      "ablation_metrics": {
+        "fold": 4.0,
+        "MAE": 1.5431467867358628,
+        "RMSE": 13.660884639472425,
+        "R2": 0.8305356672076669,
+        "train_years": 23.0,
+        "test_year": 2022.0
+      },
+      "comparison": {
+        "MAE": {
+          "full_model": 2.7754187656709775,
+          "ablation_model": 1.5431467867358628,
+          "difference": 1.2322719789351146,
+          "improvement_pct": 44.39949726423371
+        },
+        "RMSE": {
+          "full_model": 14.4119961640663,
+          "ablation_model": 13.660884639472425,
+          "difference": 0.7511115245938758,
+          "improvement_pct": 5.21171055031666
+        },
+        "R2": {
+          "full_model": 0.8202869786213369,
+          "ablation_model": 0.8305356672076669,
+          "difference": 0.01024868858632999,
+          "improvement_pct": 1.2494028130929307
+        }
+      }
+    },
+    "no_temporal": {
+      "description": "時系列特徴量を除外",
+      "excluded_features": [
+        "lag_d1",
+        "lag_d2",
+        "ma2_delta"
+      ],
+      "ablation_metrics": {
+        "fold": 4.0,
+        "MAE": 17.436949138581834,
+        "RMSE": 33.639420736574145,
+        "R2": -0.002536717716723369,
+        "train_years": 23.0,
+        "test_year": 2022.0
+      },
+      "comparison": {
+        "MAE": {
+          "full_model": 2.7754187656709775,
+          "ablation_model": 17.436949138581834,
+          "difference": -14.661530372910857,
+          "improvement_pct": -528.2637184074213
+        },
+        "RMSE": {
+          "full_model": 14.4119961640663,
+          "ablation_model": 33.639420736574145,
+          "difference": -19.227424572507843,
+          "improvement_pct": -133.41264009248033
+        },
+        "R2": {
+          "full_model": 0.8202869786213369,
+          "ablation_model": -0.002536717716723369,
+          "difference": -0.8228236963380603,
+          "improvement_pct": -100.3092475905185
+        }
+      }
+    }
+  },
+  "feature_categories": {
+    "foreign": {
+      "description": "外国人人数関連特徴量",
+      "features": [
+        "foreign_change",
+        "foreign_change_covid",
+        "foreign_change_post2022",
+        "foreign_log",
+        "foreign_log_covid",
+        "foreign_log_post2022",
+        "foreign_ma3",
+        "foreign_ma3_covid",
+        "foreign_ma3_post2022",
+        "foreign_pct_change",
+        "foreign_pct_change_covid",
+        "foreign_pct_change_post2022",
+        "foreign_population",
+        "foreign_population_covid",
+        "foreign_population_post2022"
+      ]
+    },
+    "spatial_commercial": {
+      "description": "空間ラグ（商業施設）",
+      "features": [
+        "ring1_exp_commercial_inc_h1",
+        "ring1_exp_commercial_inc_h2",
+        "ring1_exp_commercial_inc_h3"
+      ]
+    },
+    "spatial_disaster": {
+      "description": "空間ラグ（災害）",
+      "features": [
+        "ring1_exp_disaster_dec_h1",
+        "ring1_exp_disaster_dec_h2",
+        "ring1_exp_disaster_dec_h3",
+        "ring1_exp_disaster_inc_h1",
+        "ring1_exp_disaster_inc_h2",
+        "ring1_exp_disaster_inc_h3"
+      ]
+    },
+    "spatial_employment": {
+      "description": "空間ラグ（雇用）",
+      "features": [
+        "ring1_exp_employment_inc_h1",
+        "ring1_exp_employment_inc_h2",
+        "ring1_exp_employment_inc_h3"
+      ]
+    },
+    "spatial_housing": {
+      "description": "空間ラグ（住宅）",
+      "features": [
+        "ring1_exp_housing_dec_h1",
+        "ring1_exp_housing_dec_h2",
+        "ring1_exp_housing_dec_h3",
+        "ring1_exp_housing_inc_h1",
+        "ring1_exp_housing_inc_h2",
+        "ring1_exp_housing_inc_h3"
+      ]
+    },
+    "spatial_public": {
+      "description": "空間ラグ（公共施設）",
+      "features": [
+        "ring1_exp_public_edu_medical_dec_h1",
+        "ring1_exp_public_edu_medical_dec_h2"
+      ]
+    },
+    "macro": {
+      "description": "マクロ経済指標",
+      "features": [
+        "macro_delta",
+        "macro_excl",
+        "macro_ma3",
+        "macro_shock"
+      ]
+    },
+    "town_level": {
+      "description": "町レベル統計",
+      "features": [
+        "town_ma5",
+        "town_std5",
+        "town_trend5"
+      ]
+    },
+    "temporal": {
+      "description": "時系列特徴量",
+      "features": [
+        "lag_d1",
+        "lag_d2",
+        "ma2_delta"
+      ]
+    },
+    "era_flags": {
+      "description": "期間フラグ",
+      "features": [
+        "era_covid",
+        "era_post2009",
+        "era_post2013",
+        "era_post2022",
+        "era_pre2013"
+      ]
+    }
+  }
+}

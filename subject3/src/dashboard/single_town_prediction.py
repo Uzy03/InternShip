@@ -29,6 +29,36 @@ except ImportError as e:
     st.error(f"Layer5モジュールのインポートに失敗しました: {e}")
     st.stop()
 
+def run_baseline_prediction(scenario, town):
+    """ベースライン予測（イベントなし）を実行"""
+    # 出力ディレクトリの設定
+    output_dir = Path("output")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Step 1: 将来イベント行列の生成（空のイベント）
+    future_events = scenario_to_events(scenario)
+    future_events.to_csv(output_dir / "l5_future_events_baseline.csv", index=False)
+    
+    # Step 2: 基準年データの準備
+    baseline = prepare_baseline(town, 2025)
+    baseline.to_csv(output_dir / "l5_baseline_baseline.csv", index=False)
+    
+    # Step 3: 将来特徴の構築
+    future_features = build_future_features(baseline, future_events, scenario)
+    future_features.to_csv(output_dir / "l5_future_features_baseline.csv", index=False)
+    
+    # Step 4: 人口予測の実行
+    base_population = baseline["pop_total"].iloc[0] if "pop_total" in baseline.columns else 0.0
+    if pd.isna(base_population):
+        base_population = 0.0
+    
+    # 手動加算パラメータ（ベースラインは0）
+    manual_add = {1: 0.0, 2: 0.0, 3: 0.0}
+    
+    result = forecast_population(town, 2025, [1, 2, 3], base_population, str(output_dir), manual_add)
+    
+    return result
+
 def render_single_town_prediction(towns):
     """単一町丁予測のUIとロジックをレンダリング"""
     
@@ -196,7 +226,28 @@ def render_single_town_prediction(towns):
     # 実行ボタン
     if st.button("🚀 予測実行", type="primary", use_container_width=True):
         try:
-            # シナリオ作成（年次別強度を使用）
+            # ベースライン予測（イベントなし）の実行
+            with st.spinner("ベースライン予測（イベントなし）を実行中..."):
+                try:
+                    # ベースラインシナリオ（イベントなし）
+                    baseline_scenario = {
+                        "town": town,
+                        "base_year": 2025,
+                        "horizons": [1, 2, 3],
+                        "events": [],  # イベントなし
+                        "macros": {},
+                        "manual_delta": {"h1": 0, "h2": 0, "h3": 0}  # 手動加算も0
+                    }
+                    
+                    # ベースライン予測の実行
+                    baseline_result = run_baseline_prediction(baseline_scenario, town)
+                    st.success("✅ ベースライン予測が完了しました")
+                    
+                except Exception as e:
+                    st.warning(f"⚠️ ベースライン予測に失敗しました: {e}")
+                    baseline_result = None
+
+            # イベントありのシナリオ作成（年次別強度を使用）
             try:
                 # 年次別強度を使用
                 generator = LearnedScenarioGenerator()
@@ -287,6 +338,10 @@ def render_single_town_prediction(towns):
             with col3:
                 st.metric("予測期間", f"{min(result['horizons'])}-{max(result['horizons'])}年先")
 
+            # ベースライン予測が成功した場合の追加情報
+            if baseline_result:
+                st.info("📊 イベントありとなしの両方の予測が完了しました")
+
             st.markdown("---")
 
             # データフレーム作成
@@ -349,110 +404,270 @@ def render_single_town_prediction(towns):
             st.markdown("---")
 
             # 人口予測の折れ線グラフ
-            st.subheader("📈 人口予測パス")
-
-            fig_pop = go.Figure()
-
-            # 人口パス（線）
-            fig_pop.add_trace(go.Scatter(
-                x=path_df["year"],
-                y=path_df["pop_hat"],
-                mode='lines+markers',
-                name='予測人口',
-                line=dict(color='#1f77b4', width=3),
-                marker=dict(size=10, color='#1f77b4')
-            ))
-
-            # 信頼区間（帯）
-            if "pi95_pop" in path_df.columns:
-                lower = [p[0] if isinstance(p, list) else p for p in path_df["pi95_pop"]]
-                upper = [p[1] if isinstance(p, list) else p for p in path_df["pi95_pop"]]
+            if baseline_result:
+                st.subheader("📈 人口予測パス比較（イベントあり vs なし）")
                 
+                # ベースライン予測のデータフレーム
+                baseline_path_df = pd.DataFrame(baseline_result["path"])
+                
+                fig_pop = go.Figure()
+
+                # ベースライン（イベントなし）の人口パス
                 fig_pop.add_trace(go.Scatter(
-                    x=path_df["year"].tolist() + path_df["year"].tolist()[::-1],
-                    y=upper + lower[::-1],
-                    fill='tonexty',
-                    fillcolor='rgba(31, 119, 180, 0.2)',
-                    line=dict(color='rgba(255,255,255,0)'),
-                    name='95%信頼区間',
-                    showlegend=True
+                    x=baseline_path_df["year"],
+                    y=baseline_path_df["pop_hat"],
+                    mode='lines+markers',
+                    name='イベントなし（ベースライン）',
+                    line=dict(color='#2E8B57', width=3, dash='dash'),
+                    marker=dict(size=10, color='#2E8B57')
                 ))
 
-            fig_pop.update_layout(
-                title=f"人口予測パス: {result['town']} (基準年: {result['base_year']})",
-                xaxis_title="年",
-                yaxis_title="人口（人）",
-                hovermode='x unified',
-                template="plotly_white",
-                height=500
-            )
+                # イベントありの人口パス
+                fig_pop.add_trace(go.Scatter(
+                    x=path_df["year"],
+                    y=path_df["pop_hat"],
+                    mode='lines+markers',
+                    name='イベントあり',
+                    line=dict(color='#1f77b4', width=3),
+                    marker=dict(size=10, color='#1f77b4')
+                ))
 
-            st.plotly_chart(fig_pop, use_container_width=True)
+                # ベースラインの信頼区間（帯）
+                if "pi95_pop" in baseline_path_df.columns:
+                    lower_baseline = [p[0] if isinstance(p, list) else p for p in baseline_path_df["pi95_pop"]]
+                    upper_baseline = [p[1] if isinstance(p, list) else p for p in baseline_path_df["pi95_pop"]]
+                    
+                    fig_pop.add_trace(go.Scatter(
+                        x=baseline_path_df["year"].tolist() + baseline_path_df["year"].tolist()[::-1],
+                        y=upper_baseline + lower_baseline[::-1],
+                        fill='tonexty',
+                        fillcolor='rgba(46, 139, 87, 0.2)',
+                        line=dict(color='rgba(255,255,255,0)'),
+                        name='ベースライン95%信頼区間',
+                        showlegend=True
+                    ))
+
+                # イベントありの信頼区間（帯）
+                if "pi95_pop" in path_df.columns:
+                    lower = [p[0] if isinstance(p, list) else p for p in path_df["pi95_pop"]]
+                    upper = [p[1] if isinstance(p, list) else p for p in path_df["pi95_pop"]]
+                    
+                    fig_pop.add_trace(go.Scatter(
+                        x=path_df["year"].tolist() + path_df["year"].tolist()[::-1],
+                        y=upper + lower[::-1],
+                        fill='tonexty',
+                        fillcolor='rgba(31, 119, 180, 0.2)',
+                        line=dict(color='rgba(255,255,255,0)'),
+                        name='イベントあり95%信頼区間',
+                        showlegend=True
+                    ))
+
+                fig_pop.update_layout(
+                    title=f"人口予測パス比較: {result['town']} (基準年: {result['base_year']})",
+                    xaxis_title="年",
+                    yaxis_title="人口（人）",
+                    hovermode='x unified',
+                    template="plotly_white",
+                    height=500
+                )
+
+                st.plotly_chart(fig_pop, use_container_width=True)
+                
+                # 比較テーブル
+                st.subheader("📊 人口予測比較テーブル")
+                
+                # 比較データフレームの作成
+                comparison_df = pd.DataFrame({
+                    "年": path_df["year"],
+                    "イベントなし人口": baseline_path_df["pop_hat"].round(1),
+                    "イベントあり人口": path_df["pop_hat"].round(1),
+                    "人口差": (path_df["pop_hat"] - baseline_path_df["pop_hat"]).round(1),
+                    "人口差率(%)": ((path_df["pop_hat"] - baseline_path_df["pop_hat"]) / baseline_path_df["pop_hat"] * 100).round(2)
+                })
+                
+                st.dataframe(comparison_df, use_container_width=True)
+                
+                # 比較サマリー
+                st.subheader("📈 比較サマリー")
+                
+                col1, col2, col3, col4 = st.columns(4)
+                
+                with col1:
+                    final_diff = path_df["pop_hat"].iloc[-1] - baseline_path_df["pop_hat"].iloc[-1]
+                    st.metric(
+                        "最終年人口差",
+                        f"{final_diff:.1f}人",
+                        f"イベント効果"
+                    )
+                
+                with col2:
+                    max_diff = (path_df["pop_hat"] - baseline_path_df["pop_hat"]).max()
+                    st.metric(
+                        "最大人口差",
+                        f"{max_diff:.1f}人"
+                    )
+                
+                with col3:
+                    avg_diff = (path_df["pop_hat"] - baseline_path_df["pop_hat"]).mean()
+                    st.metric(
+                        "平均人口差",
+                        f"{avg_diff:.1f}人"
+                    )
+                
+                with col4:
+                    final_rate = ((path_df["pop_hat"].iloc[-1] - baseline_path_df["pop_hat"].iloc[-1]) / baseline_path_df["pop_hat"].iloc[-1] * 100)
+                    st.metric(
+                        "最終年効果率",
+                        f"{final_rate:.2f}%"
+                    )
+                
+            else:
+                # 通常モード（イベントありのみ）
+                st.subheader("📈 人口予測パス")
+
+                fig_pop = go.Figure()
+
+                # 人口パス（線）
+                fig_pop.add_trace(go.Scatter(
+                    x=path_df["year"],
+                    y=path_df["pop_hat"],
+                    mode='lines+markers',
+                    name='予測人口',
+                    line=dict(color='#1f77b4', width=3),
+                    marker=dict(size=10, color='#1f77b4')
+                ))
+
+                # 信頼区間（帯）
+                if "pi95_pop" in path_df.columns:
+                    lower = [p[0] if isinstance(p, list) else p for p in path_df["pi95_pop"]]
+                    upper = [p[1] if isinstance(p, list) else p for p in path_df["pi95_pop"]]
+                    
+                    fig_pop.add_trace(go.Scatter(
+                        x=path_df["year"].tolist() + path_df["year"].tolist()[::-1],
+                        y=upper + lower[::-1],
+                        fill='tonexty',
+                        fillcolor='rgba(31, 119, 180, 0.2)',
+                        line=dict(color='rgba(255,255,255,0)'),
+                        name='95%信頼区間',
+                        showlegend=True
+                    ))
+
+                fig_pop.update_layout(
+                    title=f"人口予測パス: {result['town']} (基準年: {result['base_year']})",
+                    xaxis_title="年",
+                    yaxis_title="人口（人）",
+                    hovermode='x unified',
+                    template="plotly_white",
+                    height=500
+                )
+
+                st.plotly_chart(fig_pop, use_container_width=True)
 
             # 人口変化量のグラフ
-            st.subheader("📊 人口変化量（Δ人口）")
+            if baseline_result:
+                st.subheader("📊 人口変化量比較（Δ人口）")
+                
+                fig_delta = go.Figure()
 
-            fig_delta = go.Figure()
+                # ベースライン（イベントなし）のΔ人口
+                fig_delta.add_trace(go.Bar(
+                    x=baseline_path_df["year"],
+                    y=baseline_path_df["delta_hat"],
+                    name='イベントなしΔ人口',
+                    marker_color='#2E8B57',
+                    opacity=0.7,
+                    text=[f"{x:+.1f}" for x in baseline_path_df["delta_hat"]],
+                    textposition='auto'
+                ))
 
-            # ホバーに "率・母数・人数換算・手動" を追加
-            custom = []
-            for y in path_df["year"]:
-                e = explain.get(y, {"exp_rate_terms": 0.0, "base_pop_for_rate": 0.0,
-                                    "exp_people_from_rate": 0.0, "exp_people_manual": 0.0})
-                custom.append([e["exp_rate_terms"], e["base_pop_for_rate"], e["exp_people_from_rate"], e["exp_people_manual"]])
+                # イベントありのΔ人口
+                fig_delta.add_trace(go.Bar(
+                    x=path_df["year"],
+                    y=path_df["delta_hat"],
+                    name='イベントありΔ人口',
+                    marker_color=['#ff7f0e' if x > 0 else '#d62728' for x in path_df["delta_hat"]],
+                    opacity=0.7,
+                    text=[f"{x:+.1f}" for x in path_df["delta_hat"]],
+                    textposition='auto'
+                ))
 
-            # Δ人口のバー
-            fig_delta.add_trace(go.Bar(
-                x=path_df["year"],
-                y=path_df["delta_hat"],
-                name='Δ人口',
-                marker_color=['#ff7f0e' if x > 0 else '#d62728' for x in path_df["delta_hat"]],
-                text=[f"{x:+.1f}" for x in path_df["delta_hat"]],
-                textposition='auto',
-                customdata=custom,
-                hovertemplate=(
-                    "年 %{x}<br>"
-                    "Δ人数: %{y:.2f}<br>"
-                    "期待効果(率): %{customdata[0]:.4f}（= %{customdata[0]:.2%}）<br>"
-                    "母数: %{customdata[1]:.1f}<br>"
-                    "人数換算: %{customdata[2]:.2f}<br>"
-                    "手動人数: %{customdata[3]:.2f}<extra></extra>"
+                fig_delta.update_layout(
+                    title="年別人口変化量比較",
+                    xaxis_title="年",
+                    yaxis_title="人口変化量（人）",
+                    barmode='group',
+                    template="plotly_white",
+                    height=400
                 )
-            ))
 
-            # 信頼区間
-            if "pi95_delta" in path_df.columns:
-                lower_delta = [p[0] if isinstance(p, list) else p for p in path_df["pi95_delta"]]
-                upper_delta = [p[1] if isinstance(p, list) else p for p in path_df["pi95_delta"]]
+                st.plotly_chart(fig_delta, use_container_width=True)
+                st.caption("イベントありとなしの人口変化量を比較表示しています。")
                 
-                fig_delta.add_trace(go.Scatter(
+            else:
+                # 通常モード（イベントありのみ）
+                st.subheader("📊 人口変化量（Δ人口）")
+
+                fig_delta = go.Figure()
+
+                # ホバーに "率・母数・人数換算・手動" を追加
+                custom = []
+                for y in path_df["year"]:
+                    e = explain.get(y, {"exp_rate_terms": 0.0, "base_pop_for_rate": 0.0,
+                                        "exp_people_from_rate": 0.0, "exp_people_manual": 0.0})
+                    custom.append([e["exp_rate_terms"], e["base_pop_for_rate"], e["exp_people_from_rate"], e["exp_people_manual"]])
+
+                # Δ人口のバー
+                fig_delta.add_trace(go.Bar(
                     x=path_df["year"],
-                    y=upper_delta,
-                    mode='markers',
-                    marker=dict(color='red', size=8, symbol='triangle-up'),
-                    name='95%信頼区間上限',
-                    showlegend=True
-                ))
-                
-                fig_delta.add_trace(go.Scatter(
-                    x=path_df["year"],
-                    y=lower_delta,
-                    mode='markers',
-                    marker=dict(color='red', size=8, symbol='triangle-down'),
-                    name='95%信頼区間下限',
-                    showlegend=True
+                    y=path_df["delta_hat"],
+                    name='Δ人口',
+                    marker_color=['#ff7f0e' if x > 0 else '#d62728' for x in path_df["delta_hat"]],
+                    text=[f"{x:+.1f}" for x in path_df["delta_hat"]],
+                    textposition='auto',
+                    customdata=custom,
+                    hovertemplate=(
+                        "年 %{x}<br>"
+                        "Δ人数: %{y:.2f}<br>"
+                        "期待効果(率): %{customdata[0]:.4f}（= %{customdata[0]:.2%}）<br>"
+                        "母数: %{customdata[1]:.1f}<br>"
+                        "人数換算: %{customdata[2]:.2f}<br>"
+                        "手動人数: %{customdata[3]:.2f}<extra></extra>"
+                    )
                 ))
 
-            fig_delta.update_layout(
-                title="年別人口変化量",
-                xaxis_title="年",
-                yaxis_title="人口変化量（人）",
-                template="plotly_white",
-                height=400
-            )
+                # 信頼区間
+                if "pi95_delta" in path_df.columns:
+                    lower_delta = [p[0] if isinstance(p, list) else p for p in path_df["pi95_delta"]]
+                    upper_delta = [p[1] if isinstance(p, list) else p for p in path_df["pi95_delta"]]
+                    
+                    fig_delta.add_trace(go.Scatter(
+                        x=path_df["year"],
+                        y=upper_delta,
+                        mode='markers',
+                        marker=dict(color='red', size=8, symbol='triangle-up'),
+                        name='95%信頼区間上限',
+                        showlegend=True
+                    ))
+                    
+                    fig_delta.add_trace(go.Scatter(
+                        x=path_df["year"],
+                        y=lower_delta,
+                        mode='markers',
+                        marker=dict(color='red', size=8, symbol='triangle-down'),
+                        name='95%信頼区間下限',
+                        showlegend=True
+                    ))
 
-            st.plotly_chart(fig_delta, use_container_width=True)
-            st.caption("グラフにマウスオーバーすると「率・母数・人数換算・手動」の内訳が表示されます。")
+                fig_delta.update_layout(
+                    title="年別人口変化量",
+                    xaxis_title="年",
+                    yaxis_title="人口変化量（人）",
+                    template="plotly_white",
+                    height=400
+                )
+
+                st.plotly_chart(fig_delta, use_container_width=True)
+                st.caption("グラフにマウスオーバーすると「率・母数・人数換算・手動」の内訳が表示されます。")
 
             # 寄与分解のグラフ
             st.subheader("🥧 寄与分解")
@@ -766,6 +981,7 @@ def render_single_town_prediction(towns):
         1. **町丁選択**: サイドバーで予測対象の町丁を選択
         2. **イベント設定**: イベントタイプを選択（増加・減少の方向は既に含まれています）
         3. **予測実行**: 「予測実行」ボタンをクリック
+        4. **結果確認**: イベントありとなしの両方の予測結果と比較グラフが表示されます
         
         ### イベントタイプの説明（11種類）
         
@@ -781,6 +997,20 @@ def render_single_town_prediction(towns):
         - **災害被害・リスクの増加**: 災害発生や被害拡大により魅力が低下（洪水・地震被害、土砂災害）
         - **災害リスクの低下（防災整備）**: 復旧・治水・耐震化等で被害リスクが下がる（堤防整備、河川改修、耐震化）
         
+        
+        ### 比較機能について
+        
+        **予測実行時**に以下の機能が自動的に利用できます：
+        
+        - **人口予測パス比較**: イベントありとなしの人口推移を同じグラフで表示
+        - **人口変化量比較**: 年次別の人口変化量を並べて比較
+        - **比較テーブル**: 年別の人口数、人口差、効果率を数値で表示
+        - **比較サマリー**: 最終年人口差、最大人口差、平均人口差、効果率を表示
+        
+        **ベースライン予測**（イベントなし）では：
+        - イベントは一切発生しない
+        - 手動加算も0に設定
+        - 純粋な人口の自然変化のみを予測
         
         ### 固定パラメータ
         

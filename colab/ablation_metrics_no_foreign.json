@@ -1,0 +1,138 @@
+{
+  "study_name": "no_foreign",
+  "excluded_categories": [
+    "foreign"
+  ],
+  "excluded_features": [
+    "foreign_change",
+    "foreign_change_covid",
+    "foreign_change_post2022",
+    "foreign_log",
+    "foreign_log_covid",
+    "foreign_log_post2022",
+    "foreign_ma3",
+    "foreign_ma3_covid",
+    "foreign_ma3_post2022",
+    "foreign_pct_change",
+    "foreign_pct_change_covid",
+    "foreign_pct_change_post2022",
+    "foreign_population",
+    "foreign_population_covid",
+    "foreign_population_post2022"
+  ],
+  "remaining_features": [
+    "era_covid",
+    "era_post2009",
+    "era_post2013",
+    "era_post2022",
+    "era_pre2013",
+    "lag_d1",
+    "lag_d2",
+    "ma2_delta",
+    "macro_delta",
+    "macro_excl",
+    "macro_ma3",
+    "macro_shock",
+    "pop_total",
+    "ring1_exp_commercial_inc_h1",
+    "ring1_exp_commercial_inc_h2",
+    "ring1_exp_commercial_inc_h3",
+    "ring1_exp_disaster_dec_h1",
+    "ring1_exp_disaster_dec_h2",
+    "ring1_exp_disaster_dec_h3",
+    "ring1_exp_disaster_inc_h1",
+    "ring1_exp_disaster_inc_h2",
+    "ring1_exp_disaster_inc_h3",
+    "ring1_exp_employment_inc_h1",
+    "ring1_exp_employment_inc_h2",
+    "ring1_exp_employment_inc_h3",
+    "ring1_exp_housing_dec_h1",
+    "ring1_exp_housing_dec_h2",
+    "ring1_exp_housing_dec_h3",
+    "ring1_exp_housing_inc_h1",
+    "ring1_exp_housing_inc_h2",
+    "ring1_exp_housing_inc_h3",
+    "ring1_exp_public_edu_medical_dec_h1",
+    "ring1_exp_public_edu_medical_dec_h2",
+    "town_ma5",
+    "town_std5",
+    "town_trend5"
+  ],
+  "fold_metrics": [
+    {
+      "MAE": 3.4822546681822133,
+      "RMSE": 6.548544938406379,
+      "MAPE": 0.9400805409750829,
+      "R2": 0.9586528558473371,
+      "fold": 1,
+      "train_years": 20,
+      "test_year": 2019
+    },
+    {
+      "MAE": 3.763476721793502,
+      "RMSE": 5.365367227840476,
+      "MAPE": 0.8784862458520949,
+      "R2": 0.973774108446488,
+      "fold": 2,
+      "train_years": 21,
+      "test_year": 2020
+    },
+    {
+      "MAE": 1.41961003647081,
+      "RMSE": 2.2400934831262087,
+      "MAPE": 0.19390735005853849,
+      "R2": 0.9947602695036519,
+      "fold": 3,
+      "train_years": 22,
+      "test_year": 2021
+    },
+    {
+      "MAE": 3.53502909830855,
+      "RMSE": 48.286984444086976,
+      "MAPE": 0.48668808562799365,
+      "R2": 0.26855592649213866,
+      "fold": 4,
+      "train_years": 23,
+      "test_year": 2022
+    },
+    {
+      "MAE": 2.041500107770413,
+      "RMSE": 2.7434063638973454,
+      "MAPE": 0.5435650690083568,
+      "R2": 0.9901731080011392,
+      "fold": 5,
+      "train_years": 24,
+      "test_year": 2023
+    },
+    {
+      "MAE": 1.8600577197700852,
+      "RMSE": 6.174211067497779,
+      "MAPE": 0.5687849227213937,
+      "R2": 0.9414307799250617,
+      "fold": 6,
+      "train_years": 25,
+      "test_year": 2024
+    },
+    {
+      "MAE": 0.9627899214316306,
+      "RMSE": 3.4922200382354367,
+      "MAPE": 0.27354184390632197,
+      "R2": 0.9855931563806759,
+      "fold": 7,
+      "train_years": 26,
+      "test_year": 2025
+    }
+  ],
+  "aggregate_metrics": {
+    "MAE": 2.4378168962467437,
+    "RMSE": 10.692975366155801,
+    "MAPE": 0.555007722592826,
+    "R2": 0.8732771720852134,
+    "fold": 4.0,
+    "train_years": 23.0,
+    "test_year": 2022.0
+  },
+  "n_features_used": 36,
+  "n_features_excluded": 15,
+  "method": "ablation_study"
+}

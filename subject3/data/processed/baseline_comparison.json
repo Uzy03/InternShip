@@ -1,0 +1,90 @@
+{
+  "methods": {
+    "LightGBM": {
+      "aggregate": {
+        "MAE": 2.739024143188183,
+        "RMSE": 13.294516292260864,
+        "MAPE": 0.6050677467098946,
+        "R2": 0.8440249618910382,
+        "fold": 4.0
+      },
+      "description": "LightGBM機械学習モデル"
+    },
+    "RandomWalk": {
+      "aggregate": {
+        "MAE": 21.882340380098224,
+        "RMSE": 44.667331492772476,
+        "MAPE": 2.551305484827512,
+        "R2": -1.0119103624379366,
+        "fold": 4.0
+      },
+      "description": "昨年比（ランダムウォーク型）ベースライン"
+    },
+    "MovingAverage": {
+      "aggregate": {
+        "MAE": 19.00946686596911,
+        "RMSE": 37.71218485661347,
+        "MAPE": 1.89699223020726,
+        "R2": -0.3020366480955439,
+        "fold": 4.0
+      },
+      "description": "移動平均（3年）ベースライン"
+    },
+    "EMA": {
+      "aggregate": {
+        "MAE": 26.855845302213968,
+        "RMSE": 98.10478595960807,
+        "MAPE": 4.804260668151646,
+        "R2": -15.730121118701074,
+        "fold": 4.0
+      },
+      "description": "EMA（単純指数平滑）ベースライン"
+    },
+    "DriftNaive": {
+      "aggregate": {
+        "MAE": 19.00946686596911,
+        "RMSE": 37.71218485661347,
+        "MAPE": 1.89699223020726,
+        "R2": -0.3020366480955439,
+        "fold": 4.0
+      },
+      "description": "ドリフト付きナイーブ（3年）ベースライン"
+    }
+  },
+  "comparison_summary": {
+    "best_mae": [
+      "LightGBM",
+      2.739024143188183
+    ],
+    "best_rmse": [
+      "LightGBM",
+      13.294516292260864
+    ],
+    "best_mape": [
+      "LightGBM",
+      0.6050677467098946
+    ],
+    "best_r2": [
+      "LightGBM",
+      0.8440249618910382
+    ]
+  },
+  "improvement_vs_baselines": {
+    "LightGBM_vs_RandomWalk_MAE": {
+      "improvement_pct": 87.48294699921907,
+      "description": "LightGBMのMAE改善率（RandomWalk比）"
+    },
+    "LightGBM_vs_MovingAverage_MAE": {
+      "improvement_pct": 85.59126269821064,
+      "description": "LightGBMのMAE改善率（MovingAverage比）"
+    },
+    "LightGBM_vs_EMA_MAE": {
+      "improvement_pct": 89.80101310398008,
+      "description": "LightGBMのMAE改善率（EMA比）"
+    },
+    "LightGBM_vs_DriftNaive_MAE": {
+      "improvement_pct": 85.59126269821064,
+      "description": "LightGBMのMAE改善率（DriftNaive比）"
+    }
+  }
+}

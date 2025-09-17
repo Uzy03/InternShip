@@ -174,8 +174,8 @@ def main():
     # transit のうち、出典なしの元ラベルがあったか（クリーン前は分からないので、ここでは列抑止のみ）
     # → events_matrix は既に clean ベースなので「出典なし transit」を個別に識別できない。
     # 代わりに、policy_boundary が立っている (town,year) では transit をゼロ化（保守的）
-    tr_cols_t  = [c for c in em.columns if c.startswith("event_transit_t")]
-    tr_cols_t1 = [c for c in em.columns if c.startswith("event_transit_t1")]
+    tr_cols_t  = [c for c in em.columns if c.startswith("event_transit_") and c.endswith("_t")]
+    tr_cols_t1 = [c for c in em.columns if c.startswith("event_transit_") and c.endswith("_t1")]
     
     before_nonzero = int((em[tr_cols_t + tr_cols_t1].abs() > 0).sum().sum())
     mask_pb = em.apply(lambda r: (r["town"], r["year"]) in pb_keys, axis=1)
